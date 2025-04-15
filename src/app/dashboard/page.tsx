@@ -4,8 +4,12 @@ import React from 'react';
 import Layout from '@/components/layout/Layout';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
+  const router = useRouter();
+
   return (
     <Layout>
       <div className="mb-8">
