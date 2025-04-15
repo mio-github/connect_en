@@ -4,25 +4,31 @@
   <rect width="1100" height="1400" fill="#f8f9fa" />
   
   <!-- タイトル -->
-  <text x="550" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">ConnectEn - 画面遷移図</text>
+  <text x="550" y="30" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">ConnectEn - 画面遷移図</text>
+  <text x="550" y="60" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">ConnectEn - Screen Flow Diagram</text>
   
   <!-- ログイン関連 -->
   <rect x="450" y="80" width="200" height="80" rx="10" ry="10" fill="#FFE0B2" stroke="#FB8C00" stroke-width="2" />
-  <text x="550" y="125" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">ログイン画面</text>
+  <text x="550" y="115" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">ログイン画面</text>
+  <text x="550" y="140" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Login Screen</text>
   
   <rect x="150" y="80" width="200" height="80" rx="10" ry="10" fill="#FFCCBC" stroke="#FF5722" stroke-width="2" />
-  <text x="250" y="125" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">パスワードリセット</text>
+  <text x="250" y="115" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">パスワードリセット</text>
+  <text x="250" y="140" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Password Reset</text>
   
   <rect x="750" y="80" width="200" height="80" rx="10" ry="10" fill="#FFCCBC" stroke="#FF5722" stroke-width="2" />
-  <text x="850" y="125" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">ユーザー登録</text>
+  <text x="850" y="115" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">ユーザー登録</text>
+  <text x="850" y="140" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">User Registration</text>
   
   <!-- ダッシュボード -->
   <rect x="450" y="240" width="200" height="80" rx="10" ry="10" fill="#B3E5FC" stroke="#0288D1" stroke-width="2" />
-  <text x="550" y="285" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">ダッシュボード</text>
+  <text x="550" y="275" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">ダッシュボード</text>
+  <text x="550" y="300" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Dashboard</text>
   
   <!-- 会員管理 -->
   <rect x="150" y="400" width="200" height="80" rx="10" ry="10" fill="#C8E6C9" stroke="#388E3C" stroke-width="2" />
-  <text x="250" y="445" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">会員管理</text>
+  <text x="250" y="435" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">会員管理</text>
+  <text x="250" y="460" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Member Management</text>
   
   <rect x="50" y="520" width="150" height="60" rx="10" ry="10" fill="#E8F5E9" stroke="#388E3C" stroke-width="1" />
   <text x="125" y="555" font-family="Arial" font-size="14" text-anchor="middle">会員検索/一覧</text>
@@ -38,7 +44,8 @@
   
   <!-- スケジュール管理 -->
   <rect x="450" y="400" width="200" height="80" rx="10" ry="10" fill="#BBDEFB" stroke="#1976D2" stroke-width="2" />
-  <text x="550" y="445" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">スケジュール管理</text>
+  <text x="550" y="435" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">スケジュール管理</text>
+  <text x="550" y="460" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Schedule Management</text>
   
   <rect x="350" y="520" width="150" height="60" rx="10" ry="10" fill="#E3F2FD" stroke="#1976D2" stroke-width="1" />
   <text x="425" y="555" font-family="Arial" font-size="14" text-anchor="middle">レッスン一覧</text>
@@ -54,7 +61,8 @@
   
   <!-- 決済・会計 -->
   <rect x="750" y="400" width="200" height="80" rx="10" ry="10" fill="#E1BEE7" stroke="#7B1FA2" stroke-width="2" />
-  <text x="850" y="445" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">決済・会計</text>
+  <text x="850" y="435" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">決済・会計</text>
+  <text x="850" y="460" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Payment & Accounting</text>
   
   <rect x="650" y="520" width="150" height="60" rx="10" ry="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1" />
   <text x="725" y="555" font-family="Arial" font-size="14" text-anchor="middle">会費請求管理</text>
@@ -70,7 +78,8 @@
   
   <!-- マーケティング -->
   <rect x="150" y="740" width="200" height="80" rx="10" ry="10" fill="#FFECB3" stroke="#FFA000" stroke-width="2" />
-  <text x="250" y="785" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">マーケティング</text>
+  <text x="250" y="775" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">マーケティング</text>
+  <text x="250" y="800" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Marketing</text>
   
   <rect x="50" y="860" width="150" height="60" rx="10" ry="10" fill="#FFF8E1" stroke="#FFA000" stroke-width="1" />
   <text x="125" y="895" font-family="Arial" font-size="14" text-anchor="middle">メール配信</text>
@@ -86,7 +95,8 @@
   
   <!-- レポート・分析 -->
   <rect x="450" y="740" width="200" height="80" rx="10" ry="10" fill="#B2EBF2" stroke="#0097A7" stroke-width="2" />
-  <text x="550" y="785" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">レポート・分析</text>
+  <text x="550" y="775" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">レポート・分析</text>
+  <text x="550" y="800" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Reports & Analysis</text>
   
   <rect x="350" y="860" width="150" height="60" rx="10" ry="10" fill="#E0F7FA" stroke="#0097A7" stroke-width="1" />
   <text x="425" y="895" font-family="Arial" font-size="14" text-anchor="middle">売上分析</text>
@@ -102,7 +112,8 @@
   
   <!-- 物品・在庫管理 -->
   <rect x="750" y="740" width="200" height="80" rx="10" ry="10" fill="#FFE0B2" stroke="#E64A19" stroke-width="2" />
-  <text x="850" y="785" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">物品・在庫管理</text>
+  <text x="850" y="775" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">物品・在庫管理</text>
+  <text x="850" y="800" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Inventory Management</text>
   
   <rect x="650" y="860" width="150" height="60" rx="10" ry="10" fill="#FFF3E0" stroke="#E64A19" stroke-width="1" />
   <text x="725" y="895" font-family="Arial" font-size="14" text-anchor="middle">物品管理</text>
@@ -115,7 +126,8 @@
   
   <!-- システム設定 -->
   <rect x="450" y="1080" width="200" height="80" rx="10" ry="10" fill="#D1C4E9" stroke="#512DA8" stroke-width="2" />
-  <text x="550" y="1125" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">システム設定</text>
+  <text x="550" y="1115" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">システム設定</text>
+  <text x="550" y="1140" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">System Settings</text>
   
   <rect x="350" y="1200" width="150" height="60" rx="10" ry="10" fill="#EDE7F6" stroke="#512DA8" stroke-width="1" />
   <text x="425" y="1235" font-family="Arial" font-size="14" text-anchor="middle">ユーザー権限管理</text>
