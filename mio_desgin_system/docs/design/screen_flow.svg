@@ -112,7 +112,7 @@
   <!-- レポート・分析 -->
   <rect x="450" y="740" width="200" height="80" rx="10" ry="10" fill="#B2EBF2" stroke="#0097A7" stroke-width="2" />
   <text x="550" y="775" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">レポート・分析</text>
-  <text x="550" y="800" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Reports & Analysis</text>
+  <text x="550" y="800" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Reports &amp; Analysis</text>
   
   <rect x="350" y="860" width="150" height="60" rx="10" ry="10" fill="#E0F7FA" stroke="#0097A7" stroke-width="1" />
   <text x="425" y="885" font-family="Arial" font-size="14" text-anchor="middle">売上分析</text>
