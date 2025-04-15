@@ -70,7 +70,7 @@
   <!-- 決済・会計 -->
   <rect x="750" y="400" width="200" height="80" rx="10" ry="10" fill="#E1BEE7" stroke="#7B1FA2" stroke-width="2" />
   <text x="850" y="435" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">決済・会計</text>
-  <text x="850" y="460" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Payment & Accounting</text>
+  <text x="850" y="460" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Payment &amp; Accounting</text>
   
   <rect x="650" y="520" width="150" height="60" rx="10" ry="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1" />
   <text x="725" y="545" font-family="Arial" font-size="14" text-anchor="middle">会費請求管理</text>
