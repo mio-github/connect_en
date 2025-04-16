@@ -113,8 +113,8 @@ export default function Sidebar() {
             href={item.href}
             className={`group flex items-center gap-3 px-6 py-3 rounded-md transition-all duration-150 text-base font-medium tracking-wide select-none
               ${pathname === item.href || pathname.startsWith(`${item.href}/`)
-                ? 'bg-[#fff7e6] text-[#ff9800] border-l-4 border-[#ff9800] font-bold'
-                : 'text-gray-600 hover:bg-[#fff7e6] hover:text-[#ff9800]'}
+                ? 'bg-[#fff8e1] text-[#ff9800] border-l-4 border-[#ffcc80] font-bold'
+                : 'text-gray-600 hover:bg-[#fff8e1] hover:text-[#ff9800]'}
             `}
           >
             <span className="flex items-center justify-center w-7 h-7 text-lg">
