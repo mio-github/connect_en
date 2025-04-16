@@ -12,71 +12,66 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">ダッシュボード</h1>
-        <p className="text-gray-600">本日の概要と重要なデータを確認できます。</p>
+      <div className="mb-10">
+        <h1 className="text-4xl font-extrabold text-[#222] mb-2">ダッシュボード</h1>
+        <p className="text-lg text-gray-500">本日の概要と重要なデータを確認できます。</p>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card className="bg-primary-light border-l-4 border-primary">
-          <div className="flex items-center">
-            <div className="mr-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <Card className="border-l-4 border-[#ff9800]">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-[#fff7e6]">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#ff9800]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             </div>
             <div>
               <div className="text-sm font-medium text-gray-500">本日の来場者数</div>
-              <div className="text-2xl font-bold">142</div>
+              <div className="text-3xl font-extrabold text-[#ff9800]">142</div>
             </div>
           </div>
         </Card>
-        
-        <Card className="bg-secondary-light border-l-4 border-secondary">
-          <div className="flex items-center">
-            <div className="mr-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <Card className="border-l-4 border-gray-400">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-gray-100">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
               </svg>
             </div>
             <div>
               <div className="text-sm font-medium text-gray-500">本日のレッスン数</div>
-              <div className="text-2xl font-bold">24</div>
+              <div className="text-3xl font-extrabold text-[#222]">24</div>
             </div>
           </div>
         </Card>
-        
-        <Card className="bg-accent-light border-l-4 border-accent">
-          <div className="flex items-center">
-            <div className="mr-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <Card className="border-l-4 border-[#ff9800]">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-[#fff7e6]">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#ff9800]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
             <div>
               <div className="text-sm font-medium text-gray-500">本日の売上</div>
-              <div className="text-2xl font-bold">¥87,500</div>
+              <div className="text-3xl font-extrabold text-[#ff9800]">¥87,500</div>
             </div>
           </div>
         </Card>
-        
-        <Card className="bg-red-100 border-l-4 border-red-500">
-          <div className="flex items-center">
-            <div className="mr-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <Card className="border-l-4 border-gray-400">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-gray-100">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
             </div>
             <div>
               <div className="text-sm font-medium text-gray-500">対応待ち件数</div>
-              <div className="text-2xl font-bold">3</div>
+              <div className="text-3xl font-extrabold text-[#222]">3</div>
             </div>
           </div>
         </Card>
       </div>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        <Card title="レッスンスケジュール">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
+        <Card title="レッスンスケジュール" className="shadow-xl">
           <div className="space-y-4">
             <div className="flex items-center p-2 hover:bg-gray-50 rounded">
               <div className="w-16 text-center">
@@ -124,7 +119,7 @@ export default function Dashboard() {
           </div>
         </Card>
         
-        <Card title="対応待ち案件">
+        <Card title="対応待ち案件" className="shadow-xl">
           <div className="space-y-4">
             <div className="p-3 bg-red-50 rounded-lg">
               <div className="flex justify-between items-start">
@@ -180,8 +175,8 @@ export default function Dashboard() {
         </Card>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card title="会員アクティビティ">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <Card title="会員アクティビティ" className="shadow-xl">
           <div className="space-y-2">
             <div className="flex items-center p-2 hover:bg-gray-50 rounded">
               <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-medium">

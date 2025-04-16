@@ -102,23 +102,25 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="w-64 bg-white border-r h-screen overflow-y-auto">
-      <div className="p-4">
-        <h1 className="text-2xl font-bold text-primary">ConnectEn</h1>
+    <div className="w-64 h-screen bg-[#f5f5f5] border-r border-gray-200 overflow-y-auto">
+      <div className="p-6 flex items-center justify-center border-b border-gray-100">
+        <h1 className="text-2xl font-extrabold tracking-tight text-[#222]">ConnectEn</h1>
       </div>
-      <nav className="mt-4">
+      <nav className="mt-4 space-y-1">
         {menuItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className={`flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 ${
-              pathname === item.href || pathname.startsWith(`${item.href}/`) 
-                ? 'bg-primary-light text-primary font-medium' 
-                : ''
-            }`}
+            className={`group flex items-center gap-3 px-6 py-3 rounded-md transition-all duration-150 text-base font-medium tracking-wide select-none
+              ${pathname === item.href || pathname.startsWith(`${item.href}/`)
+                ? 'bg-[#fff7e6] text-[#ff9800] border-l-4 border-[#ff9800] font-bold'
+                : 'text-gray-600 hover:bg-[#fff7e6] hover:text-[#ff9800]'}
+            `}
           >
-            <span className="mr-3">{item.icon}</span>
-            {item.label}
+            <span className="flex items-center justify-center w-7 h-7 text-lg">
+              {item.icon}
+            </span>
+            <span className="truncate">{item.label}</span>
           </Link>
         ))}
       </nav>
