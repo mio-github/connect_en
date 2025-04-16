@@ -7,7 +7,7 @@ interface HeaderProps {
 
 export default function Header({ userName = 'ユーザー' }: HeaderProps) {
   return (
-    <header className="bg-white h-16 shadow-sm fixed top-0 right-0 left-64 z-10">
+    <header className="bg-white h-16 shadow-sm w-full">
       <div className="h-full px-6 flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <button className="p-2 rounded-full hover:bg-gray-100">
@@ -37,7 +37,7 @@ export default function Header({ userName = 'ユーザー' }: HeaderProps) {
               </svg>
             </button>
             
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block">
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-20">
               <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 プロフィール
               </Link>
