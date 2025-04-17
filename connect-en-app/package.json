@@ -1,0 +1,26 @@
+{
+  "name": "connect-en-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.tsx",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.2",
+    "autoprefixer": "^10.4.14",
+    "next": "^15.3.0",
+    "postcss": "^8.4.23",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.8.3"
+  }
+}
