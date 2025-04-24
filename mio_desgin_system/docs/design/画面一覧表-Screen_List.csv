@@ -1,0 +1,35 @@
+Category_JP,Category_EN,Screen_JP,Screen_EN
+全般,General,ログイン,Login
+全般,General,ダッシュボード,Dashboard
+全般,General,ビジネスダッシュボード,Business Dashboard
+全般,General,ネットワークダッシュボード,Network Dashboard
+会員管理,Membership Management,入会管理,Membership Enrollment
+会員管理,Membership Management,会員管理,Member Management
+会員管理,Membership Management,会員検索,Member Search
+会員管理,Membership Management,出席管理,Attendance Management
+支払い,Payment,会員支払い,Member Payment
+支払い,Payment,カード登録,Card Registration
+支払い,Payment,カード書き込み,Card Writing
+予約管理,Reservation Management,予約管理,Reservation Management
+予約管理,Reservation Management,貸しスタジオ一覧,Rental Studio List
+予約管理,Reservation Management,貸しスタジオ詳細,Rental Studio Detail
+予約管理,Reservation Management,貸しスタジオ予約,Rental Studio Reservation
+予約管理,Reservation Management,貸しスタジオ決済,Rental Studio Payment
+通知,Notification,メール配信,Email Distribution
+通知,Notification,お知らせ管理,Notification Management
+コース,Courses & Fees,コース一覧,Course List
+コース,Courses & Fees,月謝検索,Monthly Fee Search
+POS,Sales & POS,POS検索,POS Search
+POS,Sales & POS,金種表,Cash Denomination
+POS,Sales & POS,POS設定,POS Settings
+レポート,Analytics & Reporting,売上集計,Sales Summary
+レポート,Analytics & Reporting,スタジオ集計,Studio Summary
+レポート,Analytics & Reporting,スタジオ遷移,Studio Transition
+レポート,Analytics & Reporting,売上予測,Sales Forecast
+Insights & Marketing,Insights & Marketing,分析概要,Analytics Overview
+Insights & Marketing,Insights & Marketing,セールス分析,Sales Analytics
+Insights & Marketing,Insights & Marketing,マーケティング管理,Marketing Management
+Insights & Marketing,Insights & Marketing,リード管理,Lead Management
+システム,System & Configuration,システム設定,System Settings
+システム,System & Configuration,リソース管理,Resource Management
+その他,Others,日付チェック,Date Check 
