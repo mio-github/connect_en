@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>支払い処理 - ConnectEn SaaS</title>
+  <link rel="stylesheet" href="../shared/css/common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Payment Processing Specific Styles */
+    .payment-dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .payment-summary-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+    }
+
+    .payment-summary-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .summary-amount {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    .summary-label {
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+      margin-top: var(--spacing-xs);
+    }
+
+    .amount-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-sm) 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .breakdown-item:last-child {
+      border-bottom: none;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .payment-status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .status-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+    }
+
+    .status-number {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .status-card.overdue .status-number {
+      color: var(--error-color);
+    }
+
+    .status-card.pending .status-number {
+      color: var(--warning-color);
+    }
+
+    .status-card.completed .status-number {
+      color: var(--success-color);
+    }
+
+    .status-card.total .status-number {
+      color: var(--primary-color);
+    }
+
+    .payment-table-wrapper {
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+    }
+
+    .table-controls {
+      display: flex;
+      justify-content: between;
+      align-items: center;
+      padding: var(--spacing-lg);
+      border-bottom: 1px solid var(--gray-200);
+      gap: var(--spacing-md);
+    }
+
+    .bulk-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+
+    .payment-row {
+      display: grid;
+      grid-template-columns: 40px 1fr 120px 120px 120px 100px 120px;
+      align-items: center;
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .payment-row:hover {
+      background: var(--gray-50);
+    }
+
+    .payment-row.overdue {
+      border-left: 4px solid var(--error-color);
+    }
+
+    .member-info {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .member-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: white;
+    }
+
+    .member-details h4 {
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      color: var(--gray-900);
+      margin: 0;
+    }
+
+    .member-details p {
+      font-size: var(--font-size-sm);
+      color: var(--gray-500);
+      margin: 0;
+    }
+
+    .amount-cell {
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .payment-actions {
+      display: flex;
+      gap: var(--spacing-xs);
+    }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      transition: background-color 0.2s;
+    }
+
+    .btn-icon.btn-primary {
+      background: var(--primary-light);
+      color: var(--primary-color);
+    }
+
+    .btn-icon.btn-primary:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-icon.btn-secondary {
+      background: var(--gray-100);
+      color: var(--gray-600);
+    }
+
+    .btn-icon.btn-secondary:hover {
+      background: var(--gray-200);
+    }
+
+    .payment-method-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius-xs);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      margin-right: var(--spacing-xs);
+    }
+
+    .method-cash {
+      background: var(--success-color);
+      color: white;
+    }
+
+    .method-card {
+      background: var(--info-color);
+      color: white;
+    }
+
+    .method-bank {
+      background: var(--warning-color);
+      color: white;
+    }
+
+    /* Modal Styles for Payment */
+    .payment-modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .payment-info-section {
+      background: var(--gray-50);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+    }
+
+    .payment-info-section h4 {
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-md);
+      font-weight: 600;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .info-row:last-child {
+      margin-bottom: 0;
+      border-top: 1px solid var(--gray-200);
+      padding-top: var(--spacing-sm);
+      font-weight: 600;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .calc-btn {
+      padding: var(--spacing-md);
+      border: 1px solid var(--gray-300);
+      background: white;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .calc-btn:hover {
+      background: var(--gray-50);
+    }
+
+    .calc-btn.primary {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .payment-dashboard {
+        grid-template-columns: 1fr;
+      }
+      
+      .payment-status-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .payment-row {
+        grid-template-columns: 40px 1fr 80px 80px;
+        font-size: var(--font-size-sm);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .payment-status-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .table-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-md);
+      }
+      
+      .bulk-actions {
+        justify-content: center;
+      }
+      
+      .payment-row {
+        grid-template-columns: 1fr;
+        text-align: left;
+        padding: var(--spacing-sm);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <i class="fas fa-dance"></i> ConnectEn
+        </a>
+        <div class="header-actions">
+          <span class="text-sm text-gray-600">エン株式会社様</span>
+          <div class="flex items-center gap-4">
+            <button class="btn-icon btn-secondary" data-tooltip="通知">
+              <i class="fas fa-bell"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="設定">
+              <i class="fas fa-cog"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="ユーザーメニュー">
+              <i class="fas fa-user"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="../05_dashboard/index.html" class="nav-link">
+            <i class="nav-icon fas fa-chart-line"></i>
+            ダッシュボード
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../01_member_management/index.html" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            会員管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../02_lesson_reservation/index.html" class="nav-link">
+            <i class="nav-icon fas fa-calendar-alt"></i>
+            レッスン予約
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-credit-card"></i>
+            決済管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../04_staff_management/index.html" class="nav-link">
+            <i class="nav-icon fas fa-user-tie"></i>
+            スタッフ管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-building"></i>
+            施設管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-chart-bar"></i>
+            レポート
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cog"></i>
+            設定
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content-area">
+      <!-- Page Header -->
+      <div class="card">
+        <div class="card-header">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="card-title">支払い処理</h1>
+              <p class="text-gray-500">会員の月謝・レッスン料金の管理と支払い処理</p>
+            </div>
+            <div class="flex gap-2">
+              <button class="btn btn-secondary" data-modal-target="paymentReportModal">
+                <i class="fas fa-chart-bar"></i> レポート
+              </button>
+              <button class="btn btn-primary" data-modal-target="processPaymentModal">
+                <i class="fas fa-plus"></i> 支払い処理
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Dashboard -->
+      <div class="payment-dashboard">
+        <!-- Today's Collection Summary -->
+        <div class="payment-summary-card">
+          <div class="payment-summary-header">
+            <h3>本日の売上</h3>
+            <i class="fas fa-calendar-day text-gray-400"></i>
+          </div>
+          <div class="summary-amount">¥847,500</div>
+          <div class="summary-label">11月25日 (月)</div>
+          <div class="amount-breakdown">
+            <div class="breakdown-item">
+              <span>月謝収入</span>
+              <span>¥650,000</span>
+            </div>
+            <div class="breakdown-item">
+              <span>ドロップイン</span>
+              <span>¥97,500</span>
+            </div>
+            <div class="breakdown-item">
+              <span>体験レッスン</span>
+              <span>¥45,000</span>
+            </div>
+            <div class="breakdown-item">
+              <span>物販</span>
+              <span>¥55,000</span>
+            </div>
+            <div class="breakdown-item">
+              <span>合計</span>
+              <span>¥847,500</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Summary -->
+        <div class="payment-summary-card">
+          <div class="payment-summary-header">
+            <h3>今月の売上</h3>
+            <i class="fas fa-calendar-alt text-gray-400"></i>
+          </div>
+          <div class="summary-amount">¥18,450,000</div>
+          <div class="summary-label">2024年11月</div>
+          <div class="amount-breakdown">
+            <div class="breakdown-item">
+              <span>目標達成率</span>
+              <span class="text-success">124%</span>
+            </div>
+            <div class="breakdown-item">
+              <span>前月比</span>
+              <span class="text-success">+8.5%</span>
+            </div>
+            <div class="breakdown-item">
+              <span>前年同月比</span>
+              <span class="text-success">+15.2%</span>
+            </div>
+            <div class="breakdown-item">
+              <span>予想月末売上</span>
+              <span>¥22,100,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Status Grid -->
+      <div class="payment-status-grid">
+        <div class="status-card overdue">
+          <div class="status-number">23</div>
+          <div class="text-sm text-gray-600">未納・延滞</div>
+        </div>
+        <div class="status-card pending">
+          <div class="status-number">156</div>
+          <div class="text-sm text-gray-600">支払い待ち</div>
+        </div>
+        <div class="status-card completed">
+          <div class="status-number">1,068</div>
+          <div class="text-sm text-gray-600">支払い完了</div>
+        </div>
+        <div class="status-card total">
+          <div class="status-number">1,247</div>
+          <div class="text-sm text-gray-600">総会員数</div>
+        </div>
+      </div>
+
+      <!-- Payment Table -->
+      <div class="payment-table-wrapper">
+        <div class="table-controls">
+          <div class="flex items-center gap-4">
+            <input type="checkbox" id="selectAllPayments">
+            <label for="selectAllPayments" class="text-sm">すべて選択</label>
+            <div class="bulk-actions">
+              <button class="btn btn-sm btn-secondary">一括支払い処理</button>
+              <button class="btn btn-sm btn-secondary">リマインダー送信</button>
+              <button class="btn btn-sm btn-secondary">督促状発行</button>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <select class="form-select" style="width: auto;">
+              <option>すべてのステータス</option>
+              <option>未納</option>
+              <option>延滞</option>
+              <option>支払い済み</option>
+            </select>
+            <input type="text" class="form-input" placeholder="会員名で検索" style="width: 200px;">
+          </div>
+        </div>
+
+        <!-- Table Header -->
+        <div class="payment-row" style="background: var(--gray-50); font-weight: 600;">
+          <div></div>
+          <div>会員情報</div>
+          <div>金額</div>
+          <div>支払い方法</div>
+          <div>期限</div>
+          <div>ステータス</div>
+          <div>アクション</div>
+        </div>
+
+        <!-- Payment Rows -->
+        <div class="payment-row overdue">
+          <input type="checkbox" class="payment-checkbox">
+          <div class="member-info">
+            <div class="member-avatar">田</div>
+            <div class="member-details">
+              <h4>田中 太郎</h4>
+              <p>M001234 • ファミリー会員</p>
+            </div>
+          </div>
+          <div class="amount-cell">¥15,400</div>
+          <div>
+            <span class="payment-method-icon method-bank">B</span>
+            口座振替
+          </div>
+          <div class="text-error">11/15 (延滞)</div>
+          <div><span class="badge badge-error">未納</span></div>
+          <div class="payment-actions">
+            <button class="btn-icon btn-primary" data-tooltip="支払い処理" data-modal-target="processPaymentModal">
+              <i class="fas fa-credit-card"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="詳細">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="payment-row">
+          <input type="checkbox" class="payment-checkbox">
+          <div class="member-info">
+            <div class="member-avatar">佐</div>
+            <div class="member-details">
+              <h4>佐藤 花子</h4>
+              <p>M001235 • プレミアム会員</p>
+            </div>
+          </div>
+          <div class="amount-cell">¥18,900</div>
+          <div>
+            <span class="payment-method-icon method-card">C</span>
+            クレジット
+          </div>
+          <div>11/30</div>
+          <div><span class="badge badge-warning">支払い待ち</span></div>
+          <div class="payment-actions">
+            <button class="btn-icon btn-primary" data-tooltip="支払い処理" data-modal-target="processPaymentModal">
+              <i class="fas fa-credit-card"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="詳細">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="payment-row">
+          <input type="checkbox" class="payment-checkbox">
+          <div class="member-info">
+            <div class="member-avatar">山</div>
+            <div class="member-details">
+              <h4>山田 一郎</h4>
+              <p>M001236 • スタンダード会員</p>
+            </div>
+          </div>
+          <div class="amount-cell">¥12,500</div>
+          <div>
+            <span class="payment-method-icon method-cash">¥</span>
+            現金
+          </div>
+          <div>11/25</div>
+          <div><span class="badge badge-success">支払い済み</span></div>
+          <div class="payment-actions">
+            <button class="btn-icon btn-secondary" data-tooltip="領収書">
+              <i class="fas fa-receipt"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="詳細">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex items-center justify-between mt-6">
+        <div class="text-sm text-gray-500">
+          1,247件中 1-50件を表示
+        </div>
+        <div class="pagination">
+          <button class="pagination-btn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="pagination-btn active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <button class="pagination-btn">...</button>
+          <button class="pagination-btn">25</button>
+          <button class="pagination-btn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Process Payment Modal -->
+  <div id="processPaymentModal" class="modal-overlay">
+    <div class="modal" style="max-width: 800px;">
+      <div class="modal-header">
+        <h2 class="modal-title">支払い処理</h2>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="payment-modal-grid">
+          <!-- Member & Payment Info -->
+          <div class="payment-info-section">
+            <h4>会員情報</h4>
+            <div class="member-info mb-4">
+              <div class="member-avatar">田</div>
+              <div class="member-details">
+                <h4>田中 太郎</h4>
+                <p>M001234 • ファミリー会員</p>
+              </div>
+            </div>
+            
+            <h4>支払い詳細</h4>
+            <div class="info-row">
+              <span>月謝 (11月)</span>
+              <span>¥12,500</span>
+            </div>
+            <div class="info-row">
+              <span>体験レッスン</span>
+              <span>¥2,500</span>
+            </div>
+            <div class="info-row">
+              <span>遅延手数料</span>
+              <span>¥400</span>
+            </div>
+            <div class="info-row">
+              <span>合計金額</span>
+              <span class="font-bold">¥15,400</span>
+            </div>
+          </div>
+
+          <!-- Payment Form -->
+          <div>
+            <form id="processPaymentForm">
+              <div class="form-group">
+                <label class="form-label">支払い方法 *</label>
+                <select class="form-select" required>
+                  <option value="">選択してください</option>
+                  <option value="cash">現金</option>
+                  <option value="card">クレジットカード</option>
+                  <option value="bank">口座振替</option>
+                  <option value="transfer">銀行振込</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">受取金額 *</label>
+                <input type="number" class="form-input" value="15400" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">おつり</label>
+                <input type="number" class="form-input" value="0" readonly>
+              </div>
+
+              <!-- Cash Calculator -->
+              <div class="calculator-grid">
+                <button type="button" class="calc-btn">1000</button>
+                <button type="button" class="calc-btn">5000</button>
+                <button type="button" class="calc-btn">10000</button>
+                <button type="button" class="calc-btn">+100</button>
+                <button type="button" class="calc-btn">+500</button>
+                <button type="button" class="calc-btn">+1000</button>
+                <button type="button" class="calc-btn">C</button>
+                <button type="button" class="calc-btn primary">確定</button>
+                <button type="button" class="calc-btn">領収書</button>
+              </div>
+
+              <div class="form-group mt-4">
+                <label class="form-label">備考</label>
+                <textarea class="form-textarea" rows="2" placeholder="支払いに関するメモがあれば入力"></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>キャンセル</button>
+        <button type="submit" class="btn btn-success" form="processPaymentForm">支払い処理実行</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Report Modal -->
+  <div id="paymentReportModal" class="modal-overlay">
+    <div class="modal" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2 class="modal-title">売上レポート生成</h2>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="paymentReportForm">
+          <div class="form-group">
+            <label class="form-label">レポート種類 *</label>
+            <select class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="daily">日次売上レポート</option>
+              <option value="monthly">月次売上レポート</option>
+              <option value="member">会員別売上レポート</option>
+              <option value="overdue">未納・延滞レポート</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+            <div class="form-group">
+              <label class="form-label">開始日 *</label>
+              <input type="date" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">終了日 *</label>
+              <input type="date" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">出力形式</label>
+            <select class="form-select">
+              <option value="pdf">PDF</option>
+              <option value="excel">Excel</option>
+              <option value="csv">CSV</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-wrapper">
+              <input type="checkbox" checked>
+              グラフを含める
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>キャンセル</button>
+        <button type="submit" class="btn btn-primary" form="paymentReportForm">レポート生成</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../shared/js/common.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Setup select all checkbox
+      const selectAllCheckbox = document.getElementById('selectAllPayments');
+      const paymentCheckboxes = document.querySelectorAll('.payment-checkbox');
+
+      selectAllCheckbox.addEventListener('change', function() {
+        paymentCheckboxes.forEach(checkbox => {
+          checkbox.checked = this.checked;
+        });
+      });
+
+      // Update select all when individual checkboxes change
+      paymentCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const checkedCount = document.querySelectorAll('.payment-checkbox:checked').length;
+          selectAllCheckbox.checked = checkedCount === paymentCheckboxes.length;
+          selectAllCheckbox.indeterminate = checkedCount > 0 && checkedCount < paymentCheckboxes.length;
+        });
+      });
+
+      // Calculator functionality
+      const calcButtons = document.querySelectorAll('.calc-btn');
+      const amountInput = document.querySelector('input[type="number"]');
+      const changeInput = document.querySelector('input[readonly]');
+
+      calcButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          if (this.textContent === 'C') {
+            amountInput.value = 15400;
+            changeInput.value = 0;
+          } else if (this.textContent.includes('+')) {
+            const addAmount = parseInt(this.textContent.replace('+', ''));
+            amountInput.value = parseInt(amountInput.value) + addAmount;
+            changeInput.value = Math.max(0, parseInt(amountInput.value) - 15400);
+          } else if (!isNaN(this.textContent)) {
+            amountInput.value = this.textContent;
+            changeInput.value = Math.max(0, parseInt(amountInput.value) - 15400);
+          }
+        });
+      });
+
+      // Form submissions
+      document.getElementById('processPaymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (app.validateForm(this)) {
+          app.showToast('支払い処理が完了しました', 'success');
+          app.closeModal(document.getElementById('processPaymentModal'));
+          this.reset();
+        }
+      });
+
+      document.getElementById('paymentReportForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (app.validateForm(this)) {
+          app.showToast('レポートを生成中です...', 'info');
+          app.closeModal(document.getElementById('paymentReportModal'));
+          setTimeout(() => {
+            app.showToast('レポートの準備ができました', 'success');
+          }, 2000);
+        }
+      });
+
+      // Show welcome message
+      setTimeout(() => {
+        app.showToast('支払い処理画面を表示しました', 'info');
+      }, 500);
+    });
+  </script>
+</body>
+</html>

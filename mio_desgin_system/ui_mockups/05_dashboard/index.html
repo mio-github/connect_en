@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ダッシュボード - ConnectEn SaaS</title>
+  <link rel="stylesheet" href="../shared/css/common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Dashboard Specific Styles */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .dashboard-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      padding: var(--spacing-lg);
+    }
+
+    .card-summary {
+      grid-column: span 3;
+    }
+
+    .card-wide {
+      grid-column: span 6;
+    }
+
+    .card-full {
+      grid-column: span 12;
+    }
+
+    .summary-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .summary-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-lg);
+    }
+
+    .summary-icon.primary {
+      background: var(--primary-light);
+      color: var(--primary-color);
+    }
+
+    .summary-icon.success {
+      background: var(--success-color);
+      color: white;
+    }
+
+    .summary-icon.warning {
+      background: var(--warning-color);
+      color: white;
+    }
+
+    .summary-icon.info {
+      background: var(--info-color);
+      color: white;
+    }
+
+    .summary-value {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .summary-label {
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .summary-change {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      font-size: var(--font-size-sm);
+    }
+
+    .change-positive {
+      color: var(--success-color);
+    }
+
+    .change-negative {
+      color: var(--error-color);
+    }
+
+    .chart-container {
+      height: 250px;
+      background: var(--gray-50);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-500);
+      font-size: var(--font-size-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .activity-feed {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-sm);
+      flex-shrink: 0;
+    }
+
+    .activity-icon.member {
+      background: var(--success-color);
+      color: white;
+    }
+
+    .activity-icon.lesson {
+      background: var(--info-color);
+      color: white;
+    }
+
+    .activity-icon.payment {
+      background: var(--warning-color);
+      color: white;
+    }
+
+    .activity-content h4 {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .activity-content p {
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+      margin: 0;
+    }
+
+    .activity-time {
+      font-size: var(--font-size-xs);
+      color: var(--gray-400);
+    }
+
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-md);
+    }
+
+    .quick-action-btn {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: var(--gray-700);
+    }
+
+    .quick-action-btn:hover {
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-md);
+    }
+
+    .quick-action-icon {
+      font-size: var(--font-size-xl);
+      color: var(--primary-color);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .quick-action-label {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+    }
+
+    .upcoming-lessons {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .lesson-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-sm);
+      background: var(--gray-50);
+    }
+
+    .lesson-info h4 {
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .lesson-details {
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+    }
+
+    .lesson-capacity {
+      text-align: right;
+    }
+
+    .capacity-bar {
+      width: 80px;
+      height: 6px;
+      background: var(--gray-200);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .capacity-fill {
+      height: 100%;
+      background: var(--primary-color);
+    }
+
+    .capacity-text {
+      font-size: var(--font-size-xs);
+      color: var(--gray-600);
+    }
+
+    .weather-widget {
+      background: linear-gradient(135deg, var(--info-color), var(--primary-color));
+      color: white;
+      text-align: center;
+    }
+
+    .weather-temp {
+      font-size: var(--font-size-3xl);
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .weather-desc {
+      font-size: var(--font-size-sm);
+      opacity: 0.9;
+    }
+
+    /* Alerts and Notifications */
+    .alert-panel {
+      background: var(--error-color);
+      color: white;
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .alert-panel.warning {
+      background: var(--warning-color);
+    }
+
+    .alert-panel.info {
+      background: var(--info-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: repeat(8, 1fr);
+      }
+      
+      .card-summary {
+        grid-column: span 4;
+      }
+      
+      .card-wide {
+        grid-column: span 8;
+      }
+      
+      .quick-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .card-summary,
+      .card-wide,
+      .card-full {
+        grid-column: span 1;
+      }
+      
+      .quick-actions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <i class="fas fa-dance"></i> ConnectEn
+        </a>
+        <div class="header-actions">
+          <span class="text-sm text-gray-600">エン株式会社様</span>
+          <div class="flex items-center gap-4">
+            <button class="btn-icon btn-secondary" data-tooltip="通知">
+              <i class="fas fa-bell"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="設定">
+              <i class="fas fa-cog"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="ユーザーメニュー">
+              <i class="fas fa-user"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-chart-line"></i>
+            ダッシュボード
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../01_member_management/index.html" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            会員管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../02_lesson_reservation/index.html" class="nav-link">
+            <i class="nav-icon fas fa-calendar-alt"></i>
+            レッスン予約
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../03_payment_processing/index.html" class="nav-link">
+            <i class="nav-icon fas fa-credit-card"></i>
+            決済管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../04_staff_management/index.html" class="nav-link">
+            <i class="nav-icon fas fa-user-tie"></i>
+            スタッフ管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-building"></i>
+            施設管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-chart-bar"></i>
+            レポート
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cog"></i>
+            設定
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content-area">
+      <!-- Welcome Header -->
+      <div class="card">
+        <div class="card-header">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="card-title">おはようございます、管理者さん</h1>
+              <p class="text-gray-500">今日は2024年11月25日（月）です。本日の状況をご確認ください。</p>
+            </div>
+            <div class="text-right">
+              <div class="text-sm text-gray-500">最終更新</div>
+              <div class="text-sm font-semibold">10分前</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Important Alerts -->
+      <div class="alert-panel">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-exclamation-triangle"></i>
+          <strong>重要:</strong> 支払い延滞が23件発生しています。督促処理を確認してください。
+        </div>
+      </div>
+
+      <!-- Dashboard Grid -->
+      <div class="dashboard-grid">
+        <!-- Summary Cards -->
+        <div class="dashboard-card card-summary">
+          <div class="summary-header">
+            <div>
+              <div class="summary-value">1,247</div>
+              <div class="summary-label">総会員数</div>
+            </div>
+            <div class="summary-icon primary">
+              <i class="fas fa-users"></i>
+            </div>
+          </div>
+          <div class="summary-change">
+            <i class="fas fa-arrow-up"></i>
+            <span class="change-positive">+17 今月</span>
+          </div>
+        </div>
+
+        <div class="dashboard-card card-summary">
+          <div class="summary-header">
+            <div>
+              <div class="summary-value">¥847,500</div>
+              <div class="summary-label">本日の売上</div>
+            </div>
+            <div class="summary-icon success">
+              <i class="fas fa-yen-sign"></i>
+            </div>
+          </div>
+          <div class="summary-change">
+            <i class="fas fa-arrow-up"></i>
+            <span class="change-positive">+12.5% 前日比</span>
+          </div>
+        </div>
+
+        <div class="dashboard-card card-summary">
+          <div class="summary-header">
+            <div>
+              <div class="summary-value">156</div>
+              <div class="summary-label">本日のレッスン</div>
+            </div>
+            <div class="summary-icon info">
+              <i class="fas fa-calendar-day"></i>
+            </div>
+          </div>
+          <div class="summary-change">
+            <span class="text-gray-500">18件 進行中</span>
+          </div>
+        </div>
+
+        <div class="dashboard-card card-summary">
+          <div class="summary-header">
+            <div>
+              <div class="summary-value">23</div>
+              <div class="summary-label">支払い延滞</div>
+            </div>
+            <div class="summary-icon warning">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+          </div>
+          <div class="summary-change">
+            <i class="fas fa-arrow-up"></i>
+            <span class="change-negative">+3 今週</span>
+          </div>
+        </div>
+
+        <!-- Revenue Chart -->
+        <div class="dashboard-card card-wide">
+          <h3 class="font-semibold text-gray-900 mb-4">月次売上推移</h3>
+          <div class="chart-container">
+            <div class="text-center">
+              <i class="fas fa-chart-line text-2xl mb-2"></i>
+              <div>売上チャートがここに表示されます</div>
+              <div class="text-xs mt-1">（実装時はChart.jsなどで描画）</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Schedule -->
+        <div class="dashboard-card card-wide">
+          <h3 class="font-semibold text-gray-900 mb-4">今日のレッスン予定</h3>
+          <div class="upcoming-lessons">
+            <div class="lesson-item">
+              <div class="lesson-info">
+                <h4>ヒップホップ初級</h4>
+                <div class="lesson-details">10:00-11:30 | 渋谷校スタジオA | 田中講師</div>
+              </div>
+              <div class="lesson-capacity">
+                <div class="capacity-bar">
+                  <div class="capacity-fill" style="width: 75%;"></div>
+                </div>
+                <div class="capacity-text">9/12名</div>
+              </div>
+            </div>
+
+            <div class="lesson-item">
+              <div class="lesson-info">
+                <h4>ジャズダンス上級</h4>
+                <div class="lesson-details">14:00-15:30 | 渋谷校スタジオB | 山田講師</div>
+              </div>
+              <div class="lesson-capacity">
+                <div class="capacity-bar">
+                  <div class="capacity-fill" style="width: 100%; background: var(--error-color);"></div>
+                </div>
+                <div class="capacity-text">12/12名</div>
+              </div>
+            </div>
+
+            <div class="lesson-item">
+              <div class="lesson-info">
+                <h4>キッズダンス</h4>
+                <div class="lesson-details">16:30-17:30 | 新宿校スタジオA | 佐藤講師</div>
+              </div>
+              <div class="lesson-capacity">
+                <div class="capacity-bar">
+                  <div class="capacity-fill" style="width: 60%;"></div>
+                </div>
+                <div class="capacity-text">6/10名</div>
+              </div>
+            </div>
+
+            <div class="lesson-item">
+              <div class="lesson-info">
+                <h4>ブレイクダンス</h4>
+                <div class="lesson-details">19:00-20:30 | 渋谷校スタジオA | 田中講師</div>
+              </div>
+              <div class="lesson-capacity">
+                <div class="capacity-bar">
+                  <div class="capacity-fill" style="width: 90%;"></div>
+                </div>
+                <div class="capacity-text">11/12名</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="dashboard-card card-full">
+          <h3 class="font-semibold text-gray-900 mb-4">クイックアクション</h3>
+          <div class="quick-actions-grid">
+            <a href="../01_member_management/index.html" class="quick-action-btn">
+              <div class="quick-action-icon">
+                <i class="fas fa-user-plus"></i>
+              </div>
+              <div class="quick-action-label">新規会員登録</div>
+            </a>
+            <a href="../02_lesson_reservation/index.html" class="quick-action-btn">
+              <div class="quick-action-icon">
+                <i class="fas fa-calendar-plus"></i>
+              </div>
+              <div class="quick-action-label">レッスン予約</div>
+            </a>
+            <a href="../03_payment_processing/index.html" class="quick-action-btn">
+              <div class="quick-action-icon">
+                <i class="fas fa-credit-card"></i>
+              </div>
+              <div class="quick-action-label">支払い処理</div>
+            </a>
+            <a href="../04_staff_management/index.html" class="quick-action-btn">
+              <div class="quick-action-icon">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <div class="quick-action-label">スタッフ管理</div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="dashboard-card card-wide">
+          <h3 class="font-semibold text-gray-900 mb-4">最近のアクティビティ</h3>
+          <div class="activity-feed">
+            <div class="activity-item">
+              <div class="activity-icon member">
+                <i class="fas fa-user-plus"></i>
+              </div>
+              <div class="activity-content">
+                <h4>新規会員登録</h4>
+                <p>田中 花子さんがプレミアム会員として登録されました</p>
+                <div class="activity-time">15分前</div>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon payment">
+                <i class="fas fa-yen-sign"></i>
+              </div>
+              <div class="activity-content">
+                <h4>支払い完了</h4>
+                <p>山田 一郎さんの月謝支払い（¥12,500）が完了しました</p>
+                <div class="activity-time">32分前</div>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon lesson">
+                <i class="fas fa-calendar"></i>
+              </div>
+              <div class="activity-content">
+                <h4>レッスン予約</h4>
+                <p>佐藤 太郎さんがヒップホップ上級クラスを予約しました</p>
+                <div class="activity-time">1時間前</div>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon member">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="activity-content">
+                <h4>レビュー投稿</h4>
+                <p>鈴木 美咲さんがジャズダンスクラスに5つ星レビューを投稿</p>
+                <div class="activity-time">2時間前</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weather Widget -->
+        <div class="dashboard-card card-summary weather-widget">
+          <div class="weather-temp">22°C</div>
+          <div class="weather-desc">
+            <div>晴れ</div>
+            <div class="text-xs mt-1">東京・渋谷</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../shared/js/common.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Show welcome message
+      setTimeout(() => {
+        app.showToast('ダッシュボードへようこそ', 'success');
+      }, 500);
+
+      // Auto-refresh data every 5 minutes (in real implementation)
+      setInterval(() => {
+        console.log('Refreshing dashboard data...');
+      }, 300000);
+
+      // Simulate real-time updates
+      setTimeout(() => {
+        const alertPanel = document.querySelector('.alert-panel');
+        if (alertPanel) {
+          alertPanel.classList.add('fade-in');
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

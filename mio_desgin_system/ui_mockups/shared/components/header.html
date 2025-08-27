@@ -1,0 +1,70 @@
+<!-- ConnectEn SaaS - Shared Header Component -->
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <a href="../05_dashboard/index.html" class="logo">ConnectEn</a>
+      <nav class="nav-menu">
+        <a href="../05_dashboard/index.html" class="nav-link" data-page="dashboard">ダッシュボード</a>
+        <a href="../01_member_management/index.html" class="nav-link" data-page="member">会員管理</a>
+        <a href="../02_lesson_reservation/index.html" class="nav-link" data-page="lesson">レッスン予約</a>
+        <a href="../03_payment_processing/index.html" class="nav-link" data-page="payment">支払い処理</a>
+        <a href="../04_staff_management/index.html" class="nav-link" data-page="staff">スタッフ管理</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-icon btn-secondary" data-tooltip="通知">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        <button class="btn-icon btn-secondary" data-tooltip="ユーザーメニュー">
+          <i class="fas fa-user-circle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+  
+  .notification-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--error-color);
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+  
+  .btn-icon {
+    position: relative;
+  }
+</style>
+
+<script>
+  // Auto-highlight active navigation based on current page
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = document.body.getAttribute('data-page');
+    if (currentPage) {
+      const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
+      if (activeLink) {
+        // Remove active from all links
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+        });
+        // Add active to current page
+        activeLink.classList.add('active');
+      }
+    }
+  });
+</script>

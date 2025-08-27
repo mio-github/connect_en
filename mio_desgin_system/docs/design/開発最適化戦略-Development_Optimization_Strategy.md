@@ -212,45 +212,89 @@ Below are the basic policies for developing the ConnectEn system in an efficient
 ## 7. 段階的実装計画
 ## 7. Phased Implementation Plan
 
-### 7.1 MVPフェーズ (1-2ヶ月)
-### 7.1 MVP Phase (1-2 months)
-- コアインフラと基礎アーキテクチャの構築
-- 会員管理と基本的なスケジュール機能
-- 認証・認可基盤
+### 7.1 フェーズ1: 既存システム完全移行フェーズ (3-4ヶ月)
+### 7.1 Phase 1: Complete Existing System Migration Phase (3-4 months)
 
-- Building core infrastructure and basic architecture
-- Member management and basic scheduling functionality
-- Authentication and authorization foundation
+**最優先目標**: 現在の日本側システム（now_JP_system）の機能を漏れなく移行し、業務継続性を確保
 
-### 7.2 コアビジネス機能フェーズ (2-3ヶ月)
-### 7.2 Core Business Function Phase (2-3 months)
-- 完全なスケジュール管理
-- 基本的な決済・会計機能
-- レポート・分析の基礎実装
+**詳細実装計画**:
 
-- Complete schedule management
-- Basic payment and accounting functions
-- Basic implementation of reporting and analysis
+#### 7.1.1 基盤構築 (1ヶ月目前半)
+#### 7.1.1 Foundation Building (First half of Month 1)
+- Next.js + TypeScript + Tailwind CSS環境の最適化
+- 認証・認可システムの本格実装
+- データベース設計とPrisma ORM設定
+- 基本レイアウトとナビゲーション構造
 
-### 7.3 拡張機能フェーズ (2-3ヶ月)
-### 7.3 Extended Function Phase (2-3 months)
-- AIによる予測分析とレコメンデーション
-- ゲーミフィケーション要素
-- マーケティング機能の強化
+#### 7.1.2 コア機能実装 (1ヶ月目後半〜2ヶ月目)
+#### 7.1.2 Core Function Implementation (Second half of Month 1 to Month 2)
+- **会員管理システム**: 入会管理、会員情報管理、会員検索、出席管理
+- **カード管理システム**: カード登録、カード書き込み機能
+- **予約管理システム**: レッスン予約、スタジオ貸出管理
+- **基本ダッシュボード**: 現行システムレベルの情報表示
 
-- AI-based predictive analytics and recommendations
-- Gamification elements
-- Enhanced marketing functionality
+#### 7.1.3 決済・業務機能実装 (3ヶ月目)
+#### 7.1.3 Payment and Business Function Implementation (Month 3)
+- **POS関連機能**: POS検索、金種表、POS設定
+- **決済・会計機能**: 会費管理、請求処理
+- **通知システム**: メール配信、お知らせ管理
+- **コース管理**: コース一覧、月謝検索
 
-### 7.4 最適化・統合フェーズ (1-2ヶ月)
-### 7.4 Optimization and Integration Phase (1-2 months)
-- パフォーマンス最適化
-- ユーザーフィードバックに基づく改善
-- 外部システムとの高度な統合
+#### 7.1.4 レポート・最終調整 (4ヶ月目)
+#### 7.1.4 Reporting and Final Adjustments (Month 4)
+- **基本レポート**: 売上集計、スタジオ集計
+- **システムユーティリティ**: 日付チェック等の補助機能
+- **データ移行**: 既存データの完全移行
+- **テスト・検証**: 現行システムとの機能比較検証
 
-- Performance optimization
-- Improvements based on user feedback
-- Advanced integration with external systems
+**成功基準**: 現行システムの全機能が新システムで利用可能で、業務遂行に支障がないこと
+
+### 7.2 フェーズ2: MindBody機能統合フェーズ (2-3ヶ月)
+### 7.2 Phase 2: MindBody Feature Integration Phase (2-3 months)
+
+**目標**: MindBodyシステムの優れたマーケティング支援機能とサマリ画面の実装
+
+#### 7.2.1 高度ダッシュボード実装 (1ヶ月目)
+#### 7.2.1 Advanced Dashboard Implementation (Month 1)
+- ビジネスダッシュボード（KPI表示、収益グラフ）
+- ネットワークダッシュボード（複数拠点データ統合）
+- 分析概要画面（Analytics Overview）
+
+#### 7.2.2 マーケティング機能実装 (2ヶ月目)
+#### 7.2.2 Marketing Function Implementation (Month 2)
+- マーケティング管理（キャンペーン作成、効果測定）
+- リード管理（見込み客追跡、コンバージョン分析）
+- セールス分析（販売パターン分析、顧客セグメント評価）
+
+#### 7.2.3 高度分析・レポート (3ヶ月目)
+#### 7.2.3 Advanced Analytics and Reporting (Month 3)
+- 売上予測機能
+- スタジオ遷移分析
+- スタッフパフォーマンス分析
+- 高度なビジネスインサイト機能
+
+### 7.3 フェーズ3: AI機能実装フェーズ (2-3ヶ月)
+### 7.3 Phase 3: AI Feature Implementation Phase (2-3 months)
+
+**目標**: AI技術による業務効率化と競争優位性の確立
+
+#### 7.3.1 予測分析AI (1ヶ月目)
+#### 7.3.1 Predictive Analytics AI (Month 1)
+- 会員退会予測モデル
+- 人気レッスン予測
+- 売上予測の高度化
+
+#### 7.3.2 パーソナライゼーション・自動化 (2ヶ月目)
+#### 7.3.2 Personalization and Automation (Month 2)
+- レッスンレコメンデーションエンジン
+- チャットボットによるカスタマーサポート
+- 音声認識・OCR機能
+
+#### 7.3.3 高度AI機能・最適化 (3ヶ月目)
+#### 7.3.3 Advanced AI Features and Optimization (Month 3)
+- スケジュール最適化AI
+- 自動コンテンツ生成
+- インサイト提供・改善提案機能
 
 ## 8. リスク軽減戦略
 ## 8. Risk Mitigation Strategy

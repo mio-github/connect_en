@@ -3,13 +3,25 @@ Category_JP,Category_EN,Screen_JP,Screen_EN,Functions_JP,Functions_EN
 全般,General,ダッシュボード,Dashboard,業務概要表示/重要通知表示/クイックアクセスメニュー,Business overview display/Important notification display/Quick access menu
 全般,General,ビジネスダッシュボード,Business Dashboard,売上・収益グラフ/主要KPI表示/ビジネスメトリクス,Sales and revenue graphs/Key KPI display/Business metrics
 全般,General,ネットワークダッシュボード,Network Dashboard,複数拠点データ統合/拠点間比較/ネットワーク全体指標,Multiple location data integration/Location comparison/Network-wide indicators
+スクール・施設管理,School & Facility Management,スクール管理,School Management,拠点情報管理/基本設定・営業時間/拠点間設定同期,Location information management/Basic settings and business hours/Cross-location settings synchronization
+スクール・施設管理,School & Facility Management,スタジオ管理,Studio Management,部屋情報管理/設備・備品管理/利用可能時間設定/料金設定,Room information management/Equipment and supplies management/Available time settings/Pricing settings
+スタッフ・インストラクター管理,Staff & Instructor Management,統合人材マスタ管理,Integrated Personnel Master,人材基本情報管理/役割タグ管理/権限設定/雇用形態管理,Basic personnel information management/Role tag management/Permission settings/Employment type management
+スタッフ・インストラクター管理,Staff & Instructor Management,スタッフ管理,Staff Management,スタッフ一覧・検索・編集/シフト管理/業務割当管理/給与計算・支払い管理/パフォーマンス評価,Staff list search and editing/Shift management/Task assignment management/Payroll calculation and payment management/Performance evaluation
+スタッフ・インストラクター管理,Staff & Instructor Management,インストラクター管理,Instructor Management,インストラクター一覧・検索・編集/レッスン担当スケジュール/レッスン実績管理/報酬計算・支払い管理/生徒評価・フィードバック管理,Instructor list search and editing/Lesson assignment schedule/Lesson performance management/Compensation calculation and payment management/Student evaluation and feedback management
 会員管理,Membership Management,入会管理,Membership Enrollment,新規会員登録/会員プラン選択/初期設定と契約,New member registration/Membership plan selection/Initial setup and contract
 会員管理,Membership Management,会員管理,Member Management,会員情報編集/会員ステータス管理/会員履歴表示,Member information editing/Member status management/Member history display
 会員管理,Membership Management,会員検索,Member Search,詳細検索機能/検索結果フィルタリング/一括操作機能,Advanced search function/Search result filtering/Bulk operation function
 会員管理,Membership Management,出席管理,Attendance Management,出席記録/出席履歴表示/統計レポート,Attendance recording/Attendance history display/Statistical reports
+レッスン管理,Lesson Management,レッスン一覧,Lesson List,レッスンスケジュール表示/レッスン検索・フィルタリング/レッスン状況確認,Lesson schedule display/Lesson search and filtering/Lesson status check
+レッスン管理,Lesson Management,レッスン詳細,Lesson Detail,レッスン基本情報表示/参加者一覧/インストラクター情報,Basic lesson information display/Participant list/Instructor information
+レッスン管理,Lesson Management,レッスン作成・編集,Lesson Creation and Editing,レッスン基本情報設定/スケジュール設定/料金・定員設定,Basic lesson information setup/Schedule setting/Pricing and capacity setting
+レッスン管理,Lesson Management,レッスン予約管理,Lesson Reservation Management,予約受付・確認/キャンセル・変更処理/ウェイティングリスト管理,Reservation acceptance and confirmation/Cancellation and change processing/Waiting list management
+レッスン管理,Lesson Management,オンラインレッスン管理,Online Lesson Management,オンラインレッスン設定/配信URL管理/参加者管理・サポート,Online lesson setup/Streaming URL management/Participant management and support
 支払い,Payment,会員支払い,Member Payment,支払い処理/支払い履歴/請求書発行,Payment processing/Payment history/Invoice issuance
+支払い,Payment,月謝管理,Monthly Tuition Management,月謝設定・計算/自動引き落とし管理/月謝履歴表示,Monthly tuition setup and calculation/Automatic deduction management/Monthly tuition history display
 支払い,Payment,カード登録,Card Registration,クレジットカード登録/会員カード発行/セキュリティ確認,Credit card registration/Member card issuance/Security verification
 支払い,Payment,カード書き込み,Card Writing,ICカード情報書き込み/カード検証/エラー処理,IC card information writing/Card verification/Error handling
+支払い,Payment,ポイント管理,Point Management,ポイント残高表示/ポイント付与・利用履歴/ポイント有効期限管理/ポイント購入・チャージ,Point balance display/Point earning and usage history/Point expiration management/Point purchase and charging
 予約管理,Reservation Management,予約管理,Reservation Management,予約作成と編集/キャンセル管理/予約状況確認,Reservation creation and editing/Cancellation management/Reservation status check
 予約管理,Reservation Management,貸しスタジオ一覧,Rental Studio List,スタジオ情報表示/空き状況確認/クイック予約機能,Studio information display/Availability check/Quick reservation function
 予約管理,Reservation Management,貸しスタジオ詳細,Rental Studio Detail,施設詳細情報/料金プラン表示/設備・備品リスト,Facility detailed information/Price plan display/Equipment and supplies list
@@ -18,10 +30,12 @@ Category_JP,Category_EN,Screen_JP,Screen_EN,Functions_JP,Functions_EN
 通知,Notification,メール配信,Email Distribution,メールテンプレート/ターゲット選択/配信スケジュール設定,Email templates/Target selection/Distribution schedule setting
 通知,Notification,お知らせ管理,Notification Management,お知らせ作成/公開設定/お知らせ履歴,Notification creation/Publication settings/Notification history
 コース,Courses & Fees,コース一覧,Course List,コース情報表示/コース検索とフィルタリング/コース管理機能,Course information display/Course search and filtering/Course management function
+コース,Courses & Fees,コース詳細,Course Detail,コース詳細情報表示/レッスンスケジュール/料金・定員情報,Detailed course information display/Lesson schedule/Pricing and capacity information
 コース,Courses & Fees,月謝検索,Monthly Fee Search,月謝情報検索/支払い状況確認/料金調整機能,Monthly fee information search/Payment status check/Fee adjustment function
 POS,Sales & POS,POS検索,POS Search,販売履歴検索/レシート再発行/返品・交換処理,Sales history search/Receipt reissuance/Return and exchange processing
 POS,Sales & POS,金種表,Cash Denomination,現金管理/釣銭計算/金種確認,Cash management/Change calculation/Denomination confirmation
 POS,Sales & POS,POS設定,POS Settings,POS端末設定/商品マスタ管理/割引設定,POS terminal settings/Product master management/Discount settings
+POS,Sales & POS,小売管理,Retail Management,商品在庫管理/販売実績管理/商品カテゴリ管理,Product inventory management/Sales performance management/Product category management
 レポート,Analytics & Reporting,売上集計,Sales Summary,売上データ集計/期間別分析/エクスポート機能,Sales data aggregation/Period-based analysis/Export function
 レポート,Analytics & Reporting,スタジオ集計,Studio Summary,スタジオ別パフォーマンス/稼働率分析/収益性評価,Performance by studio/Occupancy rate analysis/Profitability evaluation
 レポート,Analytics & Reporting,スタジオ遷移,Studio Transition,利用傾向分析/会員移動パターン/時間帯別利用状況,Usage trend analysis/Member movement patterns/Usage by time period
@@ -30,4 +44,36 @@ Insights & Marketing,Insights & Marketing,分析概要,Analytics Overview,ビジ
 Insights & Marketing,Insights & Marketing,セールス分析,Sales Analytics,販売パターン分析/顧客セグメント評価/販売機会特定,Sales pattern analysis/Customer segment evaluation/Sales opportunity identification
 Insights & Marketing,Insights & Marketing,マーケティング管理,Marketing Management,キャンペーン作成/マーケティング効果測定/ターゲティング設定,Campaign creation/Marketing effectiveness measurement/Targeting settings
 Insights & Marketing,Insights & Marketing,リード管理,Lead Management,見込み客追跡/コンバージョン分析/フォローアップ管理,Prospect tracking/Conversion analysis/Follow-up management
-システム,System & Configuration,システム設定,System Settings,基本設定管理/ユーザー権限設定/システムパラメータ設定,Basic settings management/User permission settings/System parameter settings 
+システム,System & Configuration,システム設定,System Settings,基本設定管理/ユーザー権限設定/システムパラメータ設定,Basic settings management/User permission settings/System parameter settings
+会員側画面（ログイン前）,Member Screens (Before Login),トップページ,Top Page,スタジオ紹介/レッスン紹介/アクセス・営業時間,Studio introduction/Lesson introduction/Access and business hours
+会員側画面（ログイン前）,Member Screens (Before Login),ログイン,Login,会員ログイン/パスワードリセット,Member login/Password reset
+会員側画面（ログイン前）,Member Screens (Before Login),会員登録,Member Registration,スタジオ会員向け登録/新規会員向け登録/バーチャル会員登録,Registration for studio members/Registration for new members/Virtual member registration
+会員側画面（ログイン前）,Member Screens (Before Login),利用規約・プライバシーポリシー,Terms and Privacy Policy,利用規約表示/プライバシーポリシー表示/特定商取引法表示,Terms of use display/Privacy policy display/Specified commercial transactions law display
+会員側画面（ログイン後）,Member Screens (After Login),会員トップ,Member Top,個人ダッシュボード/クイックアクセスメニュー/最新情報表示,Personal dashboard/Quick access menu/Latest information display
+会員側画面（ログイン後）,Member Screens (After Login),マイページ,My Page,個人情報表示・編集/各種履歴へのアクセス/設定へのアクセス,Personal information display and editing/Access to various histories/Access to settings
+会員側画面（レッスン関連）,Member Screens (Lesson Related),レッスン予約,Lesson Reservation,スタジオ検索/日時検索/レッスン一覧表示,Studio search/Date and time search/Lesson list display
+会員側画面（レッスン関連）,Member Screens (Lesson Related),予約確認,Reservation Confirmation,予約内容確認/予約確定処理,Reservation details confirmation/Reservation finalization processing
+会員側画面（レッスン関連）,Member Screens (Lesson Related),予約完了,Reservation Completed,予約完了通知/QRコード表示,Reservation completion notification/QR code display
+会員側画面（レッスン関連）,Member Screens (Lesson Related),オンラインレッスン,Online Lesson,オンラインレッスン一覧/参加URLアクセス/視聴環境テスト,Online lesson list/Participation URL access/Viewing environment test
+会員側画面（レッスン関連）,Member Screens (Lesson Related),イベント・ワークショップ,Events and Workshops,イベント一覧/イベント詳細・申込/参加履歴,Event list/Event details and application/Participation history
+会員側画面（予約・履歴管理）,Member Screens (Reservation & History),予約・キャンセル履歴,Reservation and Cancellation History,予約履歴一覧/キャンセル申請/キャンセル確認,Reservation history list/Cancellation request/Cancellation confirmation
+会員側画面（予約・履歴管理）,Member Screens (Reservation & History),レッスン履歴,Lesson History,受講履歴表示/レッスン評価・フィードバック,Class attendance history display/Lesson evaluation and feedback
+会員側画面（予約・履歴管理）,Member Screens (Reservation & History),貸しスタジオ履歴,Rental Studio History,貸しスタジオ利用履歴/利用実績統計,Rental studio usage history/Usage statistics
+会員側画面（通知・メッセージ）,Member Screens (Notifications & Messages),通知一覧,Notification List,全通知表示/通知詳細表示/通知設定,All notifications display/Notification details display/Notification settings
+会員側画面（通知・メッセージ）,Member Screens (Notifications & Messages),メッセージ,Messages,メッセージ一覧/メッセージ詳細/返信機能,Message list/Message details/Reply function
+会員側画面（決済・ポイント関連）,Member Screens (Payment & Points),Enポイント,En Points,ポイント残高・履歴/ポイント獲得履歴/ポイント利用履歴/ポイント有効期限,Point balance and history/Point earning history/Point usage history/Point expiration dates
+会員側画面（決済・ポイント関連）,Member Screens (Payment & Points),Enポイント購入,En Point Purchase,ポイント購入トップ/購入履歴/決済処理,Point purchase top/Purchase history/Payment processing
+会員側画面（決済・ポイント関連）,Member Screens (Payment & Points),チケット購入,Ticket Purchase,チケット購入トップ/チケット購入履歴,Ticket purchase top/Ticket purchase history
+会員側画面（決済・ポイント関連）,Member Screens (Payment & Points),月謝支払い,Monthly Tuition Payment,月謝支払いトップ/月謝履歴,Monthly tuition payment top/Monthly tuition history
+会員側画面（決済・ポイント関連）,Member Screens (Payment & Points),購入履歴,Purchase History,商品購入履歴/レシート表示,Product purchase history/Receipt display
+会員側画面（友達紹介・シェア）,Member Screens (Friend Referral & Sharing),友達紹介,Friend Referral,紹介システム説明/紹介特典表示,Referral system explanation/Referral benefits display
+会員側画面（友達紹介・シェア）,Member Screens (Friend Referral & Sharing),シェア機能,Share Function,QRコードシェア/LINEシェア/SNSシェア（X、Facebook）,QR code sharing/LINE sharing/SNS sharing (X Facebook)
+会員側画面（設定）,Member Screens (Settings),設定トップ,Settings Top,各種設定へのアクセス,Access to various settings
+会員側画面（設定）,Member Screens (Settings),メールアドレス変更,Email Address Change,メールアドレス変更処理,Email address change processing
+会員側画面（設定）,Member Screens (Settings),パスワード変更,Password Change,パスワード変更処理,Password change processing
+会員側画面（設定）,Member Screens (Settings),支払い設定,Payment Settings,クレジットカード登録・変更/月謝支払い設定,Credit card registration and change/Monthly tuition payment settings
+会員側画面（設定）,Member Screens (Settings),各種規約,Various Terms,利用規約/プライバシーポリシー/施設利用規約/特定商取引法,Terms of use/Privacy policy/Facility usage terms/Specified commercial transactions law
+会員側画面（設定）,Member Screens (Settings),ログアウト,Logout,ログアウト確認,Logout confirmation
+会員側画面（その他機能）,Member Screens (Other Functions),マイQR,My QR,個人QRコード表示/QRコード利用方法,Personal QR code display/QR code usage instructions
+会員側画面（その他機能）,Member Screens (Other Functions),外部サイト連携,External Site Integration,レンタルスタジオ（外部サイト）/ダンスキャンプ（外部サイト）/オンラインストア（外部サイト）,Rental studio (external site)/Dance camp (external site)/Online store (external site)
+その他,Others,日付チェック,Date Check,システム日付確認/営業日カレンダー,System date verification/Business day calendar 

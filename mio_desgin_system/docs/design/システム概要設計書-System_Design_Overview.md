@@ -1,38 +1,44 @@
-# En Dance Studio ERPシステム 概要設計書
-# En Dance Studio ERP System Design Overview
+# ConnectEn - ダンススタジオ向けSaaS ERPプラットフォーム 概要設計書
+# ConnectEn - SaaS ERP Platform for Dance Studios System Design Overview
 
 ## 1. システム概要
 ## 1. System Overview
 
 ### 1.1 目的
 ### 1.1 Purpose
-本システムは、エン株式会社が運営するEn Dance Studioのための包括的なERPシステムです。ダンススタジオの運営に必要な全ての機能を統合し、効率的な業務管理を実現します。
+ConnectEnは、ダンススタジオ業界に特化したマルチテナント型SaaS ERPプラットフォームです。エン株式会社のEn Dance Studioをはじめ、複数のダンススタジオが同一のプラットフォーム上で独立した環境を利用できる包括的なソリューションを提供します。各スタジオの運営に必要な全ての機能を統合し、効率的な業務管理とデータドリブンな経営を実現します。
 
-This system is a comprehensive ERP solution for En Dance Studio operated by En Corporation. It integrates all functions necessary for dance studio operations, achieving efficient business management.
+ConnectEn is a multi-tenant SaaS ERP platform specialized for the dance studio industry. It provides a comprehensive solution where multiple dance studios, including En Dance Studio operated by En Corporation, can use independent environments on the same platform. It integrates all functions necessary for each studio's operations, achieving efficient business management and data-driven management.
 
 ### 1.2 背景
 ### 1.2 Background
-- 既存の日本のシステムを刷新し、よりモダンで使いやすいシステムへ再構築
+- 既存の日本のシステムを刷新し、業界全体で利用可能なSaaSプラットフォームとして再構築
 - アメリカのMindBodyシステムの優れた機能を取り入れ、グローバル展開にも対応
-- Mio Systemの最新AI技術を活用し、スタジオ運営の効率化と顧客体験の向上を図る
+- Mio Systemの最新AI技術を活用し、各スタジオの運営効率化と顧客体験の向上を図る
+- 補助金申請の承認を受け、単一企業向けからマルチテナント型SaaSへと設計を拡張
 
-- Redesigning the existing Japanese system into a more modern and user-friendly system
+- Redesigning the existing Japanese system as a SaaS platform available for the entire industry
 - Incorporating excellent features from America's MindBody system to support global expansion
-- Utilizing the latest AI technology from Mio System to improve studio operation efficiency and enhance customer experience
+- Utilizing the latest AI technology from Mio System to improve each studio's operation efficiency and enhance customer experience
+- Expanding the design from single-company to multi-tenant SaaS following subsidy application approval
 
 ### 1.3 ステークホルダー
 ### 1.3 Stakeholders
-- スタジオ運営管理者
+- プラットフォーム運営者（Mio System）
+- 各テナント企業のオーナー・経営者
+- 各スタジオの運営管理者
 - インストラクター・講師
 - スタジオスタッフ
 - 生徒・顧客
-- システム管理者
+- システム管理者（プラットフォーム管理者・テナント管理者）
 
-- Studio Operations Managers
+- Platform Operator (Mio System)
+- Tenant Company Owners/Executives
+- Studio Operations Managers at each location
 - Instructors/Teachers
 - Studio Staff
 - Students/Customers
-- System Administrators
+- System Administrators (Platform Admins & Tenant Admins)
 
 ## 2. 機能要件
 ## 2. Functional Requirements
@@ -95,26 +101,42 @@ This system is a comprehensive ERP solution for En Dance Studio operated by En C
 - Lesson popularity analysis
 - Management status visualization dashboard
 
-### 2.6 インストラクター管理
-### 2.6 Instructor Management
-- インストラクター情報管理
-- レッスン実績管理
-- 報酬計算
+### 2.6 スクール・施設管理
+### 2.6 School and Facility Management
+- スクール情報管理（拠点、基本情報）
+- スタジオ（部屋）管理（設備、利用可能時間、料金設定）
+- 施設予約状況管理
+- 設備・備品管理
 
-- Instructor information management
-- Lesson performance management
-- Compensation calculation
+- School information management (locations, basic information)
+- Studio (room) management (equipment, available hours, pricing)
+- Facility reservation status management
+- Equipment and supplies management
 
-### 2.7 在庫・物品管理
-### 2.7 Inventory and Supply Management
+### 2.7 スタッフ・インストラクター管理
+### 2.7 Staff and Instructor Management
+- 統合人材マスタ管理（スタッフ・インストラクター共通）
+- スタッフ管理（シフト、業務割当、給与計算）
+- インストラクター管理（レッスン担当、実績管理、報酬計算）
+- 役割・権限管理（スタッフ/インストラクターのタグ管理）
+- スケジュール管理（勤務予定、レッスン予定）
+
+- Integrated personnel master management (common for staff and instructors)
+- Staff management (shifts, task assignment, payroll calculation)
+- Instructor management (lesson assignment, performance management, compensation calculation)
+- Role and permission management (staff/instructor tag management)
+- Schedule management (work schedule, lesson schedule)
+
+### 2.8 在庫・物品管理
+### 2.8 Inventory and Supply Management
 - スタジオ備品管理
 - 物品発注・管理
 
 - Studio equipment management
 - Supply ordering and management
 
-### 2.8 モバイル対応
-### 2.8 Mobile Support
+### 2.9 モバイル対応
+### 2.9 Mobile Support
 - モバイルアプリ連携
 - 予約・キャンセル機能
 - 会員向けポータル
@@ -139,11 +161,15 @@ This system is a comprehensive ERP solution for En Dance Studio operated by En C
 ### 3.2 性能・拡張性
 ### 3.2 Performance and Scalability
 - 高速なレスポンス時間
-- 複数スタジオのスケーラビリティ
+- マルチテナント対応による無制限のスケーラビリティ
+- テナント毎の独立したデータベース環境
+- 水平スケーリングによる負荷分散
 - 将来の機能拡張に対応
 
 - Fast response time
-- Scalability for multiple studios
+- Unlimited scalability with multi-tenant support
+- Independent database environment for each tenant
+- Load balancing through horizontal scaling
 - Support for future functional expansion
 
 ### 3.3 セキュリティ
@@ -197,48 +223,118 @@ This system is a comprehensive ERP solution for En Dance Studio operated by En C
 
 ### 4.2 システム構成
 ### 4.2 System Configuration
-- マイクロサービスアーキテクチャ
-- RESTful API設計
+- マルチテナント対応マイクロサービスアーキテクチャ
+- RESTful API設計（テナント分離対応）
 - リアルタイム通知機能（WebSocket）
 - クラウドベースのインフラストラクチャ
+- テナント毎の独立したデータストレージ
+- 共通プラットフォームサービスの提供
 
-- Microservices architecture
-- RESTful API design
+- Multi-tenant microservices architecture
+- RESTful API design (with tenant isolation)
 - Real-time notification feature (WebSocket)
 - Cloud-based infrastructure
+- Independent data storage for each tenant
+- Common platform services provision
 
 ### 4.3 データモデル
 ### 4.3 Data Model
-- ユーザー（会員、スタッフ、インストラクター）
+
+#### 4.3.1 プラットフォーム共通データ
+#### 4.3.1 Platform Common Data
+- テナント管理（企業情報、契約情報、利用プラン）
+- プラットフォームユーザー管理
+- 課金・請求管理
+- システム設定・マスタデータ
+
+- Tenant Management (Company info, contracts, usage plans)
+- Platform User Management
+- Billing and Invoice Management
+- System Settings and Master Data
+
+#### 4.3.2 テナント固有データ
+#### 4.3.2 Tenant-Specific Data
+- ユーザー（会員、統合人材マスタ）
+- スクール・拠点情報
+- スタジオ・施設・部屋
 - レッスン・クラス
-- スタジオ・施設
 - 予約
 - 支払い・取引
 - イベント・キャンペーン
 - 通知・メッセージ
+- 人材役割管理（スタッフ/インストラクタータグ）
 
-- Users (Members, Staff, Instructors)
+- Users (Members, Integrated Personnel Master)
+- School and Location Information
+- Studios/Facilities/Rooms
 - Lessons/Classes
-- Studios/Facilities
 - Reservations
 - Payments/Transactions
 - Events/Campaigns
 - Notifications/Messages
+- Personnel Role Management (Staff/Instructor Tags)
 
 ## 5. 開発・運用計画
 ## 5. Development and Operation Plan
 
 ### 5.1 開発フェーズ
 ### 5.1 Development Phases
-- フェーズ1: 基本機能開発（会員管理、スケジュール管理）
-- フェーズ2: 決済・会計機能
-- フェーズ3: 分析・レポート機能
-- フェーズ4: モバイルアプリ連携
 
-- Phase 1: Basic function development (member management, schedule management)
-- Phase 2: Payment and accounting functions
-- Phase 3: Analysis and reporting functions
-- Phase 4: Mobile app integration
+#### フェーズ1: マルチテナント基盤構築と既存システム移行 (4-5ヶ月)
+#### Phase 1: Multi-tenant Foundation and Existing System Migration (4-5 months)
+**目的**: マルチテナント対応の基盤を構築し、現在の日本側システム（now_JP_system）の機能とデータをEn Dance Studioのテナントとして移行
+
+**主要機能**:
+- マルチテナント基盤（テナント管理、認証・認可、データ分離）
+- プラットフォーム管理機能（テナント登録、利用プラン管理、請求管理）
+- 会員管理（入会管理、会員情報管理、会員検索、出席管理）
+- カード管理（カード登録、カード書き込み）
+- 予約管理（レッスン予約、スタジオ貸出）
+- 決済・会計（POS検索、金種表、POS設定、会費管理）
+- 通知（メール配信、お知らせ管理）
+- コース管理（コース一覧、月謝検索）
+- 基本レポート（売上集計、スタジオ集計）
+- システム設定・日付チェック等のユーティリティ
+
+**目標**: マルチテナント対応で現行システムと同等の業務遂行能力を確保
+
+#### フェーズ2: MindBody機能統合 (2-3ヶ月)
+#### Phase 2: MindBody Feature Integration (2-3 months)
+**目的**: MindBodyシステムの優れたマーケティング支援機能とサマリ画面の実装
+
+**主要機能**:
+- 高度なダッシュボード（ビジネスダッシュボード、ネットワークダッシュボード）
+- マーケティング管理（キャンペーン作成、効果測定、ターゲティング）
+- 分析機能（Analytics Overview、Sales Analytics）
+- リード管理（見込み客追跡、コンバージョン分析）
+- スタッフ管理強化（パフォーマンス分析、スケジュール最適化）
+- 高度なレポート機能（売上予測、スタジオ遷移分析）
+
+**目標**: マーケティング効率とビジネスインサイトの大幅向上
+
+#### フェーズ3: AI機能実装とSaaS展開 (3-4ヶ月)
+#### Phase 3: AI Feature Implementation and SaaS Deployment (3-4 months)
+**目的**: AI技術を活用した業務効率化と顧客体験向上、および他スタジオへのSaaS展開準備
+
+**主要機能**:
+- 予測分析（会員退会予測、人気レッスン予測、売上予測）
+- パーソナライゼーション（レッスンレコメンデーション、カスタマイズ通知）
+- 業務最適化（スケジュール最適化、インストラクター配置最適化）
+- 自動化支援（チャットボット、音声認識、OCR）
+- コンテンツ生成（イベント告知、メール文面生成）
+- インサイト提供（日報分析、改善提案、離脱リスクアラート）
+
+**主要機能（追加）**:
+- テナントオンボーディング機能
+- セルフサービスポータル
+- プラットフォーム共通のAI学習基盤
+- 業界ベンチマーク・分析機能
+
+**目標**: AI技術による競争優位性の確立とプラットフォームとしての市場展開準備完了
+
+- Phase 1: Complete migration of current Japanese system (now_JP_system) functions and data to ensure no disruption to business operations
+- Phase 2: Implementation of MindBody's marketing support and summary screen features  
+- Phase 3: Addition of AI functionality for operational efficiency and competitive advantage
 
 ### 5.2 テスト戦略
 ### 5.2 Testing Strategy
@@ -502,20 +598,14 @@ This system is a comprehensive ERP solution for En Dance Studio operated by En C
 - Shortcut menu (quick access to frequently used functions) 🌐
 - Search function (global search) 🌐
 
-## 8. システム名候補
-## 8. System Name Candidates
+## 8. プラットフォーム名
+## 8. Platform Name
 
-1. DanceFlow ERP
-2. StudioSync
-3. EnMotion Studio Manager
-4. RhythmCore ERP
-5. DanceMatrix
-6. StudioPulse
-7. EnVision Studio System
-8. FlexStudio ERP
-9. DanceHarmony
-10. StudioNexus
-11. ConnectEn（採用）/ ConnectEn (Adopted)
+**ConnectEn** - Dance Studio Management SaaS Platform
+
+ダンススタジオ業界を「つなぐ（Connect）」、エン株式会社から始まる「円（En）」の輪を業界全体に広げる意味を込めて。
+
+Connecting the dance studio industry, expanding the circle (En) that starts from En Corporation to the entire industry.
 
 ## 9. ゲーミフィケーション要素
 ## 9. Gamification Elements
@@ -591,11 +681,20 @@ This system is a comprehensive ERP solution for En Dance Studio operated by En C
 ## 10. 今後の検討事項
 ## 10. Future Considerations
 
-- 国際展開に向けた多通貨対応
+### 10.1 プラットフォーム拡張
+### 10.1 Platform Expansion
+- グローバル展開に向けた多言語・多通貨対応
+- APIマーケットプレイスの開設
+- サードパーティアプリケーション連携
+- ホワイトラベルソリューションの提供
+
+### 10.2 機能拡充
+### 10.2 Feature Enhancement
 - 会員向けソーシャル機能の検討
 - オンラインレッスン統合の可能性
 - AIを活用した動画分析機能の追加検討 🤖
 - VR/AR技術を活用した新しいダンス体験の提供 🤖
+- 業界共通データ分析・ベンチマークサービス
 
 - Multi-currency support for international expansion
 - Consideration of social features for members

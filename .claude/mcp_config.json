@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "serena": {
+      "command": "npx",
+      "args": ["@oraios/serena-mcp"],
+      "env": {
+        "SERENA_PROJECT_PATH": "/Volumes/KIOXIA/Developments/withAI/Vercel/EnDanceStudio"
+      }
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-context7"],
+      "env": {}
+    }
+  }
+}

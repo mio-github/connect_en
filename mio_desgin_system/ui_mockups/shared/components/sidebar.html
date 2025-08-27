@@ -1,0 +1,99 @@
+<!-- ConnectEn SaaS - Shared Sidebar Component -->
+<aside class="sidebar">
+  <nav class="nav-menu">
+    <ul>
+      <li class="nav-item">
+        <a href="../05_dashboard/index.html" class="nav-link" data-page="dashboard">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          ダッシュボード
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../01_member_management/index.html" class="nav-link" data-page="member">
+          <i class="nav-icon fas fa-users"></i>
+          会員管理
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../02_lesson_reservation/index.html" class="nav-link" data-page="lesson">
+          <i class="nav-icon fas fa-calendar-alt"></i>
+          レッスン予約
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../03_payment_processing/index.html" class="nav-link" data-page="payment">
+          <i class="nav-icon fas fa-credit-card"></i>
+          支払い処理
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../04_staff_management/index.html" class="nav-link" data-page="staff">
+          <i class="nav-icon fas fa-user-tie"></i>
+          スタッフ管理
+        </a>
+      </li>
+    </ul>
+  </nav>
+  
+  <div class="sidebar-footer">
+    <div class="studio-info">
+      <div class="studio-name">En Dance Studio</div>
+      <div class="studio-plan">プレミアムプラン</div>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--gray-200);
+    background: white;
+  }
+  
+  .studio-info {
+    text-align: center;
+  }
+  
+  .studio-name {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .studio-plan {
+    font-size: var(--font-size-xs);
+    color: var(--gray-500);
+    background: var(--primary-light);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-xl);
+    display: inline-block;
+  }
+  
+  .sidebar {
+    position: relative;
+    padding-bottom: 100px; /* Space for footer */
+  }
+</style>
+
+<script>
+  // Auto-highlight active navigation based on current page
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = document.body.getAttribute('data-page');
+    if (currentPage) {
+      const activeLink = document.querySelector(`.sidebar [data-page="${currentPage}"]`);
+      if (activeLink) {
+        // Remove active from all links
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+          link.classList.remove('active');
+        });
+        // Add active to current page
+        activeLink.classList.add('active');
+      }
+    }
+  });
+</script>

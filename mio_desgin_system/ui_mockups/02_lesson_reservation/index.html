@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>レッスン予約管理 - ConnectEn SaaS</title>
+  <link rel="stylesheet" href="../shared/css/common.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Lesson Reservation - Flat Modern Design */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-2xl);
+      padding-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    
+    .page-title {
+      font-size: var(--font-size-3xl);
+      font-weight: 700;
+      color: var(--gray-900);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+    
+    .page-title i {
+      color: var(--gray-400);
+      font-size: var(--font-size-2xl);
+    }
+    
+    .lesson-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+
+    /* Quick Stats - 横並びコンパクト表示 */
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .quick-stat {
+      background: white;
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      text-align: center;
+    }
+    
+    .quick-stat-value {
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .quick-stat-label {
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+    }
+    
+    .quick-stat.highlight .quick-stat-value {
+      color: var(--primary-color);
+    }
+
+    /* Calendar View */
+    .calendar-container {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .calendar-sidebar {
+      background: white;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      padding: var(--spacing-lg);
+      height: fit-content;
+    }
+
+    .date-picker {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .date-picker-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .month-nav {
+      background: none;
+      border: none;
+      color: var(--gray-500);
+      cursor: pointer;
+      padding: var(--spacing-sm);
+      border-radius: var(--radius-sm);
+    }
+
+    .month-nav:hover {
+      background: var(--gray-100);
+      color: var(--gray-700);
+    }
+
+    .current-month {
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .mini-calendar {
+      width: 100%;
+    }
+
+    .mini-calendar table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .mini-calendar th,
+    .mini-calendar td {
+      text-align: center;
+      padding: var(--spacing-sm);
+      font-size: var(--font-size-sm);
+    }
+
+    .mini-calendar th {
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    .mini-calendar td {
+      cursor: pointer;
+      color: var(--gray-700);
+      border-radius: var(--radius-sm);
+    }
+
+    .mini-calendar td:hover {
+      background: var(--gray-100);
+    }
+
+    .mini-calendar td.today {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .mini-calendar td.selected {
+      background: var(--primary-light);
+      color: var(--primary-color);
+    }
+
+    /* Filter Section */
+    .filter-section {
+      margin-top: var(--spacing-lg);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .filter-title {
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-md);
+      font-size: var(--font-size-sm);
+    }
+
+    .filter-group {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-xs);
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+    }
+
+    .filter-option:hover {
+      background: var(--gray-50);
+    }
+
+    .filter-checkbox {
+      margin: 0;
+    }
+
+    .filter-label {
+      font-size: var(--font-size-sm);
+      color: var(--gray-700);
+      flex: 1;
+    }
+
+    /* Main Calendar */
+    .main-calendar {
+      background: white;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+    }
+
+    .calendar-header {
+      background: var(--gray-50);
+      padding: var(--spacing-lg);
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      justify-content: between;
+      align-items: center;
+    }
+
+    .view-switcher {
+      display: flex;
+      gap: var(--spacing-xs);
+    }
+
+    .view-btn {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border: 1px solid var(--gray-300);
+      background: white;
+      color: var(--gray-600);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .view-btn.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .view-btn:not(.active):hover {
+      background: var(--gray-50);
+      border-color: var(--gray-400);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .calendar-day-header {
+      background: var(--gray-50);
+      padding: var(--spacing-md);
+      text-align: center;
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--gray-700);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .calendar-day {
+      min-height: 120px;
+      border-right: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      padding: var(--spacing-sm);
+      position: relative;
+    }
+
+    .calendar-day:nth-child(7n) {
+      border-right: none;
+    }
+
+    .day-number {
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .day-number.today {
+      background: var(--primary-color);
+      color: white;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-xs);
+    }
+
+    .lesson-item {
+      background: var(--info-color);
+      color: white;
+      padding: var(--spacing-xs);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-xs);
+      margin-bottom: var(--spacing-xs);
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .lesson-item:hover {
+      opacity: 0.8;
+    }
+
+    .lesson-item.full {
+      background: var(--gray-400);
+    }
+
+    .lesson-item.waiting {
+      background: var(--warning-color);
+    }
+
+    /* Lesson Details Panel */
+    .lesson-details {
+      background: white;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      padding: var(--spacing-xl);
+    }
+
+    .lesson-details-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .lesson-title {
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .lesson-meta {
+      color: var(--gray-600);
+      font-size: var(--font-size-sm);
+    }
+
+    .lesson-status {
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+
+    .capacity-info {
+      background: var(--gray-50);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .capacity-bar {
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .capacity-fill {
+      height: 100%;
+      background: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+
+    .capacity-fill.full {
+      background: var(--error-color);
+    }
+
+    .capacity-fill.warning {
+      background: var(--warning-color);
+    }
+
+    .capacity-text {
+      font-size: var(--font-size-sm);
+      color: var(--gray-700);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .participants-list {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .participant-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-sm) 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .participant-info {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .participant-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+    }
+
+    .participant-name {
+      font-weight: 500;
+      color: var(--gray-900);
+    }
+
+    .participant-actions {
+      display: flex;
+      gap: var(--spacing-xs);
+    }
+
+    .waiting-list {
+      margin-top: var(--spacing-lg);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .section-title {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-md);
+    }
+
+    @media (max-width: 1024px) {
+      .calendar-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .calendar-sidebar {
+        order: 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .calendar-grid {
+        display: block;
+      }
+      
+      .calendar-day {
+        border-right: none;
+        border-left: none;
+        margin-bottom: var(--spacing-sm);
+        border-radius: var(--radius-sm);
+      }
+      
+      .quick-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Modal Specific Styles */
+    .lesson-info-card {
+      background: var(--gray-50);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      border: 1px solid var(--gray-200);
+    }
+
+    .lesson-info-card h3 {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .capacity-status {
+      margin-top: var(--spacing-md);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <i class="fas fa-dance"></i> ConnectEn
+        </a>
+        <div class="header-actions">
+          <span class="text-sm text-gray-600">エン株式会社様</span>
+          <div class="flex items-center gap-4">
+            <button class="btn-icon btn-secondary" data-tooltip="通知">
+              <i class="fas fa-bell"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="設定">
+              <i class="fas fa-cog"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="ユーザーメニュー">
+              <i class="fas fa-user"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-chart-line"></i>
+            ダッシュボード
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../01_member_management/index.html" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            会員管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-calendar-alt"></i>
+            レッスン予約
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-credit-card"></i>
+            決済管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user-tie"></i>
+            スタッフ管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-building"></i>
+            施設管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-chart-bar"></i>
+            レポート
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cog"></i>
+            設定
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+      <div class="page-header">
+        <h1 class="page-title">
+          <i class="fas fa-calendar-alt"></i> レッスン予約管理
+        </h1>
+        <div class="lesson-actions">
+          <button class="btn btn-secondary">
+            <i class="fas fa-file-export"></i> エクスポート
+          </button>
+          <button class="btn btn-secondary" data-modal-target="newLessonModal">
+            <i class="fas fa-calendar-plus"></i> レッスン作成
+          </button>
+          <button class="btn btn-primary" data-modal-target="newReservationModal">
+            <i class="fas fa-plus"></i> 新規予約
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="quick-stats">
+        <div class="quick-stat highlight">
+          <div class="quick-stat-value">24</div>
+          <div class="quick-stat-label">今日のレッスン</div>
+        </div>
+        <div class="quick-stat">
+          <div class="quick-stat-value">156</div>
+          <div class="quick-stat-label">今日の参加者</div>
+        </div>
+        <div class="quick-stat highlight">
+          <div class="quick-stat-value">8</div>
+          <div class="quick-stat-label">キャンセル待ち</div>
+        </div>
+        <div class="quick-stat">
+          <div class="quick-stat-value">92%</div>
+          <div class="quick-stat-label">稼働率</div>
+        </div>
+        <div class="quick-stat">
+          <div class="quick-stat-value">3</div>
+          <div class="quick-stat-label">変更・キャンセル</div>
+        </div>
+      </div>
+
+      <!-- Calendar Container -->
+      <div class="calendar-container">
+        <!-- Calendar Sidebar -->
+        <div class="calendar-sidebar">
+          <!-- Date Picker -->
+          <div class="date-picker">
+            <div class="date-picker-header">
+              <button class="month-nav">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <span class="current-month">2024年11月</span>
+              <button class="month-nav">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            <div class="mini-calendar">
+              <table>
+                <thead>
+                  <tr>
+                    <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td>1</td><td>2</td>
+                  </tr>
+                  <tr>
+                    <td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+                  </tr>
+                  <tr>
+                    <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td>
+                  </tr>
+                  <tr>
+                    <td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td>
+                  </tr>
+                  <tr>
+                    <td>24</td><td>25</td><td>26</td><td class="today">27</td><td>28</td><td>29</td><td>30</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="filter-section">
+            <div class="filter-group">
+              <div class="filter-title">スタジオ</div>
+              <div class="filter-options">
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox" checked>
+                  <span class="filter-label">すべて</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox" checked>
+                  <span class="filter-label">渋谷校</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox" checked>
+                  <span class="filter-label">横浜校</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox">
+                  <span class="filter-label">群馬校</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox">
+                  <span class="filter-label">栃木校</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <div class="filter-title">インストラクター</div>
+              <div class="filter-options">
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox" checked>
+                  <span class="filter-label">すべて</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox">
+                  <span class="filter-label">田中先生</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox">
+                  <span class="filter-label">佐藤先生</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox">
+                  <span class="filter-label">鈴木先生</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <div class="filter-title">レッスンタイプ</div>
+              <div class="filter-options">
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox" checked>
+                  <span class="filter-label">対面レッスン</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox" checked>
+                  <span class="filter-label">オンラインレッスン</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="filter-checkbox" checked>
+                  <span class="filter-label">ハイブリッド</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Calendar -->
+        <div class="main-calendar">
+          <div class="calendar-header">
+            <div class="view-switcher">
+              <button class="view-btn">日</button>
+              <button class="view-btn active">週</button>
+              <button class="view-btn">月</button>
+            </div>
+          </div>
+          
+          <div class="calendar-grid">
+            <div class="calendar-day-header">日 24</div>
+            <div class="calendar-day-header">月 25</div>
+            <div class="calendar-day-header">火 26</div>
+            <div class="calendar-day-header">水 27</div>
+            <div class="calendar-day-header">木 28</div>
+            <div class="calendar-day-header">金 29</div>
+            <div class="calendar-day-header">土 30</div>
+
+            <div class="calendar-day">
+              <div class="day-number">24</div>
+              <div class="lesson-item">
+                <div>10:00 ヒップホップ初級</div>
+                <div>8/12名</div>
+              </div>
+              <div class="lesson-item">
+                <div>14:00 ジャズダンス</div>
+                <div>15/15名</div>
+              </div>
+            </div>
+
+            <div class="calendar-day">
+              <div class="day-number">25</div>
+              <div class="lesson-item">
+                <div>09:30 バレエ基礎</div>
+                <div>6/10名</div>
+              </div>
+              <div class="lesson-item waiting">
+                <div>19:00 ヒップホップ上級</div>
+                <div>12/12名 (待3名)</div>
+              </div>
+            </div>
+
+            <div class="calendar-day">
+              <div class="day-number">26</div>
+              <div class="lesson-item">
+                <div>18:00 コンテンポラリー</div>
+                <div>4/8名</div>
+              </div>
+            </div>
+
+            <div class="calendar-day">
+              <div class="day-number today">27</div>
+              <div class="lesson-item">
+                <div>10:00 キッズダンス</div>
+                <div>12/15名</div>
+              </div>
+              <div class="lesson-item">
+                <div>16:00 ストリート</div>
+                <div>9/12名</div>
+              </div>
+              <div class="lesson-item full">
+                <div>20:00 アダルト</div>
+                <div>満員</div>
+              </div>
+            </div>
+
+            <div class="calendar-day">
+              <div class="day-number">28</div>
+              <div class="lesson-item">
+                <div>11:00 ヨガ</div>
+                <div>5/20名</div>
+              </div>
+            </div>
+
+            <div class="calendar-day">
+              <div class="day-number">29</div>
+              <div class="lesson-item">
+                <div>13:00 社交ダンス</div>
+                <div>8/16名</div>
+              </div>
+              <div class="lesson-item">
+                <div>17:00 K-POP</div>
+                <div>14/15名</div>
+              </div>
+            </div>
+
+            <div class="calendar-day">
+              <div class="day-number">30</div>
+              <div class="lesson-item">
+                <div>10:00 フラダンス</div>
+                <div>7/12名</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson Details -->
+      <div class="lesson-details">
+        <div class="lesson-details-header">
+          <div>
+            <h3 class="lesson-title">ヒップホップ上級クラス</h3>
+            <div class="lesson-meta">
+              11月25日 (月) 19:00-20:30 | 渋谷校 スタジオA | 田中講師
+            </div>
+          </div>
+          <div class="lesson-status">
+            <span class="badge badge-warning">キャンセル待ち</span>
+            <span class="badge badge-info">ハイブリッド</span>
+          </div>
+        </div>
+
+        <div class="capacity-info">
+          <div class="capacity-bar">
+            <div class="capacity-fill" style="width: 100%"></div>
+          </div>
+          <div class="capacity-text">
+            <span>定員: 12名 (満員)</span>
+            <span>キャンセル待ち: 3名</span>
+          </div>
+        </div>
+
+        <div class="participants-list">
+          <h4 class="section-title">参加者一覧</h4>
+          <div class="participant-item">
+            <div class="participant-info">
+              <div class="participant-avatar">田</div>
+              <div class="participant-name">田中 太郎</div>
+            </div>
+            <div class="participant-actions">
+              <button class="btn-icon btn-secondary" data-tooltip="詳細">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="btn-icon btn-secondary" data-tooltip="キャンセル">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="participant-item">
+            <div class="participant-info">
+              <div class="participant-avatar">佐</div>
+              <div class="participant-name">佐藤 花子</div>
+            </div>
+            <div class="participant-actions">
+              <button class="btn-icon btn-secondary" data-tooltip="詳細">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="btn-icon btn-secondary" data-tooltip="キャンセル">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="waiting-list">
+          <h4 class="section-title">キャンセル待ち</h4>
+          <div class="participant-item">
+            <div class="participant-info">
+              <div class="participant-avatar">山</div>
+              <div class="participant-name">山田 一郎</div>
+            </div>
+            <div class="participant-actions">
+              <button class="btn btn-sm btn-primary">繰り上げ</button>
+              <button class="btn-icon btn-secondary" data-tooltip="削除">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- New Lesson Modal -->
+  <div id="newLessonModal" class="modal-overlay">
+    <div class="modal" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2 class="modal-title">新規レッスン登録</h2>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="newLessonForm">
+          <div class="form-group">
+            <label class="form-label" for="lessonName">レッスン名 *</label>
+            <input type="text" id="lessonName" name="lessonName" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="instructor">担当講師 *</label>
+            <select id="instructor" name="instructor" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="tanaka">田中 美咲</option>
+              <option value="yamada">山田 健太</option>
+              <option value="sato">佐藤 麻衣</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+            <div class="form-group">
+              <label class="form-label" for="lessonDate">開催日 *</label>
+              <input type="date" id="lessonDate" name="lessonDate" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="studio">スタジオ *</label>
+              <select id="studio" name="studio" class="form-select" required>
+                <option value="">選択してください</option>
+                <option value="studioA">渋谷校 スタジオA</option>
+                <option value="studioB">渋谷校 スタジオB</option>
+                <option value="studioC">新宿校 スタジオA</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+            <div class="form-group">
+              <label class="form-label" for="startTime">開始時間 *</label>
+              <input type="time" id="startTime" name="startTime" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="endTime">終了時間 *</label>
+              <input type="time" id="endTime" name="endTime" class="form-input" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+            <div class="form-group">
+              <label class="form-label" for="capacity">定員 *</label>
+              <input type="number" id="capacity" name="capacity" class="form-input" min="1" max="30" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="level">レベル *</label>
+              <select id="level" name="level" class="form-select" required>
+                <option value="">選択してください</option>
+                <option value="beginner">初心者</option>
+                <option value="intermediate">中級</option>
+                <option value="advanced">上級</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="lessonType">レッスンタイプ *</label>
+            <select id="lessonType" name="lessonType" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="regular">対面のみ</option>
+              <option value="online">オンラインのみ</option>
+              <option value="hybrid">ハイブリッド</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="description">レッスン詳細</label>
+            <textarea id="description" name="description" class="form-textarea" rows="3" placeholder="レッスンの内容や注意事項を入力してください"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>キャンセル</button>
+        <button type="submit" class="btn btn-primary" form="newLessonForm">レッスンを登録</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Reservation Modal -->
+  <div id="newReservationModal" class="modal-overlay">
+    <div class="modal" style="max-width: 500px;">
+      <div class="modal-header">
+        <h2 class="modal-title">レッスン予約</h2>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="lesson-info-card">
+          <h3>ヒップホップ上級クラス</h3>
+          <p class="text-gray-500">11月25日 (月) 19:00-20:30</p>
+          <p class="text-gray-500">渋谷校 スタジオA | 田中講師</p>
+          <div class="capacity-status mt-4">
+            <div class="capacity-bar">
+              <div class="capacity-fill" style="width: 100%"></div>
+            </div>
+            <div class="capacity-text">
+              <span class="text-warning">満員 (12/12) - キャンセル待ち登録</span>
+            </div>
+          </div>
+        </div>
+
+        <form id="newReservationForm">
+          <div class="form-group">
+            <label class="form-label" for="memberId">会員検索 *</label>
+            <input type="text" id="memberId" name="memberId" class="form-input" placeholder="会員ID、氏名、電話番号で検索" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reservationType">予約タイプ *</label>
+            <select id="reservationType" name="reservationType" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="regular">通常予約</option>
+              <option value="trial">体験レッスン</option>
+              <option value="waiting">キャンセル待ち</option>
+              <option value="staff">スタッフ予約</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="attendanceType">受講方法 *</label>
+            <select id="attendanceType" name="attendanceType" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="inperson">対面受講</option>
+              <option value="online">オンライン受講</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="notes">備考</label>
+            <textarea id="notes" name="notes" class="form-textarea" rows="2" placeholder="特記事項があれば入力してください"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>キャンセル</button>
+        <button type="submit" class="btn btn-primary" form="newReservationForm">予約を登録</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../shared/js/common.js"></script>
+  <script>
+    // Page-specific JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      // Calendar interaction
+      const lessonItems = document.querySelectorAll('.lesson-item');
+      lessonItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // In real implementation, this would load lesson details
+          console.log('Lesson clicked:', this.textContent);
+        });
+      });
+
+      // Filter interactions
+      const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+      filterCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          // Filter calendar view
+          console.log('Filter changed:', this.nextElementSibling.textContent, this.checked);
+        });
+      });
+
+      // View switcher
+      const viewButtons = document.querySelectorAll('.view-btn');
+      viewButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          viewButtons.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          console.log('View changed to:', this.textContent);
+        });
+      });
+
+      // Handle form submissions
+      document.getElementById('newLessonForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (app.validateForm(this)) {
+          app.showToast('レッスンが登録されました', 'success');
+          app.closeModal(document.getElementById('newLessonModal'));
+          this.reset();
+        }
+      });
+
+      document.getElementById('newReservationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (app.validateForm(this)) {
+          app.showToast('予約が登録されました', 'success');
+          app.closeModal(document.getElementById('newReservationModal'));
+          this.reset();
+        }
+      });
+
+      // Show welcome message
+      setTimeout(() => {
+        app.showToast('レッスン予約管理画面を表示しました', 'info');
+      }, 500);
+    });
+  </script>
+</body>
+</html>

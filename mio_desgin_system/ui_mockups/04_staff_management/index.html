@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スタッフ管理 - ConnectEn SaaS</title>
+  <link rel="stylesheet" href="../shared/css/common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Staff Management Specific Styles */
+    .staff-overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .staff-stat-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      text-align: center;
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gray-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--spacing-md);
+      font-size: var(--font-size-lg);
+      color: var(--gray-600);
+    }
+
+    .stat-icon.primary {
+      background: var(--primary-light);
+      color: var(--primary-color);
+    }
+
+    .stat-value {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .stat-label {
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+    }
+
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .staff-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .staff-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .staff-card-header {
+      padding: var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .staff-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      color: white;
+    }
+
+    .staff-info h3 {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .staff-role {
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .staff-status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .status-dot.online {
+      background: var(--success-color);
+    }
+
+    .status-dot.offline {
+      background: var(--gray-400);
+    }
+
+    .status-dot.break {
+      background: var(--warning-color);
+    }
+
+    .staff-card-body {
+      padding: 0 var(--spacing-lg) var(--spacing-lg);
+    }
+
+    .staff-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .staff-stat {
+      text-align: center;
+      padding: var(--spacing-sm);
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+    }
+
+    .staff-stat-number {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .staff-stat-label {
+      font-size: var(--font-size-xs);
+      color: var(--gray-600);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .staff-specialties {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .specialty-tag {
+      display: inline-block;
+      background: var(--gray-100);
+      color: var(--gray-700);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-xl);
+      font-size: var(--font-size-xs);
+      margin-right: var(--spacing-xs);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .staff-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+
+    .schedule-view {
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+    }
+
+    .schedule-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-lg);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .week-navigation {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 80px repeat(7, 1fr);
+      min-height: 600px;
+    }
+
+    .time-column {
+      background: var(--gray-50);
+      border-right: 1px solid var(--gray-200);
+    }
+
+    .time-slot {
+      padding: var(--spacing-sm);
+      border-bottom: 1px solid var(--gray-200);
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+      text-align: center;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .day-column {
+      border-right: 1px solid var(--gray-200);
+    }
+
+    .day-header {
+      padding: var(--spacing-sm);
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+      text-align: center;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .day-body {
+      position: relative;
+      min-height: 540px;
+    }
+
+    .schedule-block {
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      background: var(--primary-light);
+      border: 1px solid var(--primary-color);
+      border-radius: var(--radius-sm);
+      padding: var(--spacing-xs);
+      font-size: var(--font-size-xs);
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+
+    .schedule-block.break {
+      background: var(--warning-color);
+      border-color: var(--warning-color);
+      color: white;
+    }
+
+    .schedule-block.lesson {
+      background: var(--success-color);
+      border-color: var(--success-color);
+      color: white;
+    }
+
+    /* Modal Styles */
+    .staff-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .form-section {
+      background: var(--gray-50);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+    }
+
+    .form-section h4 {
+      color: var(--gray-900);
+      margin-bottom: var(--spacing-md);
+      font-weight: 600;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-sm);
+    }
+
+    .skill-checkbox {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .staff-overview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .staff-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+      
+      .schedule-grid {
+        grid-template-columns: 60px repeat(7, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .staff-overview {
+        grid-template-columns: 1fr;
+      }
+      
+      .staff-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .staff-form-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .schedule-grid {
+        display: none;
+      }
+      
+      .schedule-view::after {
+        content: 'モバイル表示では簡易スケジュールを表示します';
+        display: block;
+        padding: var(--spacing-xl);
+        text-align: center;
+        color: var(--gray-500);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <i class="fas fa-dance"></i> ConnectEn
+        </a>
+        <div class="header-actions">
+          <span class="text-sm text-gray-600">エン株式会社様</span>
+          <div class="flex items-center gap-4">
+            <button class="btn-icon btn-secondary" data-tooltip="通知">
+              <i class="fas fa-bell"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="設定">
+              <i class="fas fa-cog"></i>
+            </button>
+            <button class="btn-icon btn-secondary" data-tooltip="ユーザーメニュー">
+              <i class="fas fa-user"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="../05_dashboard/index.html" class="nav-link">
+            <i class="nav-icon fas fa-chart-line"></i>
+            ダッシュボード
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../01_member_management/index.html" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            会員管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../02_lesson_reservation/index.html" class="nav-link">
+            <i class="nav-icon fas fa-calendar-alt"></i>
+            レッスン予約
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../03_payment_processing/index.html" class="nav-link">
+            <i class="nav-icon fas fa-credit-card"></i>
+            決済管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-user-tie"></i>
+            スタッフ管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-building"></i>
+            施設管理
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-chart-bar"></i>
+            レポート
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cog"></i>
+            設定
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content-area">
+      <!-- Page Header -->
+      <div class="card">
+        <div class="card-header">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="card-title">スタッフ管理</h1>
+              <p class="text-gray-500">講師・スタッフの管理とスケジュール調整</p>
+            </div>
+            <div class="flex gap-2">
+              <button class="btn btn-secondary" data-modal-target="scheduleModal">
+                <i class="fas fa-calendar"></i> スケジュール調整
+              </button>
+              <button class="btn btn-primary" data-modal-target="newStaffModal">
+                <i class="fas fa-plus"></i> スタッフ登録
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Staff Overview Statistics -->
+      <div class="staff-overview">
+        <div class="staff-stat-card">
+          <div class="stat-icon primary">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-value">28</div>
+          <div class="stat-label">総スタッフ数</div>
+        </div>
+        <div class="staff-stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <div class="stat-value">18</div>
+          <div class="stat-label">アクティブ講師</div>
+        </div>
+        <div class="staff-stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="stat-value">12</div>
+          <div class="stat-label">出勤中</div>
+        </div>
+        <div class="staff-stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="stat-value">4.8</div>
+          <div class="stat-label">平均評価</div>
+        </div>
+      </div>
+
+      <!-- Staff Cards Grid -->
+      <div class="staff-grid">
+        <!-- Staff Card 1 -->
+        <div class="staff-card">
+          <div class="staff-card-header">
+            <div class="staff-avatar" style="background: var(--success-color);">田</div>
+            <div class="staff-info">
+              <h3>田中 美咲</h3>
+              <div class="staff-role">メイン講師</div>
+              <div class="staff-status">
+                <div class="status-dot online"></div>
+                <span class="text-sm text-success">出勤中</span>
+              </div>
+            </div>
+          </div>
+          <div class="staff-card-body">
+            <div class="staff-stats">
+              <div class="staff-stat">
+                <div class="staff-stat-number">156</div>
+                <div class="staff-stat-label">担当レッスン</div>
+              </div>
+              <div class="staff-stat">
+                <div class="staff-stat-number">4.9</div>
+                <div class="staff-stat-label">評価</div>
+              </div>
+              <div class="staff-stat">
+                <div class="staff-stat-number">3年</div>
+                <div class="staff-stat-label">経験</div>
+              </div>
+            </div>
+            <div class="staff-specialties">
+              <span class="specialty-tag">ヒップホップ</span>
+              <span class="specialty-tag">ジャズ</span>
+              <span class="specialty-tag">キッズ</span>
+            </div>
+            <div class="staff-actions">
+              <button class="btn btn-sm btn-primary">詳細</button>
+              <button class="btn btn-sm btn-secondary">スケジュール</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Staff Card 2 -->
+        <div class="staff-card">
+          <div class="staff-card-header">
+            <div class="staff-avatar" style="background: var(--info-color);">山</div>
+            <div class="staff-info">
+              <h3>山田 健太</h3>
+              <div class="staff-role">講師</div>
+              <div class="staff-status">
+                <div class="status-dot break"></div>
+                <span class="text-sm text-warning">休憩中</span>
+              </div>
+            </div>
+          </div>
+          <div class="staff-card-body">
+            <div class="staff-stats">
+              <div class="staff-stat">
+                <div class="staff-stat-number">89</div>
+                <div class="staff-stat-label">担当レッスン</div>
+              </div>
+              <div class="staff-stat">
+                <div class="staff-stat-number">4.7</div>
+                <div class="staff-stat-label">評価</div>
+              </div>
+              <div class="staff-stat">
+                <div class="staff-stat-number">2年</div>
+                <div class="staff-stat-label">経験</div>
+              </div>
+            </div>
+            <div class="staff-specialties">
+              <span class="specialty-tag">ブレイクダンス</span>
+              <span class="specialty-tag">ポッピン</span>
+            </div>
+            <div class="staff-actions">
+              <button class="btn btn-sm btn-primary">詳細</button>
+              <button class="btn btn-sm btn-secondary">スケジュール</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Staff Card 3 -->
+        <div class="staff-card">
+          <div class="staff-card-header">
+            <div class="staff-avatar" style="background: var(--warning-color);">佐</div>
+            <div class="staff-info">
+              <h3>佐藤 麻衣</h3>
+              <div class="staff-role">受付スタッフ</div>
+              <div class="staff-status">
+                <div class="status-dot offline"></div>
+                <span class="text-sm text-gray-500">退勤</span>
+              </div>
+            </div>
+          </div>
+          <div class="staff-card-body">
+            <div class="staff-stats">
+              <div class="staff-stat">
+                <div class="staff-stat-number">-</div>
+                <div class="staff-stat-label">担当レッスン</div>
+              </div>
+              <div class="staff-stat">
+                <div class="staff-stat-number">4.8</div>
+                <div class="staff-stat-label">評価</div>
+              </div>
+              <div class="staff-stat">
+                <div class="staff-stat-number">1年</div>
+                <div class="staff-stat-label">経験</div>
+              </div>
+            </div>
+            <div class="staff-specialties">
+              <span class="specialty-tag">受付対応</span>
+              <span class="specialty-tag">会員サポート</span>
+            </div>
+            <div class="staff-actions">
+              <button class="btn btn-sm btn-primary">詳細</button>
+              <button class="btn btn-sm btn-secondary">シフト</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weekly Schedule View -->
+      <div class="schedule-view">
+        <div class="schedule-header">
+          <h2>今週のスケジュール</h2>
+          <div class="week-navigation">
+            <button class="btn btn-sm btn-secondary">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="font-semibold">11月25日 - 12月1日</span>
+            <button class="btn btn-sm btn-secondary">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="schedule-grid">
+          <!-- Time Column -->
+          <div class="time-column">
+            <div class="time-slot" style="background: var(--gray-50); font-weight: 600;">時間</div>
+            <div class="time-slot">9:00</div>
+            <div class="time-slot">10:00</div>
+            <div class="time-slot">11:00</div>
+            <div class="time-slot">12:00</div>
+            <div class="time-slot">13:00</div>
+            <div class="time-slot">14:00</div>
+            <div class="time-slot">15:00</div>
+            <div class="time-slot">16:00</div>
+            <div class="time-slot">17:00</div>
+          </div>
+
+          <!-- Monday -->
+          <div class="day-column">
+            <div class="day-header">月 25</div>
+            <div class="day-body">
+              <div class="schedule-block lesson" style="top: 120px; height: 90px;">
+                <div style="font-weight: 600;">ヒップホップ初級</div>
+                <div>田中講師</div>
+              </div>
+              <div class="schedule-block" style="top: 240px; height: 60px;">
+                <div style="font-weight: 600;">個人レッスン</div>
+                <div>山田講師</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tuesday -->
+          <div class="day-column">
+            <div class="day-header">火 26</div>
+            <div class="day-body">
+              <div class="schedule-block lesson" style="top: 60px; height: 90px;">
+                <div style="font-weight: 600;">ジャズダンス</div>
+                <div>田中講師</div>
+              </div>
+              <div class="schedule-block break" style="top: 180px; height: 60px;">
+                <div style="font-weight: 600;">休憩</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wednesday -->
+          <div class="day-column">
+            <div class="day-header">水 27</div>
+            <div class="day-body">
+              <div class="schedule-block lesson" style="top: 180px; height: 120px;">
+                <div style="font-weight: 600;">ブレイクダンス</div>
+                <div>山田講師</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thursday -->
+          <div class="day-column">
+            <div class="day-header">木 28</div>
+            <div class="day-body">
+              <div class="schedule-block" style="top: 90px; height: 60px;">
+                <div style="font-weight: 600;">会議</div>
+                <div>全スタッフ</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Friday -->
+          <div class="day-column">
+            <div class="day-header">金 29</div>
+            <div class="day-body">
+              <div class="schedule-block lesson" style="top: 120px; height: 90px;">
+                <div style="font-weight: 600;">キッズダンス</div>
+                <div>田中講師</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Saturday -->
+          <div class="day-column">
+            <div class="day-header">土 30</div>
+            <div class="day-body">
+              <div class="schedule-block lesson" style="top: 60px; height: 180px;">
+                <div style="font-weight: 600;">発表会練習</div>
+                <div>全講師</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sunday -->
+          <div class="day-column">
+            <div class="day-header">日 1</div>
+            <div class="day-body">
+              <!-- Empty day -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- New Staff Modal -->
+  <div id="newStaffModal" class="modal-overlay">
+    <div class="modal" style="max-width: 900px;">
+      <div class="modal-header">
+        <h2 class="modal-title">新規スタッフ登録</h2>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="newStaffForm">
+          <div class="staff-form-grid">
+            <!-- Basic Information -->
+            <div class="form-section">
+              <h4>基本情報</h4>
+              <div class="form-group">
+                <label class="form-label">姓 *</label>
+                <input type="text" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">名 *</label>
+                <input type="text" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">メールアドレス *</label>
+                <input type="email" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">電話番号 *</label>
+                <input type="tel" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">役職 *</label>
+                <select class="form-select" required>
+                  <option value="">選択してください</option>
+                  <option value="instructor">講師</option>
+                  <option value="main-instructor">メイン講師</option>
+                  <option value="reception">受付スタッフ</option>
+                  <option value="manager">マネージャー</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Skills & Specialties -->
+            <div class="form-section">
+              <h4>スキル・専門分野</h4>
+              <div class="skills-grid">
+                <label class="skill-checkbox">
+                  <input type="checkbox" value="hiphop">
+                  <span>ヒップホップ</span>
+                </label>
+                <label class="skill-checkbox">
+                  <input type="checkbox" value="jazz">
+                  <span>ジャズダンス</span>
+                </label>
+                <label class="skill-checkbox">
+                  <input type="checkbox" value="breakdance">
+                  <span>ブレイクダンス</span>
+                </label>
+                <label class="skill-checkbox">
+                  <input type="checkbox" value="popping">
+                  <span>ポッピン</span>
+                </label>
+                <label class="skill-checkbox">
+                  <input type="checkbox" value="locking">
+                  <span>ロッキン</span>
+                </label>
+                <label class="skill-checkbox">
+                  <input type="checkbox" value="kids">
+                  <span>キッズダンス</span>
+                </label>
+                <label class="skill-checkbox">
+                  <input type="checkbox" value="contemporary">
+                  <span>コンテンポラリー</span>
+                </label>
+                <label class="skill-checkbox">
+                  <input type="checkbox" value="ballet">
+                  <span>バレエ</span>
+                </label>
+              </div>
+              
+              <div class="form-group mt-4">
+                <label class="form-label">経験年数</label>
+                <select class="form-select">
+                  <option value="">選択してください</option>
+                  <option value="1">1年未満</option>
+                  <option value="2">1-3年</option>
+                  <option value="3">3-5年</option>
+                  <option value="4">5年以上</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label class="form-label">プロフィール・自己紹介</label>
+            <textarea class="form-textarea" rows="3" placeholder="経歴、資格、指導方針などを入力してください"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">時給・給与</label>
+            <input type="number" class="form-input" placeholder="時給（円）">
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-wrapper">
+              <input type="checkbox">
+              <span>オンラインレッスン対応可能</span>
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>キャンセル</button>
+        <button type="submit" class="btn btn-primary" form="newStaffForm">スタッフを登録</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Schedule Modal -->
+  <div id="scheduleModal" class="modal-overlay">
+    <div class="modal" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2 class="modal-title">スケジュール調整</h2>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="scheduleForm">
+          <div class="form-group">
+            <label class="form-label">対象スタッフ *</label>
+            <select class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="tanaka">田中 美咲</option>
+              <option value="yamada">山田 健太</option>
+              <option value="sato">佐藤 麻衣</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">スケジュール種別 *</label>
+            <select class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="lesson">レッスン担当</option>
+              <option value="meeting">会議・ミーティング</option>
+              <option value="training">研修・トレーニング</option>
+              <option value="break">休憩時間</option>
+              <option value="off">休み</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+            <div class="form-group">
+              <label class="form-label">開始日時 *</label>
+              <input type="datetime-local" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">終了日時 *</label>
+              <input type="datetime-local" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">タイトル *</label>
+            <input type="text" class="form-input" placeholder="スケジュールのタイトルを入力" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">詳細・備考</label>
+            <textarea class="form-textarea" rows="3" placeholder="詳細情報や注意事項を入力"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-wrapper">
+              <input type="checkbox">
+              <span>定期スケジュール（毎週繰り返し）</span>
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>キャンセル</button>
+        <button type="submit" class="btn btn-primary" form="scheduleForm">スケジュール登録</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../shared/js/common.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Form submissions
+      document.getElementById('newStaffForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (app.validateForm(this)) {
+          app.showToast('スタッフが登録されました', 'success');
+          app.closeModal(document.getElementById('newStaffModal'));
+          this.reset();
+        }
+      });
+
+      document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (app.validateForm(this)) {
+          app.showToast('スケジュールが登録されました', 'success');
+          app.closeModal(document.getElementById('scheduleModal'));
+          this.reset();
+        }
+      });
+
+      // Show welcome message
+      setTimeout(() => {
+        app.showToast('スタッフ管理画面を表示しました', 'info');
+      }, 500);
+    });
+  </script>
+</body>
+</html>

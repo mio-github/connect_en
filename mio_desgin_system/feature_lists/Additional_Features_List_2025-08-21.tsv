@@ -1,0 +1,28 @@
+Category	Major Category	Sub Category	Feature Name	Overview	Notes	Interview
+AI & Automation Features	AI Business Support	Daily Report Analysis	AI Daily Report Analysis System	Automatically analyzes achievements/information/emotions and summarizes key points for management	August 2025 Minutes Requirements	
+AI & Automation Features	AI Business Support	Issue Management	Automatic Issue Extraction AI	Automatically detects issues from daily reports and Slack conversations and converts to prioritized Todos	August 2025 Minutes Requirements	
+AI & Automation Features	AI Business Support	Management Support	AI Yusuke (Management Advisor AI)	Decision support based on management philosophy/Expense management proposals	August 2025 Minutes Requirements	
+AI & Automation Features	AI Business Support	Trial Automation	Complete Trial Lesson Automation Flow	Complete automation of care/DM/follow-up	August 2025 Minutes Requirements	
+Tenant Features	Gamification	Staff Evaluation	Staff Achievement Badge System	Badge acquisition and level-up function for business achievements	August 2025 Minutes Requirements	
+Tenant Features	Gamification	Team Competition	Team Competition Dashboard	Promote healthy competition between stores and teams	August 2025 Minutes Requirements	
+Tenant Features	Gamification	Incentive	Surprise Point System	System to evaluate and point-ify surprise behaviors	August 2025 Minutes Requirements	
+AI & Automation Features	Human Resource Optimization	Personality Analysis	MBTI Personality Test Integration	Staff/instructor personality type management and compatibility analysis	August 2025 Minutes Requirements	
+AI & Automation Features	Human Resource Optimization	Team Formation	AI Team Formation Optimization	Optimal team formation suggestions considering personality/skills/experience	August 2025 Minutes Requirements	
+AI & Automation Features	Human Resource Optimization	Instructor Matching	Instructor Matching AI	Optimization of collaboration between instructors (En creation feature)	August 2025 Minutes Requirements	
+Tenant Features	Staff & Instructor Management	Human Resource Development	Staff Rotation Management	Systematic human resource development and job rotation support in 3-year cycles	August 2025 Minutes Requirements	
+AI & Automation Features	Shift Management	Automatic Generation	AI Automatic Shift Creation	Fully automatic shift generation considering demand forecast/staff preferences/skills	August 2025 Minutes Requirements	
+Tenant Features	Staff & Instructor Management	Shift Management	Shift Exchange Market	Free shift exchange platform between staff	August 2025 Minutes Requirements	
+AI & Automation Features	Shift Management	Staff Optimization	Optimal Staffing Proposal	AI predicts and proposes required staff by time slot	August 2025 Minutes Requirements	
+Tenant Features	Facilities & Resources	External Integration	Hot Pepper Type Booking Site	External studio rental booking platform	August 2025 Minutes Requirements	
+Tenant Features	Facilities & Resources	Network	External Studio Network	Mutual booking and collaboration with other studios	August 2025 Minutes Requirements	
+Tenant Features	Facilities & Resources	Evaluation Management	Studio Evaluation & Review Function	Review and rating system by users	August 2025 Minutes Requirements	
+Tenant Features	Lessons & Events	Event Integration	Event Information Aggregator	Automatic collection and display of dance event information nationwide	August 2025 Minutes Requirements	
+Tenant Features	Lessons & Events	Event Booking	Cross-Event Booking	Bulk booking and management function for multiple events	August 2025 Minutes Requirements	
+Tenant Features	Lessons & Events	Collaboration	Event Collaboration Function	Support for joint event hosting with other organizations	August 2025 Minutes Requirements	
+Common Services	Notification Service	Slack Integration	Complete Slack Integration	Slack integration for daily report posting/likes/comment functions	August 2025 Minutes Requirements	
+AI & Automation Features	AI & Customer Experience Enhancement	Emotion Analysis	Emotion Analysis Alert	Analyze staff emotional state and alert when care is needed	August 2025 Minutes Requirements	
+Tenant Features	Marketing & CRM	Internal SNS	Internal SNS Function	Promote information sharing and communication between staff	August 2025 Minutes Requirements	
+AI & Automation Features	AI Business Support	Meeting Minutes Creation	Automatic Meeting Minutes Generation	Automatic transcription and summary generation from meeting audio	August 2025 Minutes Requirements	
+AI & Automation Features	AI & Customer Experience Enhancement	Personalization	Personalized Journey	Automatic design of optimized experience and growth path for each student	August 2025 Minutes Requirements	
+AI & Automation Features	AI & Customer Experience Enhancement	Surprise Proposal	Automatic Surprise Proposal	Automatic surprise proposals for student anniversaries and achievements	August 2025 Minutes Requirements	
+Tenant Features	Marketing & CRM	Community	Community Building Support	Functions to promote connections between students	August 2025 Minutes Requirements
