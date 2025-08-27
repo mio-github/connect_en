@@ -1,0 +1,235 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+// ユーザーモデル（会員、スタッフ、インストラクター）
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  name            String
+  password        String?
+  role            UserRole @default(MEMBER)
+  phoneNumber     String?
+  address         String?
+  birthDate       DateTime?
+  joinedDate      DateTime @default(now())
+  profileImageUrl String?
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // リレーションシップ
+  reservations    Reservation[]
+  attendances     Attendance[]
+  payments        Payment[]
+  membershipPlans MembershipPlan[]
+  instructorBio   InstructorBio?
+}
+
+enum UserRole {
+  ADMIN
+  STAFF
+  INSTRUCTOR
+  MEMBER
+}
+
+// インストラクター情報
+model InstructorBio {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id])
+  bio         String?
+  specialties String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // リレーションシップ
+  lessons     Lesson[]
+}
+
+// レッスン・クラス
+model Lesson {
+  id             String   @id @default(cuid())
+  name           String
+  description    String?
+  instructorId   String
+  instructor     InstructorBio @relation(fields: [instructorId], references: [id])
+  capacity       Int
+  price          Float?
+  duration       Int      // 分単位
+  level          String?
+  category       String?
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // リレーションシップ
+  schedules      Schedule[]
+}
+
+// スケジュール
+model Schedule {
+  id          String         @id @default(cuid())
+  lessonId    String
+  lesson      Lesson         @relation(fields: [lessonId], references: [id])
+  studioId    String
+  studio      Studio         @relation(fields: [studioId], references: [id])
+  startTime   DateTime
+  endTime     DateTime
+  recurrence  RecurrenceType?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // リレーションシップ
+  reservations Reservation[]
+  attendances  Attendance[]
+}
+
+enum RecurrenceType {
+  NONE
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+// スタジオ・施設
+model Studio {
+  id          String   @id @default(cuid())
+  name        String
+  location    String?
+  capacity    Int
+  description String?
+  imageUrl    String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // リレーションシップ
+  schedules   Schedule[]
+}
+
+// 予約
+model Reservation {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  scheduleId String
+  schedule   Schedule @relation(fields: [scheduleId], references: [id])
+  status     ReservationStatus @default(CONFIRMED)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  WAITING_LIST
+}
+
+// 出席
+model Attendance {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  scheduleId String
+  schedule   Schedule @relation(fields: [scheduleId], references: [id])
+  attended   Boolean  @default(false)
+  checkedIn  DateTime?
+  checkedOut DateTime?
+  notes      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// 会費プラン
+model MembershipPlan {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  price       Float
+  duration    Int      // 月単位
+  benefits    String[]
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // リレーションシップ
+  members     User[]
+  payments    Payment[]
+}
+
+// 支払い・取引
+model Payment {
+  id              String       @id @default(cuid())
+  userId          String
+  user            User         @relation(fields: [userId], references: [id])
+  membershipPlanId String?
+  membershipPlan  MembershipPlan? @relation(fields: [membershipPlanId], references: [id])
+  amount          Float
+  currency        String       @default("JPY")
+  status          PaymentStatus @default(PENDING)
+  paymentMethod   String?
+  transactionId   String?
+  invoiceNumber   String?
+  dueDate         DateTime?
+  paidAt          DateTime?
+  notes           String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+// レポート集計用データ
+model SalesData {
+  id          String   @id @default(cuid())
+  month       String
+  year        Int
+  revenue     Float
+  expenses    Float?
+  studioId    String?
+  category    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model MemberData {
+  id          String   @id @default(cuid())
+  month       String
+  year        Int
+  newMembers  Int
+  totalMembers Int
+  retention   Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model LessonData {
+  id          String   @id @default(cuid())
+  lessonId    String
+  month       String
+  year        Int
+  reservations Int
+  attendance  Int
+  satisfaction Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
