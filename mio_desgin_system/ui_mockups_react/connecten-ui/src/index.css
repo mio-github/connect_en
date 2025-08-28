@@ -9,13 +9,31 @@
   font-family: 'Inter', 'Hiragino Kaku Gothic ProN', 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  
+  /* 白要素強調のカラーパレット */
+  --primary-color: #2563eb;
+  --success-color: #059669;
+  --warning-color: #d97706;
+  --error-color: #dc2626;
+  --info-color: #0284c7;
+  
+  --gray-50: #fafbfc;
+  --gray-100: #f5f7fa;
+  --gray-200: #eef1f5;
+  --gray-300: #dce1e7;
+  --gray-400: #a8b2bd;
+  --gray-500: #6b7785;
+  --gray-600: #4a5568;
+  --gray-700: #2d3748;
+  --gray-800: #1a202c;
+  --gray-900: #0d1117;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #f8fafc;
-  color: #334155;
+  background-color: #ffffff;
+  color: var(--gray-900);
 }
 
 * {
@@ -38,4 +56,144 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* App Navigation */
+.app-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--gray-200);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-brand h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.nav-subtitle {
+  font-size: 11px;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-btn {
+  padding: 10px 16px;
+  border: 1px solid var(--gray-200);
+  background: #ffffff;
+  color: var(--gray-700);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  position: relative;
+}
+
+.nav-btn i {
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
+}
+
+.nav-btn:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-300);
+  transform: translateY(-1px);
+}
+
+.nav-btn.active {
+  background: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.nav-btn.active i {
+  color: #ffffff;
+}
+
+.app-content {
+  min-height: calc(100vh - 80px);
+}
+
+/* Button Size Variants */
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+@media (max-width: 1024px) {
+  .nav-menu {
+    gap: 2px;
+  }
+
+  .nav-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-nav {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .nav-brand {
+    text-align: center;
+  }
+
+  .nav-menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .nav-btn {
+    justify-content: center;
+    padding: 12px 8px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-menu {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .nav-btn {
+    padding: 14px 12px;
+  }
+
+  .app-content {
+    min-height: calc(100vh - 200px);
+  }
 }

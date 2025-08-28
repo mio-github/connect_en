@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Layout } from '../components/Layout/Layout';
 import { Button } from '../components/UI/Button';
 import { Input } from '../components/UI/Input';
 import { Modal } from '../components/UI/Modal';
@@ -142,7 +141,6 @@ export const MemberManagement: React.FC = () => {
   }).length;
 
   return (
-    <Layout activeMenuItem="members" tenantName="エン株式会社様">
       <div className="space-y-6">
         {/* Header */}
         <motion.div
@@ -262,6 +260,5 @@ export const MemberManagement: React.FC = () => {
           />
         </Modal>
       </div>
-    </Layout>
   );
 };
