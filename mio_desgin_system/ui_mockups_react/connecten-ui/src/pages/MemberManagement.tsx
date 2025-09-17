@@ -148,8 +148,8 @@ export const MemberManagement: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">会員管理</h1>
-          <p className="text-gray-600">会員情報の確認・編集・新規登録を行えます</p>
+          <h1 className="text-2xl font-bold text-neutral-800 mb-2">会員一覧</h1>
+          <p className="text-neutral-500">会員情報の確認・編集・新規登録を行えます</p>
         </motion.div>
 
         {/* Stats Cards */}
@@ -159,38 +159,38 @@ export const MemberManagement: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.1 }}
         >
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-primary-100 rounded-lg">
-                <i className="fas fa-users text-primary-600" />
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <i className="fas fa-users text-blue-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">総会員数</p>
-                <p className="text-2xl font-bold text-gray-900">{totalMembers}</p>
+                <p className="text-sm font-medium text-neutral-600">総会員数</p>
+                <p className="text-2xl font-bold text-neutral-800">{totalMembers}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
               <div className="p-2 bg-green-100 rounded-lg">
                 <i className="fas fa-user-check text-green-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">アクティブ会員</p>
-                <p className="text-2xl font-bold text-gray-900">{activeMembers}</p>
+                <p className="text-sm font-medium text-neutral-600">アクティブ会員</p>
+                <p className="text-2xl font-bold text-neutral-800">{activeMembers}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <i className="fas fa-user-plus text-blue-600" />
+              <div className="p-2 bg-purple-100 rounded-lg">
+                <i className="fas fa-user-plus text-purple-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">今月の新規会員</p>
-                <p className="text-2xl font-bold text-gray-900">{newMembersThisMonth}</p>
+                <p className="text-sm font-medium text-neutral-600">今月の新規会員</p>
+                <p className="text-2xl font-bold text-neutral-800">{newMembersThisMonth}</p>
               </div>
             </div>
           </div>

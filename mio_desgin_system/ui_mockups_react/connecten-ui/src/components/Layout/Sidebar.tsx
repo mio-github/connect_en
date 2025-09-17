@@ -28,7 +28,7 @@ const menuItems: MenuItem[] = [
 export const Sidebar: React.FC<SidebarProps> = ({ activeMenuItem = 'members', onMenuItemClick }) => {
   return (
     <motion.aside 
-      className="w-64 bg-white shadow-md border-r border-gray-200 h-full overflow-y-auto"
+      className="w-64 bg-gradient-to-b from-sage-50 to-lavender-50 shadow-md border-r border-neutral-200 h-full overflow-y-auto backdrop-blur-sm"
       initial={{ x: -20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.3, delay: 0.1 }}
@@ -46,8 +46,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeMenuItem = 'members', on
                 onClick={() => onMenuItemClick?.(item.id)}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
                   activeMenuItem === item.id || item.active
-                    ? 'bg-primary-50 text-primary-700 border-l-4 border-primary-500'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800'
+                    ? 'bg-gradient-to-r from-primary-50 to-secondary-50 text-primary-700 border-l-4 border-primary-400 shadow-sm'
+                    : 'text-neutral-600 hover:bg-gradient-to-r hover:from-lavender-50 hover:to-rose-50 hover:text-neutral-800'
                 }`}
                 whileHover={{ x: 4 }}
                 whileTap={{ scale: 0.98 }}
@@ -56,7 +56,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeMenuItem = 'members', on
                 <span className="font-medium flex-1">{item.label}</span>
                 {item.badge && (
                   <motion.span 
-                    className="bg-red-500 text-white text-xs px-2 py-1 rounded-full min-w-[20px] text-center"
+                    className="bg-rose-400 text-white text-xs px-2 py-1 rounded-full min-w-[20px] text-center shadow-sm"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
