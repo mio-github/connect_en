@@ -491,3 +491,101 @@
     padding: 12px 20px;
   }
 }
+
+/* マーケットプレイス【ホットペッパー型】スタイル */
+.marketplace-section {
+  margin: 32px 0;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffffff 100%);
+  border-radius: 16px;
+  padding: 24px;
+  border: 2px solid #ff9800;
+  box-shadow: 0 4px 20px rgba(255, 152, 0, 0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #e65100;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marketplace-badge {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+}
+
+.marketplace-kpi {
+  margin-top: 0;
+}
+
+.marketplace-card {
+  background: linear-gradient(135deg, #ffffff, #fff8f0);
+  border: 2px solid #ffcc80;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.marketplace-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(255, 152, 0, 0.25);
+  border-color: #ff9800;
+}
+
+.marketplace-icon {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.marketplace-card .kpi-value {
+  color: #e65100;
+  font-weight: 700;
+}
+
+.marketplace-card .kpi-title {
+  color: #bf360c;
+  font-weight: 600;
+}
+
+/* マーケットプレイス専用アニメーション */
+@keyframes marketplacePulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.marketplace-badge .badge-text {
+  animation: marketplacePulse 2s infinite;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .marketplace-section {
+    margin: 24px 0;
+    padding: 16px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+}

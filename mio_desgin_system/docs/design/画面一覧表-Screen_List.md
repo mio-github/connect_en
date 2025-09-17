@@ -20,6 +20,47 @@ Below is the list of main screens expected in the ConnectEn multi-tenant SaaS pl
   - テナント別利用状況 / Usage by tenant
   - プラットフォームヘルスモニタリング / Platform health monitoring
 
+## マーケットプレイス【ホットペッパービューティー型】 / Marketplace (Hot Pepper Beauty Type)
+### B2C機能 / B2C Features
+- マーケットプレイストップページ / Marketplace Top Page
+  - スタジオ検索機能 / Studio search function
+  - 人気スタジオ表示 / Popular studios display
+  - キャンペーン情報 / Campaign information
+- スタジオ検索結果 / Studio Search Results
+  - 検索結果一覧 / Search results list
+  - 地図表示 / Map display
+  - フィルタリング機能 / Filtering function
+- スタジオ詳細ページ / Studio Detail Page
+  - 基本情報・写真・動画 / Basic info, photos, videos
+  - レッスンスケジュール / Lesson schedule
+  - 口コミ・評価 / Reviews and ratings
+- 予約・決済ページ / Booking & Payment Page
+  - 体験レッスン予約 / Trial lesson booking
+  - オンライン決済 / Online payment
+  - 予約確認 / Booking confirmation
+- 顧客マイページ / Customer My Page
+  - 予約履歴 / Booking history
+  - お気に入りスタジオ / Favorite studios
+  - ポイント管理 / Point management
+
+### B2B機能 / B2B Features
+- スタジオ出店管理 / Studio Listing Management
+  - スタジオページ編集 / Studio page editing
+  - 写真・動画アップロード / Photo and video upload
+  - SEO設定 / SEO settings
+- プロモーション管理 / Promotion Management
+  - クーポン発行 / Coupon issuance
+  - キャンペーン設定 / Campaign settings
+  - ターゲティング配信 / Targeted distribution
+- マーケットプレイス分析 / Marketplace Analytics
+  - アクセス解析 / Access analysis
+  - 予約分析 / Booking analysis
+  - ROI測定 / ROI measurement
+- アフィリエイト管理 / Affiliate Management
+  - パートナー登録 / Partner registration
+  - 成果報酬設定 / Performance-based reward settings
+  - 成果レポート / Performance reports
+
 ## テナント共通 / Tenant Common
 - テナントログイン / Tenant Login
   - ユーザー認証 / User authentication

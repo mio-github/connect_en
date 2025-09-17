@@ -79,8 +79,28 @@ ConnectEn is a multi-tenant SaaS ERP platform specialized for the dance studio i
 - Sales aggregation and analysis
 - Revenue forecasting
 
-### 2.4 マーケティング・コミュニケーション
-### 2.4 Marketing and Communication
+### 2.4 マーケットプレイス機能【ホットペッパービューティー型】
+### 2.4 Marketplace Features (Hot Pepper Beauty Type)
+- スタジオ検索・発見機能（エリア・ジャンル・条件絞り込み）
+- 統合予約システム（体験レッスン・通常レッスン予約）
+- オンライン決済機能（クレジットカード・PayPay・LINE Pay）
+- 口コミ・レビューシステム（5段階評価・コメント投稿）
+- スタジオページ管理（基本情報・写真・動画・SEO最適化）
+- プロモーション機能（クーポン発行・キャンペーン管理）
+- アフィリエイトネットワーク（パートナー登録・成果報酬）
+- 詳細分析機能（アクセス解析・予約分析・ROI測定）
+
+- Studio search and discovery (area, genre, condition filtering)
+- Integrated reservation system (trial lesson and regular lesson booking)
+- Online payment function (credit card, PayPay, LINE Pay)
+- Review and rating system (5-star rating, comment posting)
+- Studio page management (basic info, photos, videos, SEO optimization)
+- Promotion features (coupon issuance, campaign management)
+- Affiliate network (partner registration, performance-based rewards)
+- Detailed analytics (access analysis, booking analysis, ROI measurement)
+
+### 2.5 マーケティング・コミュニケーション
+### 2.5 Marketing and Communication
 - メール配信機能
 - お知らせ・通知管理
 - キャンペーン管理

@@ -73,6 +73,38 @@ export const Dashboard: React.FC = () => {
     }
   ];
 
+  // マーケットプレイス【ホットペッパー型】KPI
+  const marketplaceKpiData: KPICard[] = [
+    {
+      title: 'マーケット予約数',
+      value: 342,
+      change: 28.5,
+      trend: 'up',
+      icon: 'fas fa-store'
+    },
+    {
+      title: '平均評価',
+      value: '4.7⭐',
+      change: 0.2,
+      trend: 'up',
+      icon: 'fas fa-star'
+    },
+    {
+      title: 'マーケット売上',
+      value: '¥124,800',
+      change: 15.3,
+      trend: 'up',
+      icon: 'fas fa-chart-line'
+    },
+    {
+      title: '体験予約数',
+      value: 67,
+      change: 22.1,
+      trend: 'up',
+      icon: 'fas fa-user-plus'
+    }
+  ];
+
   const recentActivities: RecentActivity[] = [
     {
       id: '1',
@@ -278,6 +310,38 @@ export const Dashboard: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* マーケットプレイス【ホットペッパー型】KPI */}
+        <div className="marketplace-section">
+          <div className="section-header">
+            <h2 className="section-title">
+              <i className="fas fa-store text-orange-500"></i>
+              マーケットプレイス【ホットペッパー型】
+            </h2>
+            <div className="marketplace-badge">
+              <span className="badge-text">NEW</span>
+            </div>
+          </div>
+          <div className="kpi-grid marketplace-kpi">
+            {marketplaceKpiData.map((kpi, index) => (
+              <div key={index} className="kpi-card marketplace-card">
+                <div className="kpi-header">
+                  <div className="kpi-icon marketplace-icon">
+                    <i className={kpi.icon}></i>
+                  </div>
+                  <div className={`kpi-trend ${getTrendClass(kpi.trend)}`}>
+                    <i className={getTrendIcon(kpi.trend)}></i>
+                    <span>{Math.abs(kpi.change)}%</span>
+                  </div>
+                </div>
+                <div className="kpi-content">
+                  <div className="kpi-value">{kpi.value}</div>
+                  <div className="kpi-title">{kpi.title}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Main Content Grid */}

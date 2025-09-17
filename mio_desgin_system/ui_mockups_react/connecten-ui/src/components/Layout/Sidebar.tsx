@@ -21,6 +21,15 @@ const menuItems: MenuItem[] = [
   { id: 'staff', icon: 'fas fa-user-tie', label: 'スタッフ管理' },
   { id: 'reservations', icon: 'fas fa-book-open', label: '予約管理', badge: 3 },
   { id: 'payments', icon: 'fas fa-credit-card', label: '支払い管理' },
+
+  // マーケットプレイス【ホットペッパー型】セクション
+  { id: 'marketplace', icon: 'fas fa-store', label: 'マーケットプレイス【HP型】', badge: 12 },
+  { id: 'marketplace-listing', icon: 'fas fa-edit', label: 'スタジオページ管理' },
+  { id: 'marketplace-promotions', icon: 'fas fa-tags', label: 'プロモーション管理' },
+  { id: 'marketplace-bookings', icon: 'fas fa-calendar-check', label: 'マーケット予約管理', badge: 5 },
+  { id: 'marketplace-analytics', icon: 'fas fa-chart-line', label: 'マーケット分析' },
+  { id: 'marketplace-reviews', icon: 'fas fa-star', label: 'レビュー管理' },
+
   { id: 'reports', icon: 'fas fa-chart-bar', label: 'レポート' },
   { id: 'settings', icon: 'fas fa-cog', label: '設定' },
 ];
