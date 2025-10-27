@@ -10,6 +10,23 @@ interface KPICard {
   icon: string;
 }
 
+interface SchoolData {
+  id: string;
+  name: string;
+  activeMembers: number;
+  attendanceRate: number;
+  revenue: number;
+  revenueGoal: number;
+  studioUtilization: number;
+}
+
+interface SalesGoal {
+  month: string;
+  goal: number;
+  actual: number;
+  achievementRate: number;
+}
+
 interface RecentActivity {
   id: string;
   type: 'member' | 'lesson' | 'payment' | 'booking';
@@ -32,6 +49,7 @@ interface TodayLesson {
 
 export const Dashboard: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [selectedSchool, setSelectedSchool] = useState<string>('all');
 
   // リアルタイム時刻更新
   useEffect(() => {
@@ -42,34 +60,115 @@ export const Dashboard: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const kpiData: KPICard[] = [
+  // スクール別データ (実際のEnDanceスクール)
+  const schoolsData: SchoolData[] = [
     {
-      title: 'アクティブ会員',
-      value: 847,
+      id: 'shibuya',
+      name: 'SHIBUYA',
+      activeMembers: 342,
+      attendanceRate: 89.5,
+      revenue: 1260500,
+      revenueGoal: 1500000,
+      studioUtilization: 85.2
+    },
+    {
+      id: 'scramble',
+      name: 'SCRAMBLE',
+      activeMembers: 228,
+      attendanceRate: 86.4,
+      revenue: 854000,
+      revenueGoal: 1000000,
+      studioUtilization: 81.7
+    },
+    {
+      id: 'yokohama',
+      name: 'YOKOHAMA',
+      activeMembers: 195,
+      attendanceRate: 84.2,
+      revenue: 725000,
+      revenueGoal: 900000,
+      studioUtilization: 78.5
+    },
+    {
+      id: 'yokohama2',
+      name: 'YOKOHAMA2',
+      activeMembers: 156,
+      attendanceRate: 82.8,
+      revenue: 585000,
+      revenueGoal: 700000,
+      studioUtilization: 75.3
+    },
+    {
+      id: 'ashikaga',
+      name: 'ASHIKAGA',
+      activeMembers: 118,
+      attendanceRate: 85.7,
+      revenue: 425000,
+      revenueGoal: 600000,
+      studioUtilization: 73.8
+    },
+    {
+      id: 'isesaki',
+      name: 'ISESAKI',
+      activeMembers: 95,
+      attendanceRate: 83.2,
+      revenue: 348000,
+      revenueGoal: 500000,
+      studioUtilization: 71.5
+    }
+  ];
+
+  // 売上目標データ
+  const currentMonthGoal: SalesGoal = {
+    month: '2025年1月',
+    goal: 5200000,
+    actual: 4197500,
+    achievementRate: 80.7
+  };
+
+  // メイン運営KPI - スタジオ運営で最も重要な指標
+  const coreKpiData: KPICard[] = [
+    {
+      title: 'アクティブ生徒数',
+      value: 1134,
       change: 8.1,
       trend: 'up',
       icon: 'fas fa-users'
     },
     {
-      title: '今日の予約',
-      value: 32,
-      change: -2.3,
+      title: '今日の出席率',
+      value: '85.3%',
+      change: 5.2,
+      trend: 'up',
+      icon: 'fas fa-user-check'
+    },
+    {
+      title: '支払い滞納者',
+      value: 18,
+      change: -3.4,
       trend: 'down',
-      icon: 'fas fa-calendar-check'
+      icon: 'fas fa-exclamation-triangle'
+    },
+    {
+      title: '今月の売上',
+      value: '¥4,197,500',
+      change: 12.3,
+      trend: 'up',
+      icon: 'fas fa-yen-sign'
     },
     {
       title: 'スタジオ稼働率',
-      value: '82.4%',
+      value: '79.2%',
       change: 4.7,
       trend: 'up',
       icon: 'fas fa-chart-line'
     },
     {
-      title: '今月のレッスン数',
-      value: 156,
-      change: 12.3,
+      title: '講師配置状況',
+      value: '94.8%',
+      change: 2.1,
       trend: 'up',
-      icon: 'fas fa-graduation-cap'
+      icon: 'fas fa-chalkboard-teacher'
     }
   ];
 
@@ -291,9 +390,162 @@ export const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* KPI Cards */}
+        {/* スクール選択 */}
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 mb-6">
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              表示スクール:
+            </label>
+            <select
+              value={selectedSchool}
+              onChange={(e) => setSelectedSchool(e.target.value)}
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+            >
+              <option value="all">全スクール</option>
+              {schoolsData.map((school) => (
+                <option key={school.id} value={school.id}>
+                  {school.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* 売上目標達成率 */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+              <i className="fas fa-bullseye text-primary-500" />
+              {currentMonthGoal.month} 売上目標達成率
+            </h3>
+            <Button variant="secondary" size="sm" onClick={() => handleQuickAction('goal-settings')}>
+              <i className="fas fa-cog"></i> 目標設定
+            </Button>
+          </div>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-gray-600 dark:text-gray-400">目標金額</span>
+              <span className="font-semibold text-gray-900 dark:text-white">
+                ¥{currentMonthGoal.goal.toLocaleString()}
+              </span>
+            </div>
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-gray-600 dark:text-gray-400">実績金額</span>
+              <span className="font-semibold text-gray-900 dark:text-white">
+                ¥{currentMonthGoal.actual.toLocaleString()}
+              </span>
+            </div>
+            <div className="relative pt-1">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">進捗率</span>
+                <span className={`text-lg font-bold ${currentMonthGoal.achievementRate >= 100 ? 'text-green-600' : currentMonthGoal.achievementRate >= 70 ? 'text-blue-600' : 'text-orange-600'}`}>
+                  {currentMonthGoal.achievementRate}%
+                </span>
+              </div>
+              <div className="overflow-hidden h-4 text-xs flex rounded-full bg-gray-200 dark:bg-gray-700">
+                <div
+                  style={{ width: `${Math.min(currentMonthGoal.achievementRate, 100)}%` }}
+                  className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center ${
+                    currentMonthGoal.achievementRate >= 100 ? 'bg-green-500' :
+                    currentMonthGoal.achievementRate >= 70 ? 'bg-blue-500' : 'bg-orange-500'
+                  } transition-all duration-500`}
+                />
+              </div>
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+              残り: ¥{(currentMonthGoal.goal - currentMonthGoal.actual).toLocaleString()}
+            </div>
+          </div>
+        </div>
+
+        {/* スクール別データ比較 */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <i className="fas fa-chart-bar text-primary-500" />
+            スクール別パフォーマンス比較
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead className="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    スクール名
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    会員数
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    出席率
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    売上実績
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    目標達成率
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    稼働率
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                {schoolsData
+                  .filter((school) => selectedSchool === 'all' || school.id === selectedSchool)
+                  .map((school) => {
+                    const achievementRate = (school.revenue / school.revenueGoal) * 100;
+                    return (
+                      <tr key={school.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                          {school.name}
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
+                          {school.activeMembers}名
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
+                          <div className="flex items-center gap-2">
+                            <span>{school.attendanceRate}%</span>
+                            <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                              <div
+                                className="bg-blue-500 h-2 rounded-full"
+                                style={{ width: `${school.attendanceRate}%` }}
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
+                          ¥{school.revenue.toLocaleString()}
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap text-sm">
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            achievementRate >= 100 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                            achievementRate >= 70 ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                            'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200'
+                          }`}>
+                            {achievementRate.toFixed(1)}%
+                          </span>
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
+                          <div className="flex items-center gap-2">
+                            <span>{school.studioUtilization}%</span>
+                            <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                              <div
+                                className="bg-purple-500 h-2 rounded-full"
+                                style={{ width: `${school.studioUtilization}%` }}
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* メイン運営KPI Cards */}
         <div className="kpi-grid">
-          {kpiData.map((kpi, index) => (
+          {coreKpiData.map((kpi, index) => (
             <div key={index} className="kpi-card">
               <div className="kpi-header">
                 <div className="kpi-icon">
@@ -312,37 +564,7 @@ export const Dashboard: React.FC = () => {
           ))}
         </div>
 
-        {/* マーケットプレイス【ホットペッパー型】KPI */}
-        <div className="marketplace-section">
-          <div className="section-header">
-            <h2 className="section-title">
-              <i className="fas fa-store text-orange-500"></i>
-              マーケットプレイス【ホットペッパー型】
-            </h2>
-            <div className="marketplace-badge">
-              <span className="badge-text">NEW</span>
-            </div>
-          </div>
-          <div className="kpi-grid marketplace-kpi">
-            {marketplaceKpiData.map((kpi, index) => (
-              <div key={index} className="kpi-card marketplace-card">
-                <div className="kpi-header">
-                  <div className="kpi-icon marketplace-icon">
-                    <i className={kpi.icon}></i>
-                  </div>
-                  <div className={`kpi-trend ${getTrendClass(kpi.trend)}`}>
-                    <i className={getTrendIcon(kpi.trend)}></i>
-                    <span>{Math.abs(kpi.change)}%</span>
-                  </div>
-                </div>
-                <div className="kpi-content">
-                  <div className="kpi-value">{kpi.value}</div>
-                  <div className="kpi-title">{kpi.title}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* マーケットプレイス【補助機能】はサイドバーメニューのみで提供 */}
 
         {/* Main Content Grid */}
         <div className="dashboard-grid">

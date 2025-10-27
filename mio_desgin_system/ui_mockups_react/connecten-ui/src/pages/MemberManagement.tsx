@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/UI/Button';
 import { Input } from '../components/UI/Input';
-import { Modal } from '../components/UI/Modal';
 import { MemberTable } from '../components/Members/MemberTable';
 import { MemberForm } from '../components/Members/MemberForm';
 
@@ -74,8 +73,8 @@ export const MemberManagement: React.FC = () => {
   const [members, setMembers] = useState<Member[]>(mockMembers);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [viewMode, setViewMode] = useState<'list' | 'form'>('list');
 
   const filteredMembers = members.filter(member =>
     member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -85,12 +84,12 @@ export const MemberManagement: React.FC = () => {
 
   const handleAddMember = () => {
     setSelectedMember(null);
-    setIsModalOpen(true);
+    setViewMode('form');
   };
 
   const handleEditMember = (member: Member) => {
     setSelectedMember(member);
-    setIsModalOpen(true);
+    setViewMode('form');
   };
 
   const handleDeleteMember = (memberId: string) => {
@@ -101,14 +100,14 @@ export const MemberManagement: React.FC = () => {
 
   const handleFormSubmit = async (formData: any) => {
     setIsLoading(true);
-    
+
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     if (selectedMember) {
       // Update existing member
-      setMembers(prev => prev.map(member => 
-        member.id === selectedMember.id 
+      setMembers(prev => prev.map(member =>
+        member.id === selectedMember.id
           ? { ...member, ...formData }
           : member
       ));
@@ -123,7 +122,12 @@ export const MemberManagement: React.FC = () => {
     }
 
     setIsLoading(false);
-    setIsModalOpen(false);
+    setViewMode('list');
+  };
+
+  const handleFormCancel = () => {
+    setSelectedMember(null);
+    setViewMode('list');
   };
 
   const handleExport = () => {
@@ -140,7 +144,9 @@ export const MemberManagement: React.FC = () => {
            joinDate.getFullYear() === thisMonth.getFullYear();
   }).length;
 
-  return (
+  // 一覧画面の表示
+  if (viewMode === 'list') {
+    return (
       <div className="space-y-6">
         {/* Header */}
         <motion.div
@@ -148,57 +154,57 @@ export const MemberManagement: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <h1 className="text-2xl font-bold text-neutral-800 mb-2">会員一覧</h1>
-          <p className="text-neutral-500">会員情報の確認・編集・新規登録を行えます</p>
+          <h1 className="text-2xl font-bold text-neutral-800 dark:text-white mb-2">会員一覧</h1>
+          <p className="text-neutral-500 dark:text-gray-400">会員情報の確認・編集・新規登録を行えます</p>
         </motion.div>
 
         {/* Stats Cards */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.1 }}
         >
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <i className="fas fa-users text-blue-600" />
+              <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                <i className="fas fa-users text-blue-600 dark:text-blue-400" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-neutral-600">総会員数</p>
-                <p className="text-2xl font-bold text-neutral-800">{totalMembers}</p>
+                <p className="text-sm font-medium text-neutral-600 dark:text-gray-400">総会員数</p>
+                <p className="text-2xl font-bold text-neutral-800 dark:text-white">{totalMembers}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <i className="fas fa-user-check text-green-600" />
+              <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                <i className="fas fa-user-check text-green-600 dark:text-green-400" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-neutral-600">アクティブ会員</p>
-                <p className="text-2xl font-bold text-neutral-800">{activeMembers}</p>
+                <p className="text-sm font-medium text-neutral-600 dark:text-gray-400">アクティブ会員</p>
+                <p className="text-2xl font-bold text-neutral-800 dark:text-white">{activeMembers}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <i className="fas fa-user-plus text-purple-600" />
+              <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                <i className="fas fa-user-plus text-purple-600 dark:text-purple-400" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-neutral-600">今月の新規会員</p>
-                <p className="text-2xl font-bold text-neutral-800">{newMembersThisMonth}</p>
+                <p className="text-sm font-medium text-neutral-600 dark:text-gray-400">今月の新規会員</p>
+                <p className="text-2xl font-bold text-neutral-800 dark:text-white">{newMembersThisMonth}</p>
               </div>
             </div>
           </div>
         </motion.div>
 
         {/* Search and Actions */}
-        <motion.div 
-          className="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
+        <motion.div
+          className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
@@ -244,21 +250,51 @@ export const MemberManagement: React.FC = () => {
             onDeleteMember={handleDeleteMember}
           />
         </motion.div>
-
-        {/* Modal */}
-        <Modal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          title={selectedMember ? '会員情報編集' : '新規会員登録'}
-          size="lg"
-        >
-          <MemberForm
-            initialData={selectedMember || undefined}
-            onSubmit={handleFormSubmit}
-            onCancel={() => setIsModalOpen(false)}
-            isLoading={isLoading}
-          />
-        </Modal>
       </div>
+    );
+  }
+
+  // 登録・編集画面の表示
+  return (
+    <div className="space-y-6">
+      {/* Header with Back Button */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="flex items-center gap-4"
+      >
+        <Button
+          variant="ghost"
+          icon="fas fa-arrow-left"
+          onClick={handleFormCancel}
+        >
+          一覧に戻る
+        </Button>
+        <div>
+          <h1 className="text-2xl font-bold text-neutral-800 dark:text-white mb-1">
+            {selectedMember ? '会員情報編集' : '新規会員登録'}
+          </h1>
+          <p className="text-neutral-500 dark:text-gray-400">
+            {selectedMember ? '会員情報を編集してください' : '新しい会員の情報を入力してください'}
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Form */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+        className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+      >
+        <MemberForm
+          initialData={selectedMember || undefined}
+          onSubmit={handleFormSubmit}
+          onCancel={handleFormCancel}
+          isLoading={isLoading}
+        />
+      </motion.div>
+    </div>
   );
 };

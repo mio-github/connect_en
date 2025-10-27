@@ -36,14 +36,14 @@ export const SchoolManagement: React.FC = () => {
   const sampleLocations: Location[] = [
     {
       id: '1',
-      name: '渋谷本校',
-      address: '東京都渋谷区道玄坂1-12-1',
-      phone: '03-1234-5678',
+      name: 'SHIBUYA',
+      address: '東京都渋谷区道玄坂2-10-12 新大宗ビル4号館B1F',
+      phone: '03-6416-1340',
       email: 'shibuya@endance.studio',
       status: 'active',
       businessHours: {
         weekday: { open: '10:00', close: '22:00' },
-        weekend: { open: '09:00', close: '20:00' }
+        weekend: { open: '10:00', close: '22:00' }
       },
       studios: [
         {
@@ -54,38 +54,121 @@ export const SchoolManagement: React.FC = () => {
           capacity: 30,
           hourlyRate: 8000,
           equipment: ['鏡張り', '音響設備', 'バレエバー']
-        },
-        {
-          id: 's2',
-          name: 'Studio B',
-          type: '中スタジオ',
-          area: 80,
-          capacity: 20,
-          hourlyRate: 6000,
-          equipment: ['鏡張り', '音響設備', 'ヨガマット']
         }
       ]
     },
     {
       id: '2',
-      name: '新宿校',
-      address: '東京都新宿区西新宿2-8-1',
-      phone: '03-2345-6789',
-      email: 'shinjuku@endance.studio',
+      name: 'SCRAMBLE',
+      address: '東京都渋谷区宇田川町36-22 ノア渋谷パートⅡ7F',
+      phone: '03-6416-1340',
+      email: 'scramble@endance.studio',
       status: 'active',
       businessHours: {
-        weekday: { open: '10:00', close: '21:00' },
-        weekend: { open: '10:00', close: '19:00' }
+        weekday: { open: '10:00', close: '22:00' },
+        weekend: { open: '10:00', close: '22:00' }
+      },
+      studios: [
+        {
+          id: 's2',
+          name: 'Studio A',
+          type: '中スタジオ',
+          area: 90,
+          capacity: 25,
+          hourlyRate: 7000,
+          equipment: ['鏡張り', '音響設備']
+        }
+      ]
+    },
+    {
+      id: '3',
+      name: 'YOKOHAMA',
+      address: '神奈川県横浜市西区南幸2-20-5 東伸24ビル8F',
+      phone: '045-620-5575',
+      email: 'yokohama@endance.studio',
+      status: 'active',
+      businessHours: {
+        weekday: { open: '10:00', close: '22:00' },
+        weekend: { open: '10:00', close: '22:00' }
       },
       studios: [
         {
           id: 's3',
-          name: 'Studio 1',
+          name: 'Studio A',
           type: '大スタジオ',
-          area: 100,
-          capacity: 25,
-          hourlyRate: 7000,
-          equipment: ['鏡張り', '音響設備', 'プロジェクター']
+          area: 110,
+          capacity: 28,
+          hourlyRate: 7500,
+          equipment: ['鏡張り', '音響設備', 'バレエバー']
+        }
+      ]
+    },
+    {
+      id: '4',
+      name: 'YOKOHAMA2',
+      address: '神奈川県横浜市西区南幸2-11-1 横浜MSビル8F',
+      phone: '045-620-5575',
+      email: 'yokohama2@endance.studio',
+      status: 'active',
+      businessHours: {
+        weekday: { open: '10:00', close: '22:00' },
+        weekend: { open: '10:00', close: '22:00' }
+      },
+      studios: [
+        {
+          id: 's4',
+          name: 'Studio A',
+          type: '中スタジオ',
+          area: 85,
+          capacity: 22,
+          hourlyRate: 6500,
+          equipment: ['鏡張り', '音響設備']
+        }
+      ]
+    },
+    {
+      id: '5',
+      name: 'ASHIKAGA',
+      address: '栃木県足利市通3-2589',
+      phone: '0284-64-9101',
+      email: 'ashikaga@endance.studio',
+      status: 'active',
+      businessHours: {
+        weekday: { open: '10:00', close: '22:00' },
+        weekend: { open: '10:00', close: '22:00' }
+      },
+      studios: [
+        {
+          id: 's5',
+          name: 'Studio A',
+          type: '大スタジオ',
+          area: 130,
+          capacity: 32,
+          hourlyRate: 6000,
+          equipment: ['鏡張り', '音響設備', 'バレエバー']
+        }
+      ]
+    },
+    {
+      id: '6',
+      name: 'ISESAKI',
+      address: '群馬県伊勢崎市宮子町3555-1 ベイシア伊勢崎モール1F',
+      phone: '0270-61-5520',
+      email: 'isesaki@endance.studio',
+      status: 'active',
+      businessHours: {
+        weekday: { open: '10:00', close: '22:00' },
+        weekend: { open: '10:00', close: '22:00' }
+      },
+      studios: [
+        {
+          id: 's6',
+          name: 'Studio A',
+          type: '大スタジオ',
+          area: 125,
+          capacity: 30,
+          hourlyRate: 6000,
+          equipment: ['鏡張り', '音響設備', 'バレエバー']
         }
       ]
     }
