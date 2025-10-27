@@ -130,7 +130,7 @@ export const RetailManagement: React.FC = () => {
   const getStatusBadge = (status: string) => {
     const statusConfig = {
       'in-stock': { label: '在庫あり', className: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' },
-      'low-stock': { label: '在庫少', className: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' },
+      'low-stock': { label: '在庫少', className: 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200' },
       'out-of-stock': { label: '在庫切れ', className: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' }
     };
     const config = statusConfig[status as keyof typeof statusConfig] || statusConfig['in-stock'];
@@ -143,9 +143,9 @@ export const RetailManagement: React.FC = () => {
 
   const getOrderStatusBadge = (status: string) => {
     const statusConfig = {
-      'pending': { label: '発注済み', className: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' },
-      'confirmed': { label: '確認済み', className: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' },
-      'shipped': { label: '発送済み', className: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' },
+      'pending': { label: '発注済み', className: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200' },
+      'confirmed': { label: '確認済み', className: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' },
+      'shipped': { label: '発送済み', className: 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200' },
       'delivered': { label: '納品完了', className: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' }
     };
     const config = statusConfig[status as keyof typeof statusConfig] || statusConfig['pending'];
@@ -183,7 +183,12 @@ export const RetailManagement: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h1 className="text-2xl font-bold text-neutral-800 dark:text-white mb-2">小売管理</h1>
+        <div className="flex items-center gap-3 mb-2">
+          <h1 className="text-2xl font-bold text-neutral-800 dark:text-white">小売管理</h1>
+          <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-semibold rounded-full">
+            Phase 1
+          </span>
+        </div>
         <p className="text-neutral-500 dark:text-gray-400">
           商品在庫、販売実績、発注管理を一元管理します
         </p>
@@ -224,8 +229,8 @@ export const RetailManagement: React.FC = () => {
 
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center">
-            <div className="p-2 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-              <i className="fas fa-exclamation-triangle text-yellow-600 dark:text-yellow-400" />
+            <div className="p-2 bg-amber-100 dark:bg-amber-900 rounded-lg">
+              <i className="fas fa-exclamation-triangle text-amber-600 dark:text-amber-400" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-neutral-600 dark:text-gray-400">在庫アラート</p>
@@ -236,8 +241,8 @@ export const RetailManagement: React.FC = () => {
 
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center">
-            <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
-              <i className="fas fa-chart-line text-purple-600 dark:text-purple-400" />
+            <div className="p-2 bg-cyan-100 dark:bg-cyan-900 rounded-lg">
+              <i className="fas fa-chart-line text-cyan-600 dark:text-cyan-400" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-neutral-600 dark:text-gray-400">今月の売上</p>
@@ -370,7 +375,7 @@ export const RetailManagement: React.FC = () => {
                         item.currentStock === 0
                           ? 'text-red-600 dark:text-red-400'
                           : item.currentStock <= item.alertThreshold
-                          ? 'text-yellow-600 dark:text-yellow-400'
+                          ? 'text-amber-600 dark:text-amber-400'
                           : 'text-green-600 dark:text-green-400'
                       }`}
                     >

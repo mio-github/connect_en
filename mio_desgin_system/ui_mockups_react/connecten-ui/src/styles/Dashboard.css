@@ -495,7 +495,7 @@
 /* マーケットプレイス【ホットペッパー型】スタイル */
 .marketplace-section {
   margin: 32px 0;
-  background: linear-gradient(135deg, #fff3e0 0%, #ffffff 100%);
+  background: #fff8f0;
   border-radius: 16px;
   padding: 24px;
   border: 2px solid #ff9800;
@@ -520,7 +520,7 @@
 }
 
 .marketplace-badge {
-  background: linear-gradient(135deg, #ff9800, #f57c00);
+  background: #ff9800;
   color: white;
   padding: 6px 16px;
   border-radius: 20px;
@@ -536,7 +536,7 @@
 }
 
 .marketplace-card {
-  background: linear-gradient(135deg, #ffffff, #fff8f0);
+  background: #ffffff;
   border: 2px solid #ffcc80;
   box-shadow: 0 4px 12px rgba(255, 152, 0, 0.15);
   transition: all 0.3s ease;
@@ -549,7 +549,7 @@
 }
 
 .marketplace-icon {
-  background: linear-gradient(135deg, #ff9800, #f57c00);
+  background: #ff9800;
   color: white;
   box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
 }

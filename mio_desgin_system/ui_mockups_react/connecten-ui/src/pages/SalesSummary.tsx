@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Button } from '../components/UI/Button';
+import { PhaseBadge } from '../components/UI/PhaseBadge';
 
 type PeriodKey = 'day' | 'week' | 'month' | 'year';
 
@@ -146,7 +147,10 @@ export const SalesSummary: React.FC = () => {
           <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide">
             売上集計 / Revenue Console
           </p>
-          <h1 className="text-3xl font-semibold text-gray-900">Sales Summary</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-3xl font-semibold text-gray-900">Sales Summary</h1>
+            <PhaseBadge phase={1} />
+          </div>
           <p className="text-gray-500">期間切替で売上・予約トレンドを即座に比較できます。</p>
         </div>
         <div className="flex flex-wrap gap-3">
@@ -253,11 +257,11 @@ export const SalesSummary: React.FC = () => {
                 </div>
                 <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-gray-100">
                   <div
-                    className={`h-full rounded-full ${category.growth >= 0 ? 'bg-blue-500' : 'bg-rose-500'}`}
+                    className={`h-full rounded-full ${category.growth >= 0 ? 'bg-blue-500' : 'bg-red-500'}`}
                     style={{ width: `${category.share}%` }}
                   />
                 </div>
-                <p className={`mt-2 text-sm ${category.growth >= 0 ? 'text-green-600' : 'text-rose-600'}`}>
+                <p className={`mt-2 text-sm ${category.growth >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                   {category.growth >= 0 ? '+' : ''}
                   {category.growth}% vs 前期
                 </p>
@@ -290,7 +294,7 @@ export const SalesSummary: React.FC = () => {
                   <tr key={row.segment} className="border-t border-gray-100">
                     <td className="py-3 font-medium text-gray-900">{row.segment}</td>
                     <td className="py-3 text-gray-700">¥{row.revenue.toLocaleString()}</td>
-                    <td className={`py-3 ${row.diff >= 0 ? 'text-green-600' : 'text-rose-600'}`}>
+                    <td className={`py-3 ${row.diff >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                       {row.diff >= 0 ? '+' : ''}
                       {row.diff}%
                     </td>

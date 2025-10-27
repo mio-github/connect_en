@@ -60,6 +60,13 @@ export const MemberLessonBookingComplete: React.FC = () => {
       />
 
       <main className="container mx-auto px-4 py-8 max-w-3xl">
+        {/* フェーズバッジ */}
+        <div className="flex justify-end mb-4">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800 border-2 border-green-300">
+            Phase 2
+          </span>
+        </div>
+
         {/* 成功メッセージ */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-4">
@@ -79,7 +86,7 @@ export const MemberLessonBookingComplete: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-sm text-gray-600 mb-1">予約番号 / Booking ID</div>
-                <div className="text-lg font-bold text-purple-600">{bookingDetails.bookingId}</div>
+                <div className="text-lg font-bold text-blue-600">{bookingDetails.bookingId}</div>
               </div>
               <div className="text-right">
                 <div className="text-sm text-gray-600 mb-1">予約日時</div>
@@ -92,14 +99,14 @@ export const MemberLessonBookingComplete: React.FC = () => {
 
           {/* レッスン情報 */}
           <div className="space-y-4 mb-6">
-            <div className="bg-purple-50 rounded-lg p-4">
+            <div className="bg-blue-50 rounded-lg p-4">
               <div className="text-2xl font-bold text-gray-900 mb-1">{bookingDetails.lessonName}</div>
               <div className="text-gray-600">{bookingDetails.lessonNameEn}</div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                <Calendar className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                <Calendar className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="text-xs text-gray-600 mb-1">日付</div>
                   <div className="font-semibold text-gray-900">
@@ -112,7 +119,7 @@ export const MemberLessonBookingComplete: React.FC = () => {
               </div>
 
               <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                <Clock className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                <Clock className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="text-xs text-gray-600 mb-1">時間</div>
                   <div className="font-semibold text-gray-900">
@@ -125,7 +132,7 @@ export const MemberLessonBookingComplete: React.FC = () => {
               </div>
 
               <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                <MapPin className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                <MapPin className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="text-xs text-gray-600 mb-1">スタジオ</div>
                   <div className="font-semibold text-gray-900">
@@ -138,7 +145,7 @@ export const MemberLessonBookingComplete: React.FC = () => {
               </div>
 
               <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                <User className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                <User className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="text-xs text-gray-600 mb-1">インストラクター</div>
                   <div className="font-semibold text-gray-900">
@@ -169,7 +176,7 @@ export const MemberLessonBookingComplete: React.FC = () => {
         <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-6">
           <div className="text-center">
             <div className="flex items-center justify-center mb-4">
-              <QrCode className="h-6 w-6 text-purple-600 mr-2" />
+              <QrCode className="h-6 w-6 text-blue-600 mr-2" />
               <h2 className="text-xl font-bold text-gray-900">受付用QRコード</h2>
             </div>
             <p className="text-sm text-gray-600 mb-6">
@@ -178,7 +185,7 @@ export const MemberLessonBookingComplete: React.FC = () => {
 
             {/* QRコード表示エリア（ダミー） */}
             <div className="flex justify-center mb-4">
-              <div className="bg-white border-4 border-purple-600 p-4 rounded-2xl inline-block">
+              <div className="bg-white border-4 border-blue-600 p-4 rounded-2xl inline-block">
                 <div className="w-48 h-48 bg-gray-200 flex items-center justify-center rounded-lg">
                   <div className="text-center text-gray-500">
                     <QrCode className="h-16 w-16 mx-auto mb-2" />
@@ -189,9 +196,9 @@ export const MemberLessonBookingComplete: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 text-sm text-purple-900">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-900">
               <p className="font-medium mb-1">💡 ご利用方法</p>
-              <p className="text-purple-700">
+              <p className="text-blue-700">
                 レッスン開始15分前から受付可能です。スタジオ受付にてこのQRコードをスキャンしてください。
               </p>
             </div>
@@ -240,7 +247,7 @@ export const MemberLessonBookingComplete: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <button
             onClick={handleGoToMyPage}
-            className="bg-purple-600 text-white py-4 px-6 rounded-lg font-bold hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center space-x-2"
+            className="bg-blue-600 text-white py-4 px-6 rounded-lg font-bold hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center space-x-2"
           >
             <Home className="h-5 w-5" />
             <span>マイページへ / My Page</span>
@@ -248,7 +255,7 @@ export const MemberLessonBookingComplete: React.FC = () => {
 
           <button
             onClick={handleViewReservations}
-            className="bg-white border-2 border-purple-300 text-purple-700 py-4 px-6 rounded-lg font-bold hover:bg-purple-50 hover:border-purple-400 transition-colors flex items-center justify-center space-x-2"
+            className="bg-white border-2 border-blue-300 text-blue-700 py-4 px-6 rounded-lg font-bold hover:bg-blue-50 hover:border-blue-400 transition-colors flex items-center justify-center space-x-2"
           >
             <Calendar className="h-5 w-5" />
             <span>予約一覧 / Reservations</span>

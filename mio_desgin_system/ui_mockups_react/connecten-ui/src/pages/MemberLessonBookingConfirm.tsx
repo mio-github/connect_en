@@ -67,11 +67,18 @@ export const MemberLessonBookingConfirm: React.FC = () => {
       />
 
       <main className="container mx-auto px-4 py-8 max-w-4xl">
+        {/* フェーズバッジ */}
+        <div className="flex justify-end mb-4">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800 border-2 border-green-300">
+            Phase 2
+          </span>
+        </div>
+
         {/* ページヘッダー */}
         <div className="mb-6">
           <button
             onClick={handleBack}
-            className="flex items-center space-x-2 text-purple-600 hover:text-purple-700 mb-4"
+            className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 mb-4"
           >
             <ArrowLeft className="h-5 w-5" />
             <span>戻る / Back</span>
@@ -87,7 +94,7 @@ export const MemberLessonBookingConfirm: React.FC = () => {
             {/* レッスン情報カード */}
             <div className="bg-white rounded-xl shadow-lg p-6">
               <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                <Calendar className="h-6 w-6 text-purple-600 mr-2" />
+                <Calendar className="h-6 w-6 text-blue-600 mr-2" />
                 レッスン情報
               </h2>
 
@@ -96,7 +103,7 @@ export const MemberLessonBookingConfirm: React.FC = () => {
                 <div className="pb-4 border-b border-gray-200">
                   <div className="text-2xl font-bold text-gray-900">{lessonDetails.name}</div>
                   <div className="text-gray-600">{lessonDetails.nameEn}</div>
-                  <span className="inline-block mt-2 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+                  <span className="inline-block mt-2 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                     {lessonDetails.level}
                   </span>
                 </div>
@@ -194,7 +201,7 @@ export const MemberLessonBookingConfirm: React.FC = () => {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-lg p-6 sticky top-6">
               <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                <DollarSign className="h-6 w-6 text-purple-600 mr-2" />
+                <DollarSign className="h-6 w-6 text-blue-600 mr-2" />
                 料金詳細
               </h2>
 
@@ -214,7 +221,7 @@ export const MemberLessonBookingConfirm: React.FC = () => {
                 {/* 合計 */}
                 <div className="flex justify-between items-center pt-2">
                   <span className="text-lg font-bold text-gray-900">合計</span>
-                  <span className="text-2xl font-bold text-purple-600">
+                  <span className="text-2xl font-bold text-blue-600">
                     ¥{lessonDetails.price.toLocaleString()}
                   </span>
                 </div>
@@ -226,10 +233,10 @@ export const MemberLessonBookingConfirm: React.FC = () => {
                 </div>
 
                 {/* 利用可能ポイント */}
-                <div className="bg-purple-50 rounded-lg p-4">
-                  <div className="text-sm text-purple-800 mb-1">利用可能ポイント</div>
-                  <div className="font-bold text-purple-600">{memberInfo.availablePoints.toLocaleString()}pt</div>
-                  <button className="text-xs text-purple-600 hover:text-purple-700 underline mt-1">
+                <div className="bg-blue-50 rounded-lg p-4">
+                  <div className="text-sm text-blue-800 mb-1">利用可能ポイント</div>
+                  <div className="font-bold text-blue-600">{memberInfo.availablePoints.toLocaleString()}pt</div>
+                  <button className="text-xs text-blue-600 hover:text-blue-700 underline mt-1">
                     ポイントを使用する
                   </button>
                 </div>
@@ -237,7 +244,7 @@ export const MemberLessonBookingConfirm: React.FC = () => {
                 {/* 確認ボタン */}
                 <button
                   onClick={handleConfirm}
-                  className="w-full bg-purple-600 text-white py-4 px-6 rounded-lg font-bold hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center space-x-2 mt-6"
+                  className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-bold hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center space-x-2 mt-6"
                 >
                   <Check className="h-5 w-5" />
                   <span>予約を確定する / Confirm Booking</span>

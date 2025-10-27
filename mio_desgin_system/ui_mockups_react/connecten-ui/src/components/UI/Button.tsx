@@ -23,12 +23,12 @@ export const Button: React.FC<ButtonProps> = ({
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variantClasses = {
-    primary: 'bg-gradient-to-r from-primary-400 to-primary-500 text-white hover:from-primary-500 hover:to-primary-600 focus:ring-primary-400 shadow-sm',
-    secondary: 'bg-gradient-to-r from-sage-50 to-neutral-100 text-neutral-700 hover:from-sage-100 hover:to-neutral-200 focus:ring-sage-300 border border-neutral-200',
-    success: 'bg-gradient-to-r from-sage-400 to-sage-500 text-white hover:from-sage-500 hover:to-sage-600 focus:ring-sage-400 shadow-sm',
-    warning: 'bg-gradient-to-r from-accent-400 to-accent-500 text-white hover:from-accent-500 hover:to-accent-600 focus:ring-accent-400 shadow-sm',
-    danger: 'bg-gradient-to-r from-rose-400 to-rose-500 text-white hover:from-rose-500 hover:to-rose-600 focus:ring-rose-400 shadow-sm',
-    ghost: 'text-neutral-600 hover:text-neutral-800 hover:bg-gradient-to-r hover:from-lavender-50 hover:to-rose-50 focus:ring-lavender-300'
+    primary: 'bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700 focus:ring-primary-400 shadow-sm',
+    secondary: 'bg-gray-100 dark:bg-gray-700 text-neutral-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 focus:ring-gray-300 border border-neutral-200 dark:border-gray-600',
+    success: 'bg-green-500 dark:bg-green-600 text-white hover:bg-green-600 dark:hover:bg-green-700 focus:ring-green-400 shadow-sm',
+    warning: 'bg-amber-500 dark:bg-amber-600 text-white hover:bg-amber-600 dark:hover:bg-amber-700 focus:ring-amber-400 shadow-sm',
+    danger: 'bg-rose-500 dark:bg-rose-600 text-white hover:bg-rose-600 dark:hover:bg-rose-700 focus:ring-rose-400 shadow-sm',
+    ghost: 'text-neutral-600 dark:text-gray-300 hover:text-neutral-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-gray-300'
   };
 
   const sizeClasses = {

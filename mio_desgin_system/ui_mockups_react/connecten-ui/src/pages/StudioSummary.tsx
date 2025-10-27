@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Button } from '../components/UI/Button';
+import { PhaseBadge } from '../components/UI/PhaseBadge';
 
 interface StudioMetric {
   id: string;
@@ -114,8 +115,11 @@ export const StudioSummary: React.FC = () => {
     <div className="space-y-8">
       <header className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-purple-500">Studio Intelligence</p>
-          <h1 className="text-3xl font-semibold text-gray-900">スタジオ集計</h1>
+          <p className="text-sm font-semibold uppercase tracking-wide text-blue-600">Studio Intelligence</p>
+          <div className="flex items-center gap-3">
+            <h1 className="text-3xl font-semibold text-gray-900">スタジオ集計</h1>
+            <PhaseBadge phase={1} />
+          </div>
           <p className="text-gray-500">
             各拠点の稼働率、収益性、レッスン構成を一括で可視化し意思決定を支援します。
           </p>
@@ -206,7 +210,7 @@ export const StudioSummary: React.FC = () => {
         <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold text-gray-900">稼働率トレンド</h3>
-            <span className="text-xs font-semibold uppercase tracking-wide text-purple-500">
+            <span className="text-xs font-semibold uppercase tracking-wide text-blue-600">
               週次 / 直近4週間
             </span>
           </div>
@@ -214,7 +218,7 @@ export const StudioSummary: React.FC = () => {
             {['shibuya', 'scramble', 'yokohama'].map((studioId) => {
               const dataset = occupancyTrend.map((point) => point[studioId as keyof OccupancyPoint]);
               const color =
-                studioId === 'shibuya' ? '#2563eb' : studioId === 'scramble' ? '#10b981' : '#f97316';
+                studioId === 'shibuya' ? '#2563eb' : studioId === 'scramble' ? '#10b981' : '#f59e0b';
               const label = studios.find((studio) => studio.id === studioId)?.name ?? studioId;
               return (
                 <div key={studioId} className="rounded-xl border border-gray-100 p-4">

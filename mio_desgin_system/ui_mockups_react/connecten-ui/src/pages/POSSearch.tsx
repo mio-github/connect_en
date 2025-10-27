@@ -162,7 +162,7 @@ export const POSSearch: React.FC = () => {
     const statusConfig = {
       completed: { label: '完了', className: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' },
       refunded: { label: '返品', className: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' },
-      exchanged: { label: '交換', className: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' }
+      exchanged: { label: '交換', className: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200' }
     };
     const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.completed;
     return (
@@ -183,7 +183,12 @@ export const POSSearch: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h1 className="text-2xl font-bold text-neutral-800 dark:text-white mb-2">POS検索</h1>
+        <div className="flex items-center gap-3 mb-2">
+          <h1 className="text-2xl font-bold text-neutral-800 dark:text-white">POS検索</h1>
+          <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-semibold rounded-full">
+            Phase 1
+          </span>
+        </div>
         <p className="text-neutral-500 dark:text-gray-400">販売履歴の検索・確認・レシート再発行を行えます</p>
       </motion.div>
 
@@ -409,7 +414,7 @@ export const POSSearch: React.FC = () => {
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleReceiptReissue(record)}
-                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+                        className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300"
                         title="レシート再発行"
                       >
                         <i className="fas fa-receipt" />
@@ -425,7 +430,7 @@ export const POSSearch: React.FC = () => {
                           </button>
                           <button
                             onClick={() => handleExchange(record)}
-                            className="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300"
+                            className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300"
                             title="交換"
                           >
                             <i className="fas fa-exchange-alt" />

@@ -88,11 +88,18 @@ export const MemberRegistration: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-purple-50 py-8 px-4">
+    <div className="min-h-screen bg-blue-50 py-8 px-4">
       <div className="max-w-2xl mx-auto">
+        {/* フェーズバッジ */}
+        <div className="flex justify-end mb-4">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 border-2 border-blue-300">
+            Phase 1
+          </span>
+        </div>
+
         {/* ヘッダー */}
         <div className="text-center mb-8">
-          <div className="mx-auto h-16 w-16 bg-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+          <div className="mx-auto h-16 w-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-2xl">En</span>
           </div>
           <h1 className="mt-6 text-3xl font-bold text-gray-900">
@@ -117,7 +124,7 @@ export const MemberRegistration: React.FC = () => {
                   type="text"
                   value={formData.lastName}
                   onChange={(e) => handleInputChange('lastName', e.target.value)}
-                  className={`w-full pl-10 pr-4 py-3 border ${errors.lastName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
+                  className={`w-full pl-10 pr-4 py-3 border ${errors.lastName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   placeholder="山田"
                 />
               </div>
@@ -136,7 +143,7 @@ export const MemberRegistration: React.FC = () => {
                   type="text"
                   value={formData.firstName}
                   onChange={(e) => handleInputChange('firstName', e.target.value)}
-                  className={`w-full pl-10 pr-4 py-3 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
+                  className={`w-full pl-10 pr-4 py-3 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   placeholder="太郎"
                 />
               </div>
@@ -157,7 +164,7 @@ export const MemberRegistration: React.FC = () => {
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                className={`w-full pl-10 pr-4 py-3 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
+                className={`w-full pl-10 pr-4 py-3 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 placeholder="your-email@example.com"
               />
             </div>
@@ -177,7 +184,7 @@ export const MemberRegistration: React.FC = () => {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
-                className={`w-full pl-10 pr-4 py-3 border ${errors.phone ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
+                className={`w-full pl-10 pr-4 py-3 border ${errors.phone ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 placeholder="090-1234-5678"
               />
             </div>
@@ -197,7 +204,7 @@ export const MemberRegistration: React.FC = () => {
                 type={showPassword ? 'text' : 'password'}
                 value={formData.password}
                 onChange={(e) => handleInputChange('password', e.target.value)}
-                className={`w-full pl-10 pr-12 py-3 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
+                className={`w-full pl-10 pr-12 py-3 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 placeholder="8文字以上"
               />
               <button
@@ -224,7 +231,7 @@ export const MemberRegistration: React.FC = () => {
                 type={showConfirmPassword ? 'text' : 'password'}
                 value={formData.confirmPassword}
                 onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                className={`w-full pl-10 pr-12 py-3 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
+                className={`w-full pl-10 pr-12 py-3 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 placeholder="パスワードを再入力"
               />
               <button
@@ -249,12 +256,12 @@ export const MemberRegistration: React.FC = () => {
                   type="checkbox"
                   checked={formData.agreeToTerms}
                   onChange={(e) => handleInputChange('agreeToTerms', e.target.checked)}
-                  className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
               </div>
               <div className="ml-3 text-sm">
                 <label htmlFor="terms" className="font-medium text-gray-700">
-                  <a href="#" className="text-purple-600 hover:text-purple-500 hover:underline">
+                  <a href="#" className="text-blue-600 hover:text-blue-500 hover:underline">
                     利用規約
                   </a>
                   に同意します
@@ -270,12 +277,12 @@ export const MemberRegistration: React.FC = () => {
                   type="checkbox"
                   checked={formData.agreeToPrivacy}
                   onChange={(e) => handleInputChange('agreeToPrivacy', e.target.checked)}
-                  className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
               </div>
               <div className="ml-3 text-sm">
                 <label htmlFor="privacy" className="font-medium text-gray-700">
-                  <a href="#" className="text-purple-600 hover:text-purple-500 hover:underline">
+                  <a href="#" className="text-blue-600 hover:text-blue-500 hover:underline">
                     プライバシーポリシー
                   </a>
                   に同意します
@@ -295,7 +302,7 @@ export const MemberRegistration: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
+            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
           >
             {isLoading ? (
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
@@ -315,7 +322,7 @@ export const MemberRegistration: React.FC = () => {
             <p className="text-gray-600 text-sm mb-4">
               すでに会員の方 / Already a member?
             </p>
-            <button className="text-purple-600 hover:text-purple-700 font-semibold hover:underline">
+            <button className="text-blue-600 hover:text-blue-700 font-semibold hover:underline">
               ログインはこちら / Login
             </button>
           </div>

@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Button } from '../components/UI/Button';
+import { PhaseBadge } from '../components/UI/PhaseBadge';
 
 type Interval = '3m' | '6m' | '12m';
 
@@ -68,7 +69,7 @@ const TimelineChart: React.FC<{ data: TransitionPoint[] }> = ({ data }) => {
     <div className="h-48 w-full">
       <svg viewBox="0 0 100 40" className="h-full w-full">
         {['inbound', 'outbound', 'crossBooking'].map((key, idx) => {
-          const color = idx === 0 ? '#2563eb' : idx === 1 ? '#f97316' : '#10b981';
+          const color = idx === 0 ? '#2563eb' : idx === 1 ? '#f59e0b' : '#10b981';
           const points = data
             .map((point, index) => {
               const x = (index / (data.length - 1)) * 100;
@@ -122,10 +123,13 @@ export const StudioTransition: React.FC = () => {
     <div className="space-y-8">
       <header className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-sky-500">
+          <p className="text-sm font-semibold uppercase tracking-wide text-blue-600">
             Studio Transition Navigator
           </p>
-          <h1 className="text-3xl font-semibold text-gray-900">スタジオ遷移</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-3xl font-semibold text-gray-900">スタジオ遷移</h1>
+            <PhaseBadge phase={1} />
+          </div>
           <p className="text-gray-500">
             会員の利用傾向、移動パターン、時間帯別ヒートマップをもとに配置最適化を支援します。
           </p>
@@ -136,7 +140,7 @@ export const StudioTransition: React.FC = () => {
               key={key}
               onClick={() => setInterval(key)}
               className={`rounded-full px-4 py-2 text-sm font-medium ${
-                interval === key ? 'bg-sky-600 text-white shadow-sm' : 'border border-gray-200 text-gray-600'
+                interval === key ? 'bg-blue-600 text-white shadow-sm' : 'border border-gray-200 text-gray-600'
               }`}
             >
               {key === '3m' ? '直近3か月' : key === '6m' ? '半期' : '12か月'}
@@ -157,12 +161,12 @@ export const StudioTransition: React.FC = () => {
         <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
           <p className="text-xs uppercase text-gray-500">流出 (Outbound)</p>
           <p className="mt-2 text-3xl font-semibold text-gray-900">{totals.outbound}名</p>
-          <p className="text-sm text-rose-500">退会予兆 42名</p>
+          <p className="text-sm text-red-500">退会予兆 42名</p>
         </div>
         <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
           <p className="text-xs uppercase text-gray-500">クロス予約</p>
           <p className="mt-2 text-3xl font-semibold text-gray-900">{totals.crossBooking}件</p>
-          <p className="text-sm text-sky-500">回遊率 36%</p>
+          <p className="text-sm text-blue-600">回遊率 36%</p>
         </div>
       </section>
 
@@ -181,7 +185,7 @@ export const StudioTransition: React.FC = () => {
           <div className="mt-4 flex flex-wrap gap-4 text-sm text-gray-600">
             {[
               { label: 'Inbound', color: 'bg-blue-500' },
-              { label: 'Outbound', color: 'bg-orange-500' },
+              { label: 'Outbound', color: 'bg-amber-500' },
               { label: 'Cross-Booking', color: 'bg-emerald-500' }
             ].map((legend) => (
               <div key={legend.label} className="flex items-center gap-2">
@@ -231,7 +235,7 @@ export const StudioTransition: React.FC = () => {
         <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold text-gray-900">時間帯別利用状況ヒートマップ</h3>
-            <span className="text-xs font-semibold uppercase tracking-wide text-sky-500">
+            <span className="text-xs font-semibold uppercase tracking-wide text-blue-600">
               AI Demand Index
             </span>
           </div>
@@ -256,11 +260,11 @@ export const StudioTransition: React.FC = () => {
                       const intensity = cell ? cell.value : 0;
                       const bg =
                         intensity > 75
-                          ? 'bg-sky-600 text-white'
+                          ? 'bg-blue-600 text-white'
                           : intensity > 50
-                          ? 'bg-sky-400 text-white'
+                          ? 'bg-blue-400 text-white'
                           : intensity > 25
-                          ? 'bg-sky-200 text-gray-700'
+                          ? 'bg-blue-200 text-gray-700'
                           : 'bg-gray-100 text-gray-500';
                       return (
                         <td key={`${slot}-${day}`} className="py-2 text-center">
@@ -280,7 +284,7 @@ export const StudioTransition: React.FC = () => {
 
       <section className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-2xl border border-gray-100 bg-gradient-to-br from-sky-50 via-white to-white p-5">
+          <div className="rounded-2xl border border-gray-100 bg-gradient-to-br from-blue-50 via-white to-white p-5">
             <p className="text-xs uppercase text-gray-500">Sankey Flow (概念図)</p>
             <div className="mt-4 space-y-3">
               {flows.map((flow) => (
@@ -308,7 +312,7 @@ export const StudioTransition: React.FC = () => {
               </li>
               <li className="flex items-center justify-between">
                 <span>退会リスク会員</span>
-                <span className="font-semibold text-rose-600">38名</span>
+                <span className="font-semibold text-red-600">38名</span>
               </li>
               <li className="flex items-center justify-between">
                 <span>推奨テナント間施策</span>

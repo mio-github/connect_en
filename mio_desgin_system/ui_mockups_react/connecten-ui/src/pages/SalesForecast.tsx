@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Button } from '../components/UI/Button';
+import { PhaseBadge } from '../components/UI/PhaseBadge';
 
 type ScenarioKey = 'optimistic' | 'baseline' | 'pessimistic';
 
@@ -67,7 +68,7 @@ const LineChart: React.FC<{
     activeScenario === 'optimistic'
       ? '#10b981'
       : activeScenario === 'pessimistic'
-      ? '#f97316'
+      ? '#f59e0b'
       : '#2563eb';
 
   const points = data
@@ -124,10 +125,13 @@ export const SalesForecast: React.FC = () => {
     <div className="space-y-8">
       <header className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-indigo-500">
+          <p className="text-sm font-semibold uppercase tracking-wide text-blue-600">
             Forecast Lab
           </p>
-          <h1 className="text-3xl font-semibold text-gray-900">売上予測</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-3xl font-semibold text-gray-900">売上予測</h1>
+            <PhaseBadge phase={1} />
+          </div>
           <p className="text-gray-500">
             シナリオ比較、季節性補正、AI推奨アクションを一元管理します。
           </p>
@@ -149,7 +153,7 @@ export const SalesForecast: React.FC = () => {
             onClick={() => setActiveScenario(scenario.key)}
             className={`rounded-2xl border p-5 text-left shadow-sm transition ${
               activeScenario === scenario.key
-                ? 'border-indigo-500 bg-indigo-50/60'
+                ? 'border-blue-500 bg-blue-50/60'
                 : 'border-gray-100 bg-white hover:border-gray-200'
             }`}
           >
@@ -177,9 +181,9 @@ export const SalesForecast: React.FC = () => {
                 max="10"
                 value={seasonality}
                 onChange={(event) => setSeasonality(Number(event.target.value))}
-                className="h-1 w-40 cursor-pointer rounded-full bg-gray-200 accent-indigo-500"
+                className="h-1 w-40 cursor-pointer rounded-full bg-gray-200 accent-blue-500"
               />
-              <span className="font-semibold text-indigo-600">{seasonality}%</span>
+              <span className="font-semibold text-blue-600">{seasonality}%</span>
             </div>
           </div>
           <div className="mt-6">
@@ -194,7 +198,7 @@ export const SalesForecast: React.FC = () => {
                   <div
                     key={key}
                     className={`rounded-xl border p-4 ${
-                      activeScenario === key ? 'border-indigo-400 bg-indigo-50/70' : 'border-gray-100'
+                      activeScenario === key ? 'border-blue-400 bg-blue-50/70' : 'border-gray-100'
                     }`}
                   >
                     <p className="text-xs uppercase text-gray-500">{label}</p>

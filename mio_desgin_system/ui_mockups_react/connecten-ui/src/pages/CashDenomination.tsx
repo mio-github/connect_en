@@ -109,7 +109,12 @@ export const CashDenomination: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h1 className="text-2xl font-bold text-neutral-800 dark:text-white mb-2">金種表</h1>
+        <div className="flex items-center gap-3 mb-2">
+          <h1 className="text-2xl font-bold text-neutral-800 dark:text-white">金種表</h1>
+          <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-semibold rounded-full">
+            Phase 1
+          </span>
+        </div>
         <p className="text-neutral-500 dark:text-gray-400">
           レジ内の現金を金種別に集計します
         </p>

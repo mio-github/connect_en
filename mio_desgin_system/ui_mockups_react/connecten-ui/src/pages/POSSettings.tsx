@@ -154,7 +154,12 @@ export const POSSettings: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h1 className="text-2xl font-bold text-neutral-800 dark:text-white mb-2">POS設定</h1>
+        <div className="flex items-center gap-3 mb-2">
+          <h1 className="text-2xl font-bold text-neutral-800 dark:text-white">POS設定</h1>
+          <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-semibold rounded-full">
+            Phase 1
+          </span>
+        </div>
         <p className="text-neutral-500 dark:text-gray-400">
           POS端末、商品マスタ、割引、税率などの設定を管理します
         </p>
@@ -384,7 +389,7 @@ export const POSSettings: React.FC = () => {
                           <div className="flex gap-2">
                             <button
                               onClick={() => handleEditProduct(product)}
-                              className="text-blue-600 dark:text-blue-400 hover:text-blue-800"
+                              className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-800"
                             >
                               <i className="fas fa-edit" />
                             </button>
@@ -478,7 +483,7 @@ export const POSSettings: React.FC = () => {
                           <div className="flex gap-2">
                             <button
                               onClick={() => handleEditDiscount(discount)}
-                              className="text-blue-600 dark:text-blue-400 hover:text-blue-800"
+                              className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-800"
                             >
                               <i className="fas fa-edit" />
                             </button>

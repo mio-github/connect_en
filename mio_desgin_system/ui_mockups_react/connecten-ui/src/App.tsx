@@ -15,9 +15,37 @@ import { MemberLessonBooking } from './pages/MemberLessonBooking';
 import { MemberMyPage } from './pages/MemberMyPage';
 import { MemberPoints } from './pages/MemberPoints';
 import { MemberQR } from './pages/MemberQR';
+import { SalesSummary } from './pages/SalesSummary';
+import { StudioSummary } from './pages/StudioSummary';
+import { StudioTransition } from './pages/StudioTransition';
+import { SalesForecast } from './pages/SalesForecast';
+import { AnalyticsOverview } from './pages/AnalyticsOverview';
+import { SalesAnalytics } from './pages/SalesAnalytics';
+import { MarketingManagement } from './pages/MarketingManagement';
+import { LeadManagement } from './pages/LeadManagement';
+import AttendanceManagement from './pages/AttendanceManagement';
+import InstructorManagement from './pages/InstructorManagement';
 import './index.css';
 
-type AdminPageType = 'dashboard' | 'members' | 'lessons' | 'staff' | 'reservations' | 'payments' | 'reports' | 'settings';
+type AdminPageType =
+  | 'dashboard'
+  | 'members'
+  | 'attendance'
+  | 'instructors'
+  | 'lessons'
+  | 'staff'
+  | 'reservations'
+  | 'payments'
+  | 'reports'
+  | 'settings'
+  | 'sales-summary'
+  | 'studio-summary'
+  | 'studio-transition'
+  | 'sales-forecast'
+  | 'analytics-overview'
+  | 'sales-analytics'
+  | 'marketing-management'
+  | 'lead-management';
 type MemberPageType = 'lesson-booking' | 'my-reservations' | 'mypage' | 'points' | 'my-qr' | 'notifications';
 type AppMode = 'admin' | 'member';
 
@@ -33,6 +61,10 @@ function App() {
         return <Dashboard />;
       case 'members':
         return <MemberManagement />;
+      case 'attendance':
+        return <AttendanceManagement />;
+      case 'instructors':
+        return <InstructorManagement />;
       case 'lessons':
         return <LessonManagement />;
       case 'staff':
@@ -45,6 +77,22 @@ function App() {
         return <ReportsAnalytics />;
       case 'settings':
         return <Settings />;
+      case 'sales-summary':
+        return <SalesSummary />;
+      case 'studio-summary':
+        return <StudioSummary />;
+      case 'studio-transition':
+        return <StudioTransition />;
+      case 'sales-forecast':
+        return <SalesForecast />;
+      case 'analytics-overview':
+        return <AnalyticsOverview />;
+      case 'sales-analytics':
+        return <SalesAnalytics />;
+      case 'marketing-management':
+        return <MarketingManagement />;
+      case 'lead-management':
+        return <LeadManagement />;
       default:
         return <Dashboard />;
     }

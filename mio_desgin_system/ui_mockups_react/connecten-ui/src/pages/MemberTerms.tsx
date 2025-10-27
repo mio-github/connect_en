@@ -188,11 +188,18 @@ export const MemberTerms: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-purple-50 py-8 px-4">
+    <div className="min-h-screen bg-blue-50 py-8 px-4">
       <div className="max-w-4xl mx-auto">
+        {/* フェーズバッジ */}
+        <div className="flex justify-end mb-4">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 border-2 border-blue-300">
+            Phase 1
+          </span>
+        </div>
+
         {/* ヘッダー */}
         <div className="text-center mb-8">
-          <div className="mx-auto h-16 w-16 bg-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+          <div className="mx-auto h-16 w-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-2xl">En</span>
           </div>
           <h1 className="mt-6 text-3xl font-bold text-gray-900">
@@ -213,7 +220,7 @@ export const MemberTerms: React.FC = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 py-4 px-4 text-sm font-medium border-b-2 transition-colors ${
                     activeTab === tab.id
-                      ? 'border-purple-500 text-purple-600 bg-purple-50'
+                      ? 'border-blue-500 text-blue-600 bg-blue-50'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -252,11 +259,11 @@ export const MemberTerms: React.FC = () => {
 
             {/* 同意セクション */}
             <div className="mt-6 pt-6 border-t border-gray-200">
-              <div className="bg-purple-50 rounded-lg p-4 mb-4">
+              <div className="bg-blue-50 rounded-lg p-4 mb-4">
                 <div className="flex items-start space-x-3">
-                  <Shield className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                  <Shield className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
                   <div className="text-sm text-gray-700">
-                    <p className="font-medium text-purple-900 mb-1">
+                    <p className="font-medium text-blue-900 mb-1">
                       重要なお知らせ
                     </p>
                     <p>
@@ -278,7 +285,7 @@ export const MemberTerms: React.FC = () => {
                 <button
                   onClick={handleAgree}
                   disabled={hasAgreed}
-                  className="flex-1 bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
+                  className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
                 >
                   <Check className="h-5 w-5" />
                   <span>{hasAgreed ? '同意済み / Agreed' : '同意する / Agree'}</span>
@@ -302,7 +309,7 @@ export const MemberTerms: React.FC = () => {
 
         {/* 戻るリンク */}
         <div className="text-center mt-6">
-          <button className="text-purple-600 hover:text-purple-700 font-medium hover:underline">
+          <button className="text-blue-600 hover:text-blue-700 font-medium hover:underline">
             ← 前の画面に戻る / Back
           </button>
         </div>

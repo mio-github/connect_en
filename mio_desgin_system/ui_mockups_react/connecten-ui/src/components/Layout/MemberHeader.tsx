@@ -17,7 +17,7 @@ export const MemberHeader: React.FC<MemberHeaderProps> = ({
           {/* ロゴとスタジオ名 */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <div className="h-8 w-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="h-8 w-8 bg-pink-500 dark:bg-purple-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">En</span>
               </div>
             </div>
