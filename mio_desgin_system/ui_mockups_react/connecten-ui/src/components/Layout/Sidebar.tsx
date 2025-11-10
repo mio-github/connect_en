@@ -140,23 +140,29 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeMenuItem = 'members', on
           <div key={item.id}>
             <motion.button
               onClick={() => {
+                if (item.phase === 2) return; // Phase 2は無効化
                 if (item.subItems) {
                   toggleExpanded(item.id);
                 } else {
                   onMenuItemClick?.(item.id);
                 }
               }}
+              disabled={item.phase === 2}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium transition-all group ${
-                activeMenuItem === item.id
+                item.phase === 2
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-50'
+                  : activeMenuItem === item.id
                   ? 'bg-teal-600 text-white shadow-lg'
                   : 'text-gray-700 hover:bg-gray-50 hover:text-teal-600'
               }`}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={item.phase === 2 ? {} : { scale: 1.02 }}
+              whileTap={item.phase === 2 ? {} : { scale: 0.98 }}
             >
               <div className="flex items-center gap-3">
                 <item.icon className={`h-5 w-5 ${
-                  activeMenuItem === item.id
+                  item.phase === 2
+                    ? 'text-gray-400'
+                    : activeMenuItem === item.id
                     ? 'text-white'
                     : 'text-gray-500 group-hover:text-teal-600'
                 }`} />
@@ -183,15 +189,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeMenuItem = 'members', on
                 {item.subItems.map((subItem) => (
                   <button
                     key={subItem.id}
-                    onClick={() => onMenuItemClick?.(subItem.id)}
+                    onClick={() => subItem.phase !== 2 && onMenuItemClick?.(subItem.id)}
+                    disabled={subItem.phase === 2}
                     className={`w-full flex items-center justify-between px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                      activeMenuItem === subItem.id
+                      subItem.phase === 2
+                        ? 'bg-gray-50 text-gray-400 cursor-not-allowed opacity-50'
+                        : activeMenuItem === subItem.id
                         ? 'bg-teal-50 text-teal-700 border-l-2 border-teal-600'
                         : 'text-gray-600 hover:bg-gray-50 hover:text-teal-600'
                     }`}
                   >
                     <span className="flex items-center gap-3">
-                      <subItem.icon className="h-4 w-4" />
+                      <subItem.icon className={`h-4 w-4 ${subItem.phase === 2 ? 'text-gray-400' : ''}`} />
                       {subItem.label}
                     </span>
                     {subItem.phase && <PhaseBadge phase={subItem.phase} compact />}

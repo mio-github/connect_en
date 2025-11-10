@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1200" height="1600" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1200" height="1600" fill="#f8f9fa" />
+
+  <!-- タイトル -->
+  <text x="600" y="30" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">ConnectEn - 会員側画面遷移図</text>
+  <text x="600" y="60" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">ConnectEn - User Side Screen Flow</text>
+
+  <!-- ログイン前セクション -->
+  <rect x="30" y="90" width="1140" height="200" rx="10" ry="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" stroke-dasharray="5,5" />
+  <text x="50" y="115" font-family="Arial" font-size="18" font-weight="bold" fill="#E65100">ログイン前 / Before Login</text>
+
+  <!-- トップページ（未ログイン） -->
+  <rect x="100" y="140" width="200" height="80" rx="10" ry="10" fill="#FFE0B2" stroke="#FB8C00" stroke-width="2" />
+  <text x="200" y="175" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">トップページ</text>
+  <text x="200" y="200" font-family="Arial" font-size="14" text-anchor="middle">(未ログイン)</text>
+  <text x="200" y="215" font-family="Arial" font-size="14" text-anchor="middle">Top Page</text>
+
+  <!-- 会員ログイン -->
+  <rect x="350" y="140" width="200" height="80" rx="10" ry="10" fill="#FFE0B2" stroke="#FB8C00" stroke-width="2" />
+  <text x="450" y="175" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">会員ログイン</text>
+  <text x="450" y="200" font-family="Arial" font-size="14" text-anchor="middle">Member Login</text>
+
+  <!-- パスワードリセット -->
+  <rect x="600" y="140" width="200" height="80" rx="10" ry="10" fill="#FFCCBC" stroke="#FF5722" stroke-width="2" />
+  <text x="700" y="175" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">パスワードリセット</text>
+  <text x="700" y="200" font-family="Arial" font-size="14" text-anchor="middle">Password Reset</text>
+
+  <!-- 会員登録 -->
+  <rect x="850" y="140" width="200" height="80" rx="10" ry="10" fill="#FFCCBC" stroke="#FF5722" stroke-width="2" />
+  <text x="950" y="165" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">会員登録</text>
+  <text x="950" y="190" font-family="Arial" font-size="14" text-anchor="middle">月謝制/バーチャル</text>
+  <text x="950" y="210" font-family="Arial" font-size="14" text-anchor="middle">Registration</text>
+
+  <!-- ログイン後セクション -->
+  <rect x="30" y="320" width="1140" height="1220" rx="10" ry="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2" stroke-dasharray="5,5" />
+  <text x="50" y="345" font-family="Arial" font-size="18" font-weight="bold" fill="#1B5E20">ログイン後 / After Login</text>
+
+  <!-- 会員トップ/マイページ -->
+  <rect x="450" y="380" width="250" height="80" rx="10" ry="10" fill="#81C784" stroke="#388E3C" stroke-width="3" />
+  <text x="575" y="410" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">会員TOP / マイページ</text>
+  <text x="575" y="435" font-family="Arial" font-size="16" text-anchor="middle">Member Top / My Page</text>
+  <text x="575" y="455" font-family="Arial" font-size="12" text-anchor="middle">個人QR・情報・予約状況</text>
+
+  <!-- レッスン予約エリア -->
+  <rect x="50" y="500" width="350" height="200" rx="10" ry="10" fill="#C8E6C9" stroke="#388E3C" stroke-width="2" />
+  <text x="225" y="525" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">レッスン予約 / Lesson Reservation</text>
+
+  <rect x="70" y="550" width="150" height="60" rx="10" ry="10" fill="#E8F5E9" stroke="#388E3C" stroke-width="1" />
+  <text x="145" y="575" font-family="Arial" font-size="14" text-anchor="middle">スタジオ検索</text>
+  <text x="145" y="595" font-family="Arial" font-size="14" text-anchor="middle">Studio Search</text>
+
+  <rect x="240" y="550" width="150" height="60" rx="10" ry="10" fill="#E8F5E9" stroke="#388E3C" stroke-width="1" />
+  <text x="315" y="575" font-family="Arial" font-size="14" text-anchor="middle">日付検索</text>
+  <text x="315" y="595" font-family="Arial" font-size="14" text-anchor="middle">Date Search</text>
+
+  <rect x="70" y="625" width="150" height="60" rx="10" ry="10" fill="#E8F5E9" stroke="#388E3C" stroke-width="1" />
+  <text x="145" y="650" font-family="Arial" font-size="14" text-anchor="middle">予約確認</text>
+  <text x="145" y="670" font-family="Arial" font-size="14" text-anchor="middle">Confirmation</text>
+
+  <rect x="240" y="625" width="150" height="60" rx="10" ry="10" fill="#E8F5E9" stroke="#388E3C" stroke-width="1" />
+  <text x="315" y="650" font-family="Arial" font-size="14" text-anchor="middle">キャンセル</text>
+  <text x="315" y="670" font-family="Arial" font-size="14" text-anchor="middle">Cancellation</text>
+
+  <!-- オンラインレッスン -->
+  <rect x="430" y="500" width="310" height="140" rx="10" ry="10" fill="#BBDEFB" stroke="#1976D2" stroke-width="2" />
+  <text x="585" y="525" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">オンラインレッスン / Online Lesson</text>
+
+  <rect x="450" y="550" width="140" height="60" rx="10" ry="10" fill="#E3F2FD" stroke="#1976D2" stroke-width="1" />
+  <text x="520" y="575" font-family="Arial" font-size="14" text-anchor="middle">オンライン一覧</text>
+  <text x="520" y="595" font-family="Arial" font-size="14" text-anchor="middle">Online List</text>
+
+  <rect x="610" y="550" width="115" height="60" rx="10" ry="10" fill="#E3F2FD" stroke="#1976D2" stroke-width="1" />
+  <text x="668" y="575" font-family="Arial" font-size="14" text-anchor="middle">視聴URL</text>
+  <text x="668" y="595" font-family="Arial" font-size="14" text-anchor="middle">View URL</text>
+
+  <!-- イベント・ワークショップ -->
+  <rect x="770" y="500" width="380" height="140" rx="10" ry="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="2" />
+  <text x="960" y="525" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">イベント・ワークショップ / Events</text>
+
+  <rect x="790" y="550" width="170" height="60" rx="10" ry="10" fill="#FCE4EC" stroke="#7B1FA2" stroke-width="1" />
+  <text x="875" y="575" font-family="Arial" font-size="14" text-anchor="middle">イベント一覧</text>
+  <text x="875" y="595" font-family="Arial" font-size="14" text-anchor="middle">Event List</text>
+
+  <rect x="980" y="550" width="155" height="60" rx="10" ry="10" fill="#FCE4EC" stroke="#7B1FA2" stroke-width="1" />
+  <text x="1058" y="575" font-family="Arial" font-size="14" text-anchor="middle">申込・参加履歴</text>
+  <text x="1058" y="595" font-family="Arial" font-size="14" text-anchor="middle">Apply &amp; History</text>
+
+  <!-- 履歴管理 -->
+  <rect x="50" y="730" width="350" height="180" rx="10" ry="10" fill="#FFF9C4" stroke="#F57F17" stroke-width="2" />
+  <text x="225" y="755" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">履歴管理 / History Management</text>
+
+  <rect x="70" y="780" width="150" height="60" rx="10" ry="10" fill="#FFFDE7" stroke="#F57F17" stroke-width="1" />
+  <text x="145" y="805" font-family="Arial" font-size="14" text-anchor="middle">予約履歴</text>
+  <text x="145" y="825" font-family="Arial" font-size="14" text-anchor="middle">Reservation</text>
+
+  <rect x="240" y="780" width="150" height="60" rx="10" ry="10" fill="#FFFDE7" stroke="#F57F17" stroke-width="1" />
+  <text x="315" y="805" font-family="Arial" font-size="14" text-anchor="middle">キャンセル履歴</text>
+  <text x="315" y="825" font-family="Arial" font-size="14" text-anchor="middle">Cancellation</text>
+
+  <rect x="70" y="855" width="150" height="45" rx="10" ry="10" fill="#FFFDE7" stroke="#F57F17" stroke-width="1" />
+  <text x="145" y="883" font-family="Arial" font-size="14" text-anchor="middle">受講履歴</text>
+
+  <rect x="240" y="855" width="150" height="45" rx="10" ry="10" fill="#FFFDE7" stroke="#F57F17" stroke-width="1" />
+  <text x="315" y="883" font-family="Arial" font-size="14" text-anchor="middle">出席率</text>
+
+  <!-- 通知・お知らせ -->
+  <rect x="430" y="730" width="310" height="120" rx="10" ry="10" fill="#FFE0B2" stroke="#E65100" stroke-width="2" />
+  <text x="585" y="755" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">お知らせ / Notice</text>
+
+  <rect x="450" y="780" width="135" height="60" rx="10" ry="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1" />
+  <text x="518" y="805" font-family="Arial" font-size="14" text-anchor="middle">お知らせ一覧</text>
+  <text x="518" y="825" font-family="Arial" font-size="14" text-anchor="middle">Notice List</text>
+
+  <rect x="605" y="780" width="120" height="60" rx="10" ry="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1" />
+  <text x="665" y="805" font-family="Arial" font-size="14" text-anchor="middle">お知らせ詳細</text>
+  <text x="665" y="825" font-family="Arial" font-size="14" text-anchor="middle">Details</text>
+
+  <!-- ポイント・決済 -->
+  <rect x="770" y="730" width="380" height="340" rx="10" ry="10" fill="#E1BEE7" stroke="#7B1FA2" stroke-width="2" />
+  <text x="960" y="755" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">ポイント・決済 / Points &amp; Payment</text>
+
+  <rect x="790" y="780" width="170" height="60" rx="10" ry="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1" />
+  <text x="875" y="800" font-family="Arial" font-size="14" text-anchor="middle">Enポイント</text>
+  <text x="875" y="820" font-family="Arial" font-size="12" text-anchor="middle">残高・獲得・利用履歴</text>
+
+  <rect x="980" y="780" width="155" height="60" rx="10" ry="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1" />
+  <text x="1058" y="800" font-family="Arial" font-size="14" text-anchor="middle">ポイント購入</text>
+  <text x="1058" y="820" font-family="Arial" font-size="14" text-anchor="middle">Buy Points</text>
+
+  <rect x="790" y="855" width="170" height="60" rx="10" ry="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1" />
+  <text x="875" y="875" font-family="Arial" font-size="14" text-anchor="middle">チケット管理</text>
+  <text x="875" y="895" font-family="Arial" font-size="12" text-anchor="middle">残数・購入履歴</text>
+
+  <rect x="980" y="855" width="155" height="60" rx="10" ry="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1" />
+  <text x="1058" y="875" font-family="Arial" font-size="14" text-anchor="middle">チケット購入</text>
+  <text x="1058" y="895" font-family="Arial" font-size="14" text-anchor="middle">Buy Tickets</text>
+
+  <rect x="790" y="930" width="170" height="60" rx="10" ry="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1" />
+  <text x="875" y="950" font-family="Arial" font-size="14" text-anchor="middle">月謝支払い履歴</text>
+  <text x="875" y="970" font-family="Arial" font-size="14" text-anchor="middle">Tuition History</text>
+
+  <rect x="980" y="930" width="155" height="60" rx="10" ry="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1" />
+  <text x="1058" y="950" font-family="Arial" font-size="14" text-anchor="middle">支払い方法設定</text>
+  <text x="1058" y="970" font-family="Arial" font-size="14" text-anchor="middle">Payment Settings</text>
+
+  <rect x="790" y="1005" width="345" height="55" rx="10" ry="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1" />
+  <text x="963" y="1030" font-family="Arial" font-size="14" text-anchor="middle">商品購入履歴・レシート / Purchase History</text>
+
+  <!-- 友達紹介・シェア -->
+  <rect x="50" y="1090" width="350" height="180" rx="10" ry="10" fill="#FFCDD2" stroke="#D32F2F" stroke-width="2" />
+  <text x="225" y="1115" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">友達紹介・シェア / Referral &amp; Share</text>
+
+  <rect x="70" y="1140" width="150" height="60" rx="10" ry="10" fill="#FFEBEE" stroke="#D32F2F" stroke-width="1" />
+  <text x="145" y="1165" font-family="Arial" font-size="14" text-anchor="middle">紹介QRコード</text>
+  <text x="145" y="1185" font-family="Arial" font-size="14" text-anchor="middle">Referral QR</text>
+
+  <rect x="240" y="1140" width="150" height="60" rx="10" ry="10" fill="#FFEBEE" stroke="#D32F2F" stroke-width="1" />
+  <text x="315" y="1165" font-family="Arial" font-size="14" text-anchor="middle">SNSシェア</text>
+  <text x="315" y="1185" font-family="Arial" font-size="14" text-anchor="middle">Social Share</text>
+
+  <rect x="70" y="1215" width="320" height="45" rx="10" ry="10" fill="#FFEBEE" stroke="#D32F2F" stroke-width="1" />
+  <text x="230" y="1243" font-family="Arial" font-size="14" text-anchor="middle">紹介特典表示 / Referral Benefits</text>
+
+  <!-- 設定 -->
+  <rect x="430" y="1090" width="310" height="250" rx="10" ry="10" fill="#B2DFDB" stroke="#00695C" stroke-width="2" />
+  <text x="585" y="1115" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">設定 / Settings</text>
+
+  <rect x="450" y="1140" width="135" height="60" rx="10" ry="10" fill="#E0F2F1" stroke="#00695C" stroke-width="1" />
+  <text x="518" y="1165" font-family="Arial" font-size="14" text-anchor="middle">個人情報編集</text>
+  <text x="518" y="1185" font-family="Arial" font-size="14" text-anchor="middle">Profile Edit</text>
+
+  <rect x="605" y="1140" width="120" height="60" rx="10" ry="10" fill="#E0F2F1" stroke="#00695C" stroke-width="1" />
+  <text x="665" y="1165" font-family="Arial" font-size="14" text-anchor="middle">パスワード変更</text>
+  <text x="665" y="1185" font-family="Arial" font-size="14" text-anchor="middle">Password</text>
+
+  <rect x="450" y="1215" width="135" height="55" rx="10" ry="10" fill="#E0F2F1" stroke="#00695C" stroke-width="1" />
+  <text x="518" y="1238" font-family="Arial" font-size="14" text-anchor="middle">通知設定</text>
+  <text x="518" y="1255" font-family="Arial" font-size="12" text-anchor="middle">Notification</text>
+
+  <rect x="605" y="1215" width="120" height="55" rx="10" ry="10" fill="#E0F2F1" stroke="#00695C" stroke-width="1" />
+  <text x="665" y="1238" font-family="Arial" font-size="14" text-anchor="middle">ログアウト</text>
+  <text x="665" y="1255" font-family="Arial" font-size="12" text-anchor="middle">Logout</text>
+
+  <rect x="450" y="1285" width="275" height="45" rx="10" ry="10" fill="#E0F2F1" stroke="#00695C" stroke-width="1" />
+  <text x="588" y="1313" font-family="Arial" font-size="14" text-anchor="middle">利用規約・プライバシーポリシー</text>
+
+  <!-- 外部連携 -->
+  <rect x="770" y="1090" width="380" height="120" rx="10" ry="10" fill="#D1C4E9" stroke="#512DA8" stroke-width="2" />
+  <text x="960" y="1115" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">外部連携 / External Link</text>
+
+  <rect x="790" y="1140" width="170" height="60" rx="10" ry="10" fill="#EDE7F6" stroke="#512DA8" stroke-width="1" />
+  <text x="875" y="1160" font-family="Arial" font-size="14" text-anchor="middle">レンタルスタジオ</text>
+  <text x="875" y="1180" font-family="Arial" font-size="12" text-anchor="middle">Rental Studio</text>
+
+  <rect x="980" y="1140" width="155" height="60" rx="10" ry="10" fill="#EDE7F6" stroke="#512DA8" stroke-width="1" />
+  <text x="1058" y="1160" font-family="Arial" font-size="14" text-anchor="middle">ダンスキャンプ</text>
+  <text x="1058" y="1180" font-family="Arial" font-size="12" text-anchor="middle">Dance Camp</text>
+
+  <!-- LINE連携 -->
+  <rect x="770" y="1230" width="380" height="100" rx="10" ry="10" fill="#C5E1A5" stroke="#558B2F" stroke-width="2" />
+  <text x="960" y="1255" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">LINE連携 / LINE Integration</text>
+
+  <rect x="790" y="1275" width="345" height="45" rx="10" ry="10" fill="#F1F8E9" stroke="#558B2F" stroke-width="1" />
+  <text x="963" y="1303" font-family="Arial" font-size="14" text-anchor="middle">LINE通知設定・トーク画面連携</text>
+
+  <!-- 接続線：ログイン前 -->
+  <line x1="300" y1="180" x2="350" y2="180" stroke="#888888" stroke-width="2" />
+  <line x1="550" y1="180" x2="600" y2="180" stroke="#888888" stroke-width="2" />
+  <line x1="300" y1="180" x2="300" y2="260" stroke="#888888" stroke-width="2" />
+  <line x1="300" y1="260" x2="850" y2="260" stroke="#888888" stroke-width="2" />
+  <line x1="850" y1="260" x2="850" y2="220" stroke="#888888" stroke-width="2" />
+
+  <!-- 接続線：ログイン→会員トップ -->
+  <line x1="450" y1="220" x2="450" y2="300" stroke="#888888" stroke-width="3" />
+  <line x1="450" y1="300" x2="575" y2="300" stroke="#888888" stroke-width="3" />
+  <line x1="575" y1="300" x2="575" y2="380" stroke="#888888" stroke-width="3" />
+
+  <!-- 接続線：会員トップ→各機能 -->
+  <line x1="575" y1="460" x2="575" y2="475" stroke="#888888" stroke-width="2" />
+  <line x1="225" y1="475" x2="960" y2="475" stroke="#888888" stroke-width="2" />
+
+  <line x1="225" y1="475" x2="225" y2="500" stroke="#888888" stroke-width="2" />
+  <line x1="585" y1="475" x2="585" y2="500" stroke="#888888" stroke-width="2" />
+  <line x1="960" y1="475" x2="960" y2="500" stroke="#888888" stroke-width="2" />
+
+  <line x1="225" y1="700" x2="225" y2="730" stroke="#888888" stroke-width="2" />
+  <line x1="585" y1="640" x2="585" y2="730" stroke="#888888" stroke-width="2" />
+  <line x1="960" y1="640" x2="960" y2="730" stroke="#888888" stroke-width="2" />
+
+  <line x1="225" y1="910" x2="225" y2="1090" stroke="#888888" stroke-width="2" />
+  <line x1="585" y1="850" x2="585" y2="1090" stroke="#888888" stroke-width="2" />
+  <line x1="960" y1="1070" x2="960" y2="1090" stroke="#888888" stroke-width="2" />
+
+  <!-- 注釈 -->
+  <text x="600" y="1400" font-family="Arial" font-size="16" text-anchor="middle" fill="#555">★スマートフォン最適化UI / Smartphone Optimized UI</text>
+  <text x="600" y="1430" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">左右スワイプ操作・タッチ最適化・QRコード表示機能</text>
+
+  <text x="600" y="1470" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">個人QRコード: マイページで動的生成・不正利用防止・受付・決済に使用</text>
+  <text x="600" y="1495" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">1日最大3レッスンまで予約可能・リアルタイム残席表示</text>
+
+  <!-- QRコードアイコン -->
+  <rect x="525" y="405" width="20" height="20" fill="#FFD700" stroke="#FF8C00" stroke-width="1" />
+  <text x="535" y="420" font-family="Arial" font-size="12" text-anchor="middle" font-weight="bold">QR</text>
+</svg>
